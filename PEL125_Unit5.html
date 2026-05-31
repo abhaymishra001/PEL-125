@@ -1,0 +1,2180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PEL-125 | Unit V – Reported Speech Notes</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Kalam:wght@300;400;700&family=Nunito:wght@300;400;600;700;800&family=Patrick+Hand&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --white: #FFFFFF;
+      --beige: #F8F5EE;
+      --beige2: #F2EDE3;
+      --sky: #60B8E0;
+      --sky-light: #D6EFFA;
+      --yellow: #FFE066;
+      --yellow-light: #FFF9D6;
+      --pink: #FFB3C6;
+      --pink-light: #FFE8EE;
+      --lavender: #C9B8F5;
+      --lavender-light: #EDE8FC;
+      --mint: #7DD9B8;
+      --mint-light: #D6F5EB;
+      --orange: #FFB347;
+      --orange-light: #FFF0D6;
+      --ink: #1a1a2e;
+      --ink2: #2d2d44;
+      --ink3: #4a4a6a;
+      --ruled: rgba(100, 140, 200, 0.12);
+      --shadow: 0 4px 24px rgba(80, 80, 120, 0.10);
+      --shadow2: 0 8px 40px rgba(80, 80, 120, 0.15);
+      --radius: 18px;
+      --radius2: 10px;
+    }
+
+    [data-dark] {
+      --white: #1a1a2e;
+      --beige: #22223b;
+      --beige2: #2a2a45;
+      --sky-light: #1a3a4a;
+      --yellow-light: #3a3000;
+      --pink-light: #3a1020;
+      --lavender-light: #2a1a4a;
+      --mint-light: #0a3028;
+      --orange-light: #3a2000;
+      --ink: #e8e8f8;
+      --ink2: #c8c8e8;
+      --ink3: #a0a0c8;
+      --ruled: rgba(160, 180, 255, 0.07);
+      --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+      --shadow2: 0 8px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--beige);
+      color: var(--ink);
+      min-height: 100vh;
+      transition: background 0.4s, color 0.4s;
+      position: relative;
+    }
+
+    /* Ruled lines background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: repeating-linear-gradient(transparent,
+          transparent 31px,
+          var(--ruled) 31px,
+          var(--ruled) 32px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Left margin line */
+    body::after {
+      content: '';
+      position: fixed;
+      left: 88px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: rgba(255, 100, 100, 0.18);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── PROGRESS BAR ── */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--sky), var(--lavender), var(--pink));
+      width: 0%;
+      z-index: 1000;
+      transition: width 0.1s;
+      border-radius: 0 4px 4px 0;
+    }
+
+    /* ── STICKY NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 500;
+      background: rgba(248, 245, 238, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 2px solid rgba(100, 140, 200, 0.15);
+      padding: 0.7rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+      box-shadow: var(--shadow);
+      transition: background 0.4s;
+    }
+
+    [data-dark] nav {
+      background: rgba(26, 26, 46, 0.88);
+    }
+
+    nav .brand {
+      font-family: 'Caveat', cursive;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--sky);
+      margin-right: auto;
+      letter-spacing: 0.5px;
+    }
+
+    nav a {
+      font-family: 'Patrick Hand', cursive;
+      font-size: 0.85rem;
+      color: var(--ink3);
+      text-decoration: none;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    nav a:hover {
+      background: var(--sky-light);
+      color: var(--sky);
+    }
+
+    /* search */
+    #search-input {
+      font-family: 'Patrick Hand', cursive;
+      font-size: 0.9rem;
+      padding: 0.4rem 1rem;
+      border: 2px solid var(--lavender);
+      border-radius: 20px;
+      background: var(--white);
+      color: var(--ink);
+      outline: none;
+      width: 160px;
+      transition: all 0.3s;
+    }
+
+    #search-input:focus {
+      border-color: var(--sky);
+      width: 220px;
+    }
+
+    /* toggle buttons */
+    .btn-icon {
+      background: var(--white);
+      border: 2px solid var(--lavender);
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      color: var(--ink2);
+    }
+
+    .btn-icon:hover {
+      background: var(--lavender-light);
+      transform: scale(1.1);
+    }
+
+    /* ── MAIN CONTAINER ── */
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 6rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── UNIT TITLE AREA ── */
+    .title-area {
+      text-align: center;
+      padding: 2.5rem 1rem 1.5rem;
+      position: relative;
+    }
+
+    .pel-badge {
+      font-family: 'Patrick Hand', cursive;
+      display: inline-block;
+      background: var(--lavender);
+      color: var(--white);
+      padding: 0.3rem 1.2rem;
+      border-radius: 20px;
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+      box-shadow: 2px 2px 8px rgba(180, 140, 255, 0.3);
+      animation: fadeDown 0.6s ease both;
+    }
+
+    .unit-label {
+      font-family: 'Caveat', cursive;
+      font-size: 1.3rem;
+      color: var(--ink3);
+      display: block;
+      margin-bottom: 0.3rem;
+      animation: fadeDown 0.6s 0.1s ease both;
+      opacity: 0;
+    }
+
+    .unit-title {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(2.2rem, 6vw, 3.5rem);
+      font-weight: 700;
+      color: var(--sky);
+      line-height: 1.2;
+      animation: fadeDown 0.6s 0.2s ease both;
+      opacity: 0;
+      position: relative;
+      display: inline-block;
+    }
+
+    .unit-title::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--yellow), var(--pink), var(--lavender));
+      border-radius: 4px;
+      transform: scaleX(0);
+      animation: lineGrow 0.8s 0.8s ease forwards;
+    }
+
+    .subject-info {
+      font-family: 'Patrick Hand', cursive;
+      font-size: 1rem;
+      color: var(--ink3);
+      margin-top: 1rem;
+      animation: fadeDown 0.6s 0.35s ease both;
+      opacity: 0;
+    }
+
+    .doodle-line {
+      font-size: 1.5rem;
+      letter-spacing: 0.2rem;
+      margin: 1.2rem 0 0;
+      opacity: 0.5;
+      animation: fadeDown 0.6s 0.45s ease both;
+    }
+
+    /* ── SECTION WRAPPER ── */
+    .section {
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.5s ease both;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1.2rem;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .section-num {
+      font-family: 'Caveat', cursive;
+      font-size: 0.9rem;
+      color: var(--white);
+      background: var(--ink3);
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: 700;
+      flex: 1;
+    }
+
+    .toggle-btn {
+      background: none;
+      border: 2px solid var(--ink3);
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      cursor: pointer;
+      font-size: 1rem;
+      color: var(--ink3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      flex-shrink: 0;
+    }
+
+    .toggle-btn:hover {
+      background: var(--ink3);
+      color: var(--white);
+    }
+
+    .section-body {
+      overflow: hidden;
+      transition: max-height 0.4s ease, opacity 0.4s;
+    }
+
+    .section-body.collapsed {
+      max-height: 0 !important;
+      opacity: 0;
+    }
+
+    /* ── PAPER CARD ── */
+    .card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      margin-bottom: 1rem;
+      position: relative;
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: 1.5px solid rgba(200, 200, 230, 0.3);
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow2);
+    }
+
+    /* ── STICKY NOTE ── */
+    .sticky {
+      border-radius: var(--radius2);
+      padding: 1.2rem 1.4rem;
+      margin-bottom: 1rem;
+      position: relative;
+      box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.12);
+      transition: transform 0.2s;
+    }
+
+    .sticky:hover {
+      transform: rotate(-0.5deg) scale(1.01);
+    }
+
+    .sticky-blue {
+      background: var(--sky-light);
+      border-top: 4px solid var(--sky);
+    }
+
+    .sticky-yellow {
+      background: var(--yellow-light);
+      border-top: 4px solid var(--yellow);
+    }
+
+    .sticky-pink {
+      background: var(--pink-light);
+      border-top: 4px solid var(--pink);
+    }
+
+    .sticky-lavender {
+      background: var(--lavender-light);
+      border-top: 4px solid var(--lavender);
+    }
+
+    .sticky-mint {
+      background: var(--mint-light);
+      border-top: 4px solid var(--mint);
+    }
+
+    .sticky-orange {
+      background: var(--orange-light);
+      border-top: 4px solid var(--orange);
+    }
+
+    .sticky-title {
+      font-family: 'Caveat', cursive;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* ── HIGHLIGHT ── */
+    .highlight {
+      background: var(--yellow);
+      padding: 0 3px;
+      border-radius: 3px;
+    }
+
+    .highlight-pink {
+      background: var(--pink);
+      padding: 0 3px;
+      border-radius: 3px;
+    }
+
+    .highlight-blue {
+      background: var(--sky-light);
+      padding: 0 3px;
+      border-radius: 3px;
+    }
+
+    .highlight-mint {
+      background: var(--mint-light);
+      padding: 0 3px;
+      border-radius: 3px;
+    }
+
+    /* ── HANDWRITTEN NOTES STYLES ── */
+    .note-heading {
+      font-family: 'Caveat', cursive;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 1.2rem 0 0.6rem;
+      padding-bottom: 4px;
+      border-bottom: 2px dashed rgba(100, 140, 200, 0.35);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .note-subheading {
+      font-family: 'Kalam', cursive;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin: 1rem 0 0.4rem;
+      color: var(--ink2);
+    }
+
+    .note-text {
+      font-family: 'Patrick Hand', cursive;
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: var(--ink2);
+    }
+
+    ul.note-list {
+      list-style: none;
+      padding: 0;
+      margin: 0.5rem 0;
+    }
+
+    ul.note-list li {
+      font-family: 'Patrick Hand', cursive;
+      font-size: 1.02rem;
+      padding: 0.25rem 0 0.25rem 1.6rem;
+      position: relative;
+      color: var(--ink2);
+      line-height: 1.7;
+    }
+
+    ul.note-list li::before {
+      content: '✏️';
+      position: absolute;
+      left: 0;
+      font-size: 0.85rem;
+    }
+
+    ul.note-list.check li::before {
+      content: '✅';
+    }
+
+    ul.note-list.star li::before {
+      content: '⭐';
+    }
+
+    ul.note-list.arrow li::before {
+      content: '➡️';
+    }
+
+    ul.note-list.dot li::before {
+      content: '•';
+      font-size: 1.4rem;
+      color: var(--sky);
+      top: 0;
+    }
+
+    /* ── TABLE ── */
+    .note-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'Patrick Hand', cursive;
+      font-size: 0.98rem;
+      margin: 1rem 0;
+      border-radius: var(--radius2);
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+    }
+
+    .note-table th {
+      background: var(--sky);
+      color: white;
+      padding: 0.7rem 1rem;
+      text-align: left;
+      font-family: 'Caveat', cursive;
+      font-size: 1.05rem;
+    }
+
+    .note-table td {
+      padding: 0.65rem 1rem;
+      border-bottom: 1px solid rgba(100, 140, 200, 0.12);
+      color: var(--ink2);
+    }
+
+    .note-table tr:nth-child(even) td {
+      background: rgba(96, 184, 224, 0.07);
+    }
+
+    .note-table tr:hover td {
+      background: var(--sky-light);
+    }
+
+    /* ── MEMORY TRICK BOX ── */
+    .memory-box {
+      background: linear-gradient(135deg, #fff9d6, #ffe8ee);
+      border: 2px solid var(--yellow);
+      border-radius: var(--radius2);
+      padding: 1rem 1.2rem;
+      margin: 1rem 0;
+      position: relative;
+    }
+
+    .memory-box::before {
+      content: '🧠 Memory Trick';
+      font-family: 'Caveat', cursive;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #b07a00;
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+
+    .example-box {
+      background: var(--mint-light);
+      border-left: 4px solid var(--mint);
+      border-radius: 0 var(--radius2) var(--radius2) 0;
+      padding: 0.8rem 1.2rem;
+      margin: 0.7rem 0;
+      font-family: 'Patrick Hand', cursive;
+      font-size: 1rem;
+      color: var(--ink2);
+    }
+
+    .example-box strong {
+      font-family: 'Kalam', cursive;
+    }
+
+    /* ── DEFINITION BOX ── */
+    .def-box {
+      background: var(--lavender-light);
+      border: 2px solid var(--lavender);
+      border-radius: var(--radius2);
+      padding: 1rem 1.2rem;
+      margin: 0.8rem 0;
+    }
+
+    .def-box .def-word {
+      font-family: 'Caveat', cursive;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #6a3fc8;
+      margin-bottom: 0.3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* ── MARGIN NOTE ── */
+    .margin-note {
+      float: right;
+      clear: right;
+      width: 130px;
+      background: var(--yellow-light);
+      border: 1px solid var(--yellow);
+      border-radius: 8px;
+      padding: 0.6rem 0.8rem;
+      font-family: 'Caveat', cursive;
+      font-size: 0.9rem;
+      color: #7a6000;
+      margin: 0 0 0.8rem 1rem;
+      box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.08);
+      transform: rotate(1.5deg);
+      line-height: 1.4;
+    }
+
+    @media (max-width: 600px) {
+      .margin-note {
+        float: none;
+        width: auto;
+        margin: 0.5rem 0;
+        transform: none;
+      }
+
+      body::after {
+        left: 24px;
+      }
+    }
+
+    /* ── EXAM SECTION ── */
+    .exam-card {
+      border-radius: var(--radius);
+      padding: 1.2rem 1.5rem;
+      margin-bottom: 1rem;
+      border-left: 5px solid;
+    }
+
+    .exam-card.vvi {
+      background: #fff0f0;
+      border-color: #ff4444;
+    }
+
+    .exam-card.faq {
+      background: #fff8e8;
+      border-color: var(--orange);
+    }
+
+    .exam-card.short {
+      background: var(--mint-light);
+      border-color: var(--mint);
+    }
+
+    .exam-card.long {
+      background: var(--lavender-light);
+      border-color: var(--lavender);
+    }
+
+    .exam-card.viva {
+      background: var(--sky-light);
+      border-color: var(--sky);
+    }
+
+    .exam-badge {
+      display: inline-block;
+      font-family: 'Caveat', cursive;
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 0.15rem 0.7rem;
+      border-radius: 12px;
+      color: white;
+      margin-bottom: 0.6rem;
+    }
+
+    .badge-vvi {
+      background: #ff4444;
+    }
+
+    .badge-faq {
+      background: var(--orange);
+    }
+
+    .badge-short {
+      background: var(--mint);
+    }
+
+    .badge-long {
+      background: var(--lavender);
+    }
+
+    .badge-viva {
+      background: var(--sky);
+    }
+
+    .exam-q {
+      font-family: 'Patrick Hand', cursive;
+      font-size: 1.02rem;
+      color: var(--ink2);
+      line-height: 1.7;
+    }
+
+    /* ── CHEAT SHEET ── */
+    .cheat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .cheat-card {
+      background: var(--white);
+      border-radius: var(--radius2);
+      padding: 1.1rem;
+      border: 2px dashed rgba(100, 140, 200, 0.3);
+      box-shadow: var(--shadow);
+    }
+
+    .cheat-card h4 {
+      font-family: 'Caveat', cursive;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      padding-bottom: 4px;
+      border-bottom: 2px solid var(--yellow);
+    }
+
+    .cheat-card p,
+    .cheat-card li {
+      font-family: 'Patrick Hand', cursive;
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: var(--ink2);
+    }
+
+    /* ── MCQ SECTION ── */
+    .mcq-controls {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .mcq-mode-btn {
+      font-family: 'Patrick Hand', cursive;
+      padding: 0.5rem 1.2rem;
+      border-radius: 20px;
+      border: 2px solid var(--sky);
+      background: var(--white);
+      color: var(--sky);
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: all 0.2s;
+    }
+
+    .mcq-mode-btn.active,
+    .mcq-mode-btn:hover {
+      background: var(--sky);
+      color: white;
+    }
+
+    .mcq-score-bar {
+      background: var(--beige2);
+      border-radius: 20px;
+      padding: 0.7rem 1.5rem;
+      font-family: 'Caveat', cursive;
+      font-size: 1.1rem;
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      margin-bottom: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .score-num {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .score-correct {
+      color: #27ae60;
+    }
+
+    .score-wrong {
+      color: #e74c3c;
+    }
+
+    .score-unattempted {
+      color: var(--ink3);
+    }
+
+    .mcq-item {
+      background: var(--white);
+      border-radius: var(--radius2);
+      padding: 1.2rem 1.4rem;
+      margin-bottom: 1rem;
+      box-shadow: var(--shadow);
+      border: 1.5px solid rgba(200, 200, 230, 0.3);
+      transition: all 0.2s;
+    }
+
+    .mcq-item.hidden {
+      display: none;
+    }
+
+    .mcq-q-num {
+      font-family: 'Caveat', cursive;
+      font-size: 0.85rem;
+      background: var(--lavender);
+      color: white;
+      padding: 0.1rem 0.6rem;
+      border-radius: 12px;
+      display: inline-block;
+      margin-bottom: 0.5rem;
+    }
+
+    .mcq-q {
+      font-family: 'Patrick Hand', cursive;
+      font-size: 1.05rem;
+      margin-bottom: 0.8rem;
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    .mcq-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      margin-bottom: 0.8rem;
+    }
+
+    @media (max-width: 500px) {
+      .mcq-options {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .mcq-opt {
+      font-family: 'Patrick Hand', cursive;
+      font-size: 0.97rem;
+      padding: 0.5rem 0.9rem;
+      border-radius: 10px;
+      border: 2px solid rgba(200, 200, 230, 0.5);
+      background: var(--beige);
+      cursor: pointer;
+      transition: all 0.2s;
+      color: var(--ink2);
+      text-align: left;
+    }
+
+    .mcq-opt:hover {
+      background: var(--sky-light);
+      border-color: var(--sky);
+    }
+
+    .mcq-opt.correct {
+      background: #d4f8d4;
+      border-color: #27ae60;
+      color: #155a25;
+    }
+
+    .mcq-opt.wrong {
+      background: #ffd4d4;
+      border-color: #e74c3c;
+      color: #7a1010;
+    }
+
+    .mcq-opt.disabled {
+      pointer-events: none;
+    }
+
+    .mcq-answer {
+      font-family: 'Patrick Hand', cursive;
+      font-size: 0.95rem;
+      background: var(--mint-light);
+      border-left: 4px solid var(--mint);
+      padding: 0.7rem 1rem;
+      border-radius: 0 8px 8px 0;
+      color: var(--ink2);
+      line-height: 1.6;
+    }
+
+    .mcq-answer.hidden {
+      display: none;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes lineGrow {
+      to {
+        transform: scaleX(1);
+      }
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.05);
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── SCROLL TO TOP ── */
+    #scroll-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 1.5rem;
+      z-index: 600;
+      background: var(--sky);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(96, 184, 224, 0.4);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      animation: pulse 2s infinite;
+    }
+
+    #scroll-top:hover {
+      background: var(--lavender);
+      transform: scale(1.1);
+    }
+
+    #scroll-top.show {
+      display: flex;
+    }
+
+    /* ── PRINT ── */
+    @media print {
+
+      nav,
+      #scroll-top,
+      #progress-bar,
+      .btn-icon,
+      .mcq-controls,
+      .toggle-btn {
+        display: none !important;
+      }
+
+      body {
+        background: white;
+      }
+
+      body::before,
+      body::after {
+        display: none;
+      }
+
+      .card,
+      .sticky,
+      .mcq-item {
+        box-shadow: none;
+        border: 1px solid #ddd;
+      }
+
+      .section-body.collapsed {
+        max-height: none !important;
+        opacity: 1;
+      }
+    }
+
+    /* ── SEARCH HIGHLIGHT ── */
+    mark.search-mark {
+      background: var(--yellow);
+      color: var(--ink);
+      border-radius: 3px;
+      padding: 0 2px;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      text-align: center;
+      font-size: 1.3rem;
+      letter-spacing: 0.4rem;
+      color: var(--ink3);
+      opacity: 0.4;
+      margin: 1.5rem 0;
+    }
+
+    /* cols grid */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    @media (max-width: 600px) {
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .tag {
+      display: inline-block;
+      font-family: 'Patrick Hand', cursive;
+      font-size: 0.82rem;
+      padding: 0.15rem 0.65rem;
+      border-radius: 12px;
+      margin: 0.15rem;
+      font-weight: 600;
+    }
+
+    .tag-blue {
+      background: var(--sky-light);
+      color: #1a6fa0;
+    }
+
+    .tag-yellow {
+      background: var(--yellow-light);
+      color: #7a6000;
+    }
+
+    .tag-pink {
+      background: var(--pink-light);
+      color: #a0205a;
+    }
+
+    .tag-green {
+      background: var(--mint-light);
+      color: #155a35;
+    }
+
+    .tag-purple {
+      background: var(--lavender-light);
+      color: #4a1a9a;
+    }
+
+    /* ── GLASS CARD ── */
+    .glass {
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow2);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="progress-bar"></div>
+
+  <!-- STICKY NAV -->
+  <nav>
+    <a href="index.html" style="text-decoration: none; margin-right: 10px; display: inline-flex; align-items: center; justify-content: center; gap: 4px; padding: 0.3rem 0.8rem; background: var(--white); border: 2px solid var(--lavender); border-radius: 20px; color: var(--ink2); font-family: 'Patrick Hand', cursive; font-size: 0.85rem; font-weight: 700;">🏠 Home</a>
+    <span class="brand">📓 PEL-125</span>
+    <a href="#overview">Overview</a>
+    <a href="#notes">Notes</a>
+    <a href="#exam">Exam Focus</a>
+    <a href="#revision">Quick Revision</a>
+    <a href="#mcq">MCQs</a>
+    <input type="text" id="search-input" placeholder="🔍 Search notes...">
+    <button class="btn-icon" id="dark-toggle" title="Toggle Dark Mode">🌙</button>
+    <button class="btn-icon" onclick="window.print()" title="Print">🖨️</button>
+  </nav>
+
+  <!-- SCROLL TO TOP -->
+  <button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+  <div class="container">
+
+    <!-- ══ TITLE ══ -->
+    <div class="title-area">
+      <span class="pel-badge">PEL-125 • Upper Intermediate Communication Skills-I</span>
+      <span class="unit-label">Unit 5</span>
+      <div class="unit-title">Reported Speech</div>
+      <div class="subject-info">B.Tech 1st Year &nbsp;|&nbsp; L:1 T:0 P:3 Credits:3 &nbsp;|&nbsp; <em>Handcrafted
+          Notes</em> ✍️</div>
+      <div class="doodle-line">～ ✦ ～ ✦ ～ ✦ ～</div>
+    </div>
+
+    <!-- ══ SECTION 1: QUICK OVERVIEW ══ -->
+    <div class="section reveal" id="overview">
+      <div class="section-header" onclick="toggleSection('overview-body','t1')">
+        <div class="section-num">1</div>
+        <div class="section-title" style="color: var(--sky);">📋 Quick Overview</div>
+        <button class="toggle-btn" id="t1">−</button>
+      </div>
+      <div class="section-body" id="overview-body">
+
+        <div class="two-col">
+          <div class="sticky sticky-blue">
+            <div class="sticky-title">📌 Unit Summary</div>
+            <p class="note-text">This unit covers <span class="highlight">Reported Speech</span> — the technique of
+              conveying someone's words without quoting them exactly. You'll learn direct vs indirect speech, tense
+              backshifting, pronoun changes, time expression changes, and how to report questions, requests, and offers.
+            </p>
+          </div>
+          <div class="sticky sticky-yellow">
+            <div class="sticky-title">🎯 Learning Objectives</div>
+            <ul class="note-list check">
+              <li>Identify direct and reported speech</li>
+              <li>Apply tense backshifting rules</li>
+              <li>Change pronouns and time expressions correctly</li>
+              <li>Report Yes/No and Wh-questions</li>
+              <li>Report requests and offers accurately</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="sticky sticky-pink">
+            <div class="sticky-title">🔑 Key Concepts</div>
+            <div style="display:flex;flex-wrap:wrap;gap:0.3rem;margin-top:0.3rem;">
+              <span class="tag tag-blue">Direct Speech</span>
+              <span class="tag tag-purple">Indirect Speech</span>
+              <span class="tag tag-yellow">Tense Backshift</span>
+              <span class="tag tag-pink">Pronoun Change</span>
+              <span class="tag tag-green">Time Expressions</span>
+              <span class="tag tag-blue">Reported Questions</span>
+              <span class="tag tag-purple">Reported Requests</span>
+              <span class="tag tag-green">Reported Offers</span>
+              <span class="tag tag-pink">Reporting Verbs</span>
+              <span class="tag tag-yellow">SON Rule</span>
+            </div>
+          </div>
+          <div class="sticky sticky-lavender">
+            <div class="sticky-title">📖 Important Terms</div>
+            <ul class="note-list dot">
+              <li><strong>Direct Speech:</strong> Exact words in quotes</li>
+              <li><strong>Reported Speech:</strong> Words conveyed without quotes</li>
+              <li><strong>Reporting Verb:</strong> said, asked, told, etc.</li>
+              <li><strong>Backshift:</strong> Moving tense one step back</li>
+              <li><strong>SON Rule:</strong> Subject-Object-No change for pronouns</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="sticky sticky-mint">
+          <div class="sticky-title">🗺️ Unit Syllabus at a Glance (Unit V)</div>
+          <ul class="note-list arrow">
+            <li>Direct speech and reported speech — overview and structure</li>
+            <li>Overview of changes in reported speech (tense, pronoun, time)</li>
+            <li>Reported questions (Yes/No and Wh- questions)</li>
+            <li>Reported requests and reported offers</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="divider">✦ ✦ ✦</div>
+
+    <!-- ══ SECTION 2: DETAILED NOTES ══ -->
+    <div class="section reveal" id="notes">
+      <div class="section-header" onclick="toggleSection('notes-body','t2')">
+        <div class="section-num">2</div>
+        <div class="section-title" style="color: #e07040;">✍️ Detailed Handwritten Notes</div>
+        <button class="toggle-btn" id="t2">−</button>
+      </div>
+      <div class="section-body" id="notes-body">
+
+        <!-- ─ 2.1 Direct vs Reported ─ -->
+        <div class="card">
+          <div class="note-heading" style="color: var(--sky);">📢 2.1 Direct Speech vs Reported (Indirect) Speech</div>
+
+          <div class="def-box">
+            <div class="def-word">📌 Direct Speech</div>
+            <p class="note-text">The <span class="highlight">exact words</span> spoken by a person, enclosed in <span
+                class="highlight-pink">quotation marks (" ")</span>. Uses reporting verbs like <em>said, asked,
+                exclaimed</em>.</p>
+            <div class="example-box"><strong>Example:</strong> Riya said, <em>"I am preparing for my exam."</em></div>
+          </div>
+
+          <div class="def-box">
+            <div class="def-word">📌 Reported (Indirect) Speech</div>
+            <p class="note-text">Reporting someone's words <span class="highlight">without quotation marks</span>. Verb
+              tense, pronouns, and time expressions change.</p>
+            <div class="example-box"><strong>Example:</strong> Riya said that <em>she was preparing for her exam.</em>
+            </div>
+          </div>
+
+          <table class="note-table">
+            <tr>
+              <th>Feature</th>
+              <th>Direct Speech</th>
+              <th>Reported Speech</th>
+            </tr>
+            <tr>
+              <td>Quotation Marks</td>
+              <td>✅ Yes</td>
+              <td>❌ No</td>
+            </tr>
+            <tr>
+              <td>Tense</td>
+              <td>As spoken</td>
+              <td>Backshifted</td>
+            </tr>
+            <tr>
+              <td>Pronouns</td>
+              <td>As spoken</td>
+              <td>Changed (SON rule)</td>
+            </tr>
+            <tr>
+              <td>Time expressions</td>
+              <td>As spoken</td>
+              <td>Changed</td>
+            </tr>
+            <tr>
+              <td>Question mark</td>
+              <td>✅ If question</td>
+              <td>❌ No</td>
+            </tr>
+          </table>
+
+          <div class="memory-box">
+            <p class="note-text">Direct speech uses <strong>D</strong>ouble quotes → <strong>D</strong>irect. Reported
+              speech <strong>R</strong>emoves quotes and <strong>R</strong>eports the meaning.</p>
+          </div>
+
+          <div class="note-subheading">💡 Why Do We Need Reported Speech?</div>
+          <p class="note-text">In real life, we report conversations rather than quoting them exactly. Used in:</p>
+          <ul class="note-list arrow">
+            <li><span class="highlight">News reporting</span> — journalists relay statements</li>
+            <li><span class="highlight">Storytelling</span> — narrating past conversations</li>
+            <li><span class="highlight">Academic writing</span> — citing sources indirectly</li>
+            <li><span class="highlight">Daily conversations</span> — "He told me that..."</li>
+          </ul>
+        </div>
+
+        <!-- ─ 2.2 Tense Backshifting ─ -->
+        <div class="card">
+          <div class="note-heading" style="color: #c0392b;">⏰ 2.2 Change of Tense (Backshifting)</div>
+          <div class="margin-note">🔥 Most asked topic in exams! Learn all tense changes.</div>
+          <p class="note-text">When the reporting verb is in the <span class="highlight">past tense</span> (said, told,
+            asked), the tense of the reported clause shifts <span class="highlight-pink">one step back</span> into the
+            past.</p>
+
+          <div class="example-box">
+            <strong>Why?</strong> Teacher: "I will check your homework tomorrow."<br>
+            Next day → The teacher said she <em>would</em> check our homework the <em>next day</em>.<br>
+            (<em>will</em> → <em>would</em> | <em>tomorrow</em> → <em>the next day</em>)
+          </div>
+
+          <table class="note-table">
+            <tr>
+              <th>Direct Speech Tense</th>
+              <th>→</th>
+              <th>Reported Speech Tense</th>
+            </tr>
+            <tr>
+              <td>Present Simple (<em>play</em>)</td>
+              <td>→</td>
+              <td>Past Simple (<em>played</em>)</td>
+            </tr>
+            <tr>
+              <td>Present Continuous (<em>is playing</em>)</td>
+              <td>→</td>
+              <td>Past Continuous (<em>was playing</em>)</td>
+            </tr>
+            <tr>
+              <td>Present Perfect (<em>has played</em>)</td>
+              <td>→</td>
+              <td>Past Perfect (<em>had played</em>)</td>
+            </tr>
+            <tr>
+              <td>Present Perfect Continuous</td>
+              <td>→</td>
+              <td>Past Perfect Continuous</td>
+            </tr>
+            <tr>
+              <td>Past Simple (<em>played</em>)</td>
+              <td>→</td>
+              <td>Past Simple / Past Perfect</td>
+            </tr>
+            <tr>
+              <td>Past Continuous (<em>was playing</em>)</td>
+              <td>→</td>
+              <td>Past Perfect Continuous</td>
+            </tr>
+            <tr>
+              <td>will / shall</td>
+              <td>→</td>
+              <td>would / should</td>
+            </tr>
+            <tr>
+              <td>can / may</td>
+              <td>→</td>
+              <td>could / might</td>
+            </tr>
+            <tr>
+              <td>is / am / are</td>
+              <td>→</td>
+              <td>was / were</td>
+            </tr>
+            <tr>
+              <td>was / were</td>
+              <td>→</td>
+              <td>had been</td>
+            </tr>
+            <tr>
+              <td>must</td>
+              <td>→</td>
+              <td>must / had to</td>
+            </tr>
+          </table>
+
+          <div class="def-box">
+            <div class="def-word">⚠️ When tense does NOT change</div>
+            <ul class="note-list check">
+              <li>When the statement is a <span class="highlight">universal truth</span> → He said, "The sun rises in
+                the east." → He said that the sun <span class="highlight">rises</span> in the east.</li>
+              <li>When the reporting verb is in <span class="highlight">present or future tense</span></li>
+            </ul>
+          </div>
+
+          <div class="memory-box">
+            <p class="note-text"><strong>"SHIFT BACK ONE STEP"</strong> — Simple → Simple Past → Perfect. Think of it as
+              going one floor down in a building: Present → Past → Past Perfect.</p>
+          </div>
+        </div>
+
+        <!-- ─ 2.3 Time & Place Expressions ─ -->
+        <div class="card">
+          <div class="note-heading" style="color: #8e44ad;">🕐 2.3 Change in Time & Place Expressions</div>
+          <p class="note-text">Time and place words change because the context of speech has shifted to a different time
+            and place.</p>
+
+          <table class="note-table">
+            <tr>
+              <th>Direct Speech</th>
+              <th>→</th>
+              <th>Reported Speech</th>
+            </tr>
+            <tr>
+              <td>now</td>
+              <td>→</td>
+              <td>then</td>
+            </tr>
+            <tr>
+              <td>today</td>
+              <td>→</td>
+              <td>that day</td>
+            </tr>
+            <tr>
+              <td>tonight</td>
+              <td>→</td>
+              <td>that night</td>
+            </tr>
+            <tr>
+              <td>yesterday</td>
+              <td>→</td>
+              <td>the previous day / the day before</td>
+            </tr>
+            <tr>
+              <td>last night</td>
+              <td>→</td>
+              <td>the previous night / the night before</td>
+            </tr>
+            <tr>
+              <td>tomorrow</td>
+              <td>→</td>
+              <td>the next day / the following day</td>
+            </tr>
+            <tr>
+              <td>ago</td>
+              <td>→</td>
+              <td>before</td>
+            </tr>
+            <tr>
+              <td>this / these</td>
+              <td>→</td>
+              <td>that / those</td>
+            </tr>
+            <tr>
+              <td>here</td>
+              <td>→</td>
+              <td>there</td>
+            </tr>
+            <tr>
+              <td>thus</td>
+              <td>→</td>
+              <td>so</td>
+            </tr>
+            <tr>
+              <td>just</td>
+              <td>→</td>
+              <td>then</td>
+            </tr>
+          </table>
+
+          <div class="memory-box">
+            <p class="note-text"><strong>"THIS → THAT, HERE → THERE, NOW → THEN"</strong> — Proximity words move away
+              because the speech event is now in the past. Think: what was CLOSE (this/here/now) becomes FAR
+              (that/there/then).</p>
+          </div>
+        </div>
+
+        <!-- ─ 2.4 Pronoun Changes ─ -->
+        <div class="card">
+          <div class="note-heading" style="color: #27ae60;">👤 2.4 Change of Pronouns — The SON Rule</div>
+
+          <div class="sticky sticky-yellow" style="display:inline-block; margin-bottom:1rem;">
+            <div class="sticky-title">🔑 The SON Rule (Easy Memory Trick!)</div>
+            <ul class="note-list star">
+              <li><strong>S</strong> — 1st person pronouns change to match the <span class="highlight">Subject</span> of
+                reporting clause</li>
+              <li><strong>O</strong> — 2nd person pronouns change to match the <span class="highlight">Object</span> of
+                reporting clause</li>
+              <li><strong>N</strong> — 3rd person pronouns show <span class="highlight">No change</span></li>
+            </ul>
+          </div>
+
+          <table class="note-table">
+            <tr>
+              <th>Direct Speech</th>
+              <th>→</th>
+              <th>Reported Speech</th>
+            </tr>
+            <tr>
+              <td>I</td>
+              <td>→</td>
+              <td>he / she</td>
+            </tr>
+            <tr>
+              <td>you</td>
+              <td>→</td>
+              <td>I / he / she / we / they (context dependent)</td>
+            </tr>
+            <tr>
+              <td>we</td>
+              <td>→</td>
+              <td>they</td>
+            </tr>
+            <tr>
+              <td>me</td>
+              <td>→</td>
+              <td>him / her</td>
+            </tr>
+            <tr>
+              <td>you (obj)</td>
+              <td>→</td>
+              <td>him / her / us / them</td>
+            </tr>
+            <tr>
+              <td>us</td>
+              <td>→</td>
+              <td>them</td>
+            </tr>
+            <tr>
+              <td>my</td>
+              <td>→</td>
+              <td>his / her</td>
+            </tr>
+            <tr>
+              <td>your</td>
+              <td>→</td>
+              <td>my / his / her / our / their</td>
+            </tr>
+            <tr>
+              <td>our</td>
+              <td>→</td>
+              <td>their</td>
+            </tr>
+            <tr>
+              <td>mine</td>
+              <td>→</td>
+              <td>his / hers</td>
+            </tr>
+            <tr>
+              <td>yours</td>
+              <td>→</td>
+              <td>mine / his / hers / ours / theirs</td>
+            </tr>
+          </table>
+
+          <div class="example-box">
+            <strong>"You are stupid!"</strong> — Three possible reports:<br>
+            • She said that <em>I</em> was stupid. (if said to the reporter)<br>
+            • She said that <em>we</em> were stupid. (if said to a group)<br>
+            • She said that <em>he</em> was stupid. (if said to a third person)
+          </div>
+        </div>
+
+        <!-- ─ 2.5 Reporting Verbs ─ -->
+        <div class="card">
+          <div class="note-heading" style="color: #2980b9;">🗣️ 2.5 Reporting Verbs — More Than Just 'Said'</div>
+          <p class="note-text">Using varied reporting verbs makes reported speech more precise and natural.</p>
+
+          <div class="two-col">
+            <div>
+              <div class="note-subheading">For Statements</div>
+              <ul class="note-list dot">
+                <li>said, told, stated, explained, added, mentioned, claimed, admitted, confessed, announced, declared
+                </li>
+              </ul>
+              <div class="note-subheading">For Questions</div>
+              <ul class="note-list dot">
+                <li>asked, inquired, wanted to know, wondered, queried</li>
+              </ul>
+            </div>
+            <div>
+              <div class="note-subheading">For Requests / Commands</div>
+              <ul class="note-list dot">
+                <li>requested, begged, ordered, commanded, instructed, advised, warned, urged, reminded</li>
+              </ul>
+              <div class="note-subheading">For Offers</div>
+              <ul class="note-list dot">
+                <li>offered, promised, agreed, volunteered, proposed, suggested</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="example-box">
+            <strong>❌ Weak:</strong> He said, "Please sit down." → He <em>said</em> me to sit down.<br>
+            <strong>✅ Better:</strong> He <em>requested</em> me to sit down.
+          </div>
+        </div>
+
+        <!-- ─ 2.6 Reported Questions ─ -->
+        <div class="card">
+          <div class="note-heading" style="color: #e67e22;">❓ 2.6 Reported Questions</div>
+          <p class="note-text">Reported questions are rewritten as <span class="highlight">statements</span>, not as
+            questions.</p>
+
+          <div class="sticky sticky-orange">
+            <div class="sticky-title">⚠️ Key Rules for Reported Questions</div>
+            <ul class="note-list check">
+              <li>No question mark ( ? )</li>
+              <li>No inversion of subject and verb (not "asked where was he" — wrong!)</li>
+              <li>Use reporting verbs: <em>asked, inquired, wanted to know</em></li>
+            </ul>
+          </div>
+
+          <div class="note-subheading">Type 1: Yes/No Questions</div>
+          <p class="note-text">Structure: <span class="highlight">asked + if / whether + subject + verb</span></p>
+          <div class="example-box">
+            Direct: She asked, <em>"Are you ready?"</em><br>
+            Reported: She asked <em>if I was ready.</em><br><br>
+            Direct: He said, <em>"Did she pass the exam?"</em><br>
+            Reported: He asked <em>whether she had passed the exam.</em>
+          </div>
+
+          <div class="note-subheading">Type 2: Wh- Questions</div>
+          <p class="note-text">Structure: <span class="highlight">asked + wh-word + subject + verb</span> (NO
+            if/whether)</p>
+          <div class="example-box">
+            Direct: He asked, <em>"Where do you work?"</em><br>
+            Reported: He asked <em>where I worked.</em><br><br>
+            Direct: She asked, <em>"What time will you arrive?"</em><br>
+            Reported: She asked <em>what time I would arrive.</em>
+          </div>
+
+          <table class="note-table">
+            <tr>
+              <th>Question Type</th>
+              <th>Connector Used</th>
+              <th>Example</th>
+            </tr>
+            <tr>
+              <td>Yes/No</td>
+              <td>if / whether</td>
+              <td>asked if she was ready</td>
+            </tr>
+            <tr>
+              <td>What / Which</td>
+              <td>what / which</td>
+              <td>asked what I wanted</td>
+            </tr>
+            <tr>
+              <td>Where / When</td>
+              <td>where / when</td>
+              <td>asked where I lived</td>
+            </tr>
+            <tr>
+              <td>Who / Whom</td>
+              <td>who / whom</td>
+              <td>asked who had called</td>
+            </tr>
+            <tr>
+              <td>Why / How</td>
+              <td>why / how</td>
+              <td>asked why I was late</td>
+            </tr>
+          </table>
+
+          <div class="memory-box">
+            <p class="note-text"><strong>YES/NO → IF</strong>. Easy: if the question has no question word, use IF. If it
+              has a question word (Wh-), use that word directly. No "if" with Wh- words!</p>
+          </div>
+        </div>
+
+        <!-- ─ 2.7 Reported Requests ─ -->
+        <div class="card">
+          <div class="note-heading" style="color: #8e44ad;">🙏 2.7 Reported Requests</div>
+          <p class="note-text">Requests are polite commands. They are reported using <span class="highlight">to / not to
+              + base verb</span>.</p>
+
+          <div class="note-subheading">Structure</div>
+          <p class="note-text"><span class="highlight">Reporting verb + object + to / not to + base verb</span></p>
+
+          <table class="note-table">
+            <tr>
+              <th>Direct Speech</th>
+              <th>→</th>
+              <th>Reported Speech</th>
+            </tr>
+            <tr>
+              <td>"Please wait outside."</td>
+              <td>→</td>
+              <td>She requested me <em>to wait</em> outside.</td>
+            </tr>
+            <tr>
+              <td>"Open your books."</td>
+              <td>→</td>
+              <td>The teacher instructed them <em>to open</em> their books.</td>
+            </tr>
+            <tr>
+              <td>"Don't make noise."</td>
+              <td>→</td>
+              <td>She warned them <em>not to make</em> noise.</td>
+            </tr>
+            <tr>
+              <td>"Please help me."</td>
+              <td>→</td>
+              <td>She requested me <em>to help</em> her.</td>
+            </tr>
+            <tr>
+              <td>"Show your ID card."</td>
+              <td>→</td>
+              <td>The officer ordered him <em>to show</em> his ID card.</td>
+            </tr>
+          </table>
+
+          <div class="sticky sticky-pink">
+            <div class="sticky-title">🔑 Choosing the Right Verb for Requests</div>
+            <ul class="note-list arrow">
+              <li><em>requested</em> — polite ask ("Please help me")</li>
+              <li><em>ordered / commanded</em> — authoritative command ("Submit the file!")</li>
+              <li><em>begged</em> — desperate request ("Please, please help me!")</li>
+              <li><em>advised</em> — giving advice ("You should rest.")</li>
+              <li><em>warned</em> — warning ("Don't touch that!")</li>
+              <li><em>instructed</em> — giving instructions ("Open your books.")</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- ─ 2.8 Reported Offers ─ -->
+        <div class="card">
+          <div class="note-heading" style="color: #27ae60;">🤝 2.8 Reported Offers</div>
+          <p class="note-text">Offers express <span class="highlight">willingness to help</span>. They use the
+            structure: <span class="highlight">offered / promised + to + base verb</span>.</p>
+
+          <table class="note-table">
+            <tr>
+              <th>Direct Speech</th>
+              <th>→</th>
+              <th>Reported Speech</th>
+            </tr>
+            <tr>
+              <td>"I will help you with the project."</td>
+              <td>→</td>
+              <td>He <em>offered to help</em> me with the project.</td>
+            </tr>
+            <tr>
+              <td>"I can drop you home."</td>
+              <td>→</td>
+              <td>She <em>offered to drop</em> me home.</td>
+            </tr>
+            <tr>
+              <td>"Shall I help you with homework?"</td>
+              <td>→</td>
+              <td>He <em>offered to help</em> me with my homework.</td>
+            </tr>
+            <tr>
+              <td>"Shall we start the meeting?"</td>
+              <td>→</td>
+              <td>Ram <em>suggested starting</em> the meeting then.</td>
+            </tr>
+            <tr>
+              <td>"May I open the window?"</td>
+              <td>→</td>
+              <td>She <em>offered to open</em> the window for me.</td>
+            </tr>
+          </table>
+
+          <div class="memory-box">
+            <p class="note-text"><strong>Offer keywords:</strong> "Shall I…?", "I will…", "Can I…?", "I could…" all
+              signal offers. Use <strong>offered to</strong> for most. Use <strong>suggested + gerund (-ing)</strong>
+              for group suggestions like "Shall we…?"</p>
+          </div>
+        </div>
+
+        <!-- ─ 2.9 Worked Examples ─ -->
+        <div class="card">
+          <div class="note-heading" style="color: #c0392b;">📝 2.9 Worked Examples (Activity Solutions)</div>
+
+          <div class="note-subheading">Tense & Time Changes</div>
+          <div class="example-box">
+            1. Rohan said, "I met my teacher yesterday." → Rohan said that <em>he had met his teacher the previous
+              day.</em><br>
+            2. She said, "I will call you tomorrow." → She said that <em>she would call me the next day.</em><br>
+            3. He said, "I completed the task two hours ago." → He said that <em>he had completed the task two hours
+              before.</em><br>
+            4. She said, "These books are mine." → She said that <em>those books were hers.</em><br>
+            5. The guide said, "We will stay here." → The guide said that <em>they would stay there.</em>
+          </div>
+
+          <div class="note-subheading">Pronoun Changes</div>
+          <div class="example-box">
+            1. She said, "I am very tired." → She said that <em>she was very tired.</em><br>
+            2. Ravi said to me, "You are my best friend." → Ravi told me that <em>I was his best friend.</em><br>
+            3. They said, "We will complete our work." → They said that <em>they would complete their work.</em><br>
+            4. My mother said to me, "You should take care of your health." → My mother <em>advised me that I should
+              take care of my health.</em><br>
+            5. She said to him, "I trust you." → She told him that <em>she trusted him.</em>
+          </div>
+
+          <div class="note-subheading">Mixed Practice</div>
+          <div class="example-box">
+            1. He said, "I have got a toothache." → He said that <em>he had got a toothache.</em><br>
+            2. Manu said, "I am very busy now." → Manu said that <em>he was very busy then.</em><br>
+            3. "Hurry up," she said to us. → She <em>urged us to hurry up.</em><br>
+            4. "Give me a cup of water," he told her. → He <em>asked her to give him a cup of water.</em><br>
+            5. She said to me, "Thank you." → She <em>thanked me.</em><br>
+            6. Raju said, "Gautam must go tomorrow." → Raju said that <em>Gautam must/had to go the next day.</em><br>
+            7. Geetha says, "My father is an Engineer." → Geetha says that <em>her father is an Engineer.</em> (present
+            reporting verb → no backshift!)<br>
+            8. 'Where are you going?' James asked Mary. → James asked Mary <em>where she was going.</em>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="divider">✦ ✦ ✦</div>
+
+    <!-- ══ SECTION 3: EXAM FOCUS ══ -->
+    <div class="section reveal" id="exam">
+      <div class="section-header" onclick="toggleSection('exam-body','t3')">
+        <div class="section-num">3</div>
+        <div class="section-title" style="color: #c0392b;">⭐ Exam Focus Section</div>
+        <button class="toggle-btn" id="t3">−</button>
+      </div>
+      <div class="section-body" id="exam-body">
+
+        <div class="exam-card vvi">
+          <span class="exam-badge badge-vvi">⭐⭐⭐ MOST IMPORTANT</span>
+          <div class="exam-q">
+            <ul class="note-list star">
+              <li>Convert the following sentences from Direct to Reported Speech (Statements)</li>
+              <li>Apply tense backshifting rules with examples for all 11 tense pairs</li>
+              <li>Change time and place expressions with a full conversion table</li>
+              <li>Explain the SON rule with examples for each type of pronoun change</li>
+              <li>Convert Yes/No questions and Wh-questions into reported speech</li>
+              <li>Report requests using appropriate verbs (order, request, beg, advise, warn)</li>
+              <li>Report offers using "offered to", "suggested"</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exam-card faq">
+          <span class="exam-badge badge-faq">🔥 Frequently Asked</span>
+          <div class="exam-q">
+            <ul class="note-list arrow">
+              <li>What is the difference between direct speech and reported speech? Give examples.</li>
+              <li>When does tense NOT change in reported speech?</li>
+              <li>How do you report a Yes/No question? Give the structure and an example.</li>
+              <li>How do you report a Wh- question? Give the structure and an example.</li>
+              <li>What is the SON rule in reported speech?</li>
+              <li>What reporting verbs are used for requests, offers, and questions?</li>
+              <li>Change: "I am tired," she said. / She said, "I will help you."</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exam-card short">
+          <span class="exam-badge badge-short">📝 Short Answer Questions (2-3 marks)</span>
+          <div class="exam-q">
+            <ul class="note-list dot">
+              <li>Define reported speech. How is it different from direct speech?</li>
+              <li>What is tense backshifting? Give two examples.</li>
+              <li>Convert: She said, "I can drop you home."</li>
+              <li>Convert: He asked, "Where do you work?"</li>
+              <li>Convert: "Please wait outside," she said to me.</li>
+              <li>Write the reported form of: "The sun rises in the east," he said.</li>
+              <li>Convert: "Are you ready?" she asked.</li>
+              <li>How does 'tomorrow' change in reported speech?</li>
+              <li>What happens to 'will' in reported speech?</li>
+              <li>Convert: "We will complete our work," they said.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exam-card long">
+          <span class="exam-badge badge-long">📃 Long Answer Questions (5-10 marks)</span>
+          <div class="exam-q">
+            <ul class="note-list dot">
+              <li>Explain the rules of tense change in reported speech with a complete table and examples for each
+                tense.</li>
+              <li>Describe the changes in pronouns using the SON rule. Illustrate with examples for 1st, 2nd, and 3rd
+                person pronouns.</li>
+              <li>What are reported questions? Explain the difference between reporting Yes/No questions and Wh-
+                questions with rules and examples.</li>
+              <li>Explain reported requests and reported offers. How are they structurally different? Give five examples
+                of each.</li>
+              <li>Write a comprehensive note on all the changes that occur when converting direct speech to reported
+                speech (tense, pronoun, time expression, structure).</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exam-card viva">
+          <span class="exam-badge badge-viva">🎤 Viva / Oral Questions</span>
+          <div class="exam-q">
+            <ul class="note-list dot">
+              <li>What is the SON rule?</li>
+              <li>What connector is used for Yes/No questions in reported speech?</li>
+              <li>Does tense change when the reporting verb is in present tense?</li>
+              <li>What does 'today' become in reported speech?</li>
+              <li>What verb do you use to report an offer?</li>
+              <li>Is there a question mark in reported questions?</li>
+              <li>What is the structure for reporting a request?</li>
+              <li>Give a reporting verb for each: command, advice, warning, suggestion.</li>
+              <li>What happens to 'can' in reported speech?</li>
+              <li>Give an example of a universal truth in reported speech.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="divider">✦ ✦ ✦</div>
+
+    <!-- ══ SECTION 4: QUICK REVISION ══ -->
+    <div class="section reveal" id="revision">
+      <div class="section-header" onclick="toggleSection('revision-body','t4')">
+        <div class="section-num">4</div>
+        <div class="section-title" style="color: var(--mint);">⚡ Quick Revision Sheet</div>
+        <button class="toggle-btn" id="t4">−</button>
+      </div>
+      <div class="section-body" id="revision-body">
+
+        <div class="sticky sticky-yellow" style="text-align:center;padding:1.5rem;">
+          <div class="sticky-title" style="justify-content:center;font-size:1.4rem;">📋 CHEAT SHEET — Reported Speech
+          </div>
+          <p class="note-text" style="color:#7a6000;">Read this the night before your exam! 🌙</p>
+        </div>
+
+        <div class="cheat-grid">
+          <div class="cheat-card">
+            <h4 style="color: var(--sky);">📌 Basic Rule</h4>
+            <p>Direct → Reported: Remove quotes, add 'that', backshift tense, change pronouns and time words.</p>
+          </div>
+          <div class="cheat-card">
+            <h4 style="color: #c0392b;">⏰ Tense Quick Reference</h4>
+            <p>Present → Past<br>Past → Past Perfect<br>will → would<br>can → could<br>may → might<br>must → had to</p>
+          </div>
+          <div class="cheat-card">
+            <h4 style="color: #8e44ad;">🕐 Time Words</h4>
+            <p>now→then | today→that day | tomorrow→next day | yesterday→previous day | ago→before | here→there |
+              this→that</p>
+          </div>
+          <div class="cheat-card">
+            <h4 style="color: #27ae60;">👤 SON Rule</h4>
+            <p>1st Person (I/we) → Subject<br>2nd Person (you) → Object<br>3rd Person (he/she/they) → No change</p>
+          </div>
+          <div class="cheat-card">
+            <h4 style="color: #e67e22;">❓ Questions</h4>
+            <p>Yes/No → asked + <strong>if/whether</strong><br>Wh- → asked + <strong>wh-word</strong><br>No ?, No
+              inversion<br>Subject comes before verb</p>
+          </div>
+          <div class="cheat-card">
+            <h4 style="color: var(--pink);">🙏 Requests</h4>
+            <p>Structure: verb + object + <strong>to/not to</strong> + base
+              verb<br><br>requested/ordered/begged/advised/warned</p>
+          </div>
+          <div class="cheat-card">
+            <h4 style="color: #16a085;">🤝 Offers</h4>
+            <p>offered/promised/agreed/volunteered + <strong>to</strong> + base verb<br><br>Shall we → suggested + -ing
+            </p>
+          </div>
+          <div class="cheat-card">
+            <h4 style="color: #c0392b;">⚠️ Exceptions</h4>
+            <p>Tense does NOT change for:<br>✅ Universal truths<br>✅ Reporting verb in present/future</p>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:1.5rem; border:2px dashed var(--lavender);">
+          <div class="note-heading" style="color: var(--lavender);">🔑 Key Definitions (Exam Ready)</div>
+          <ul class="note-list dot">
+            <li><strong>Direct Speech:</strong> The exact words of the speaker enclosed in quotation marks. E.g., He
+              said, "I am tired."</li>
+            <li><strong>Reported Speech:</strong> Repeating someone's words without quotation marks, with grammatical
+              changes. E.g., He said that he was tired.</li>
+            <li><strong>Backshifting:</strong> Moving the tense of the reported clause one step back in time.</li>
+            <li><strong>Reporting Verb:</strong> The verb that introduces the reported speech (said, asked, told,
+              ordered, etc.).</li>
+            <li><strong>SON Rule:</strong> 1st person → Subject, 2nd person → Object, 3rd person → No change.</li>
+            <li><strong>Reported Question:</strong> A question rewritten as a statement with no question mark and no
+              subject-verb inversion.</li>
+            <li><strong>Reported Request:</strong> A polite command reported using <em>to/not to + base verb</em>.</li>
+            <li><strong>Reported Offer:</strong> An expression of willingness, reported using <em>offered to + base
+                verb</em>.</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="divider">✦ ✦ ✦</div>
+
+    <!-- ══ SECTION 5: MCQs ══ -->
+    <div class="section reveal" id="mcq">
+      <div class="section-header" onclick="toggleSection('mcq-body','t5')">
+        <div class="section-num">5</div>
+        <div class="section-title" style="color: #e67e22;">🎯 50 MCQs — Practice Zone</div>
+        <button class="toggle-btn" id="t5">−</button>
+      </div>
+      <div class="section-body" id="mcq-body">
+
+        <div class="mcq-controls">
+          <button class="mcq-mode-btn active" id="mode-study" onclick="setMode('study')">📖 Study Mode (Answers
+            Shown)</button>
+          <button class="mcq-mode-btn" id="mode-practice" onclick="setMode('practice')">🎮 Practice Mode
+            (Interactive)</button>
+          <button class="mcq-mode-btn" onclick="resetAll()">🔄 Reset All</button>
+        </div>
+
+        <div class="mcq-score-bar" id="score-bar" style="display:none;">
+          <span>📊 Score:</span>
+          <span class="score-num score-correct" id="sc-correct">0</span> <span style="color:#27ae60">Correct</span>
+          <span class="score-num score-wrong" id="sc-wrong">0</span> <span style="color:#e74c3c">Wrong</span>
+          <span class="score-num score-unattempted" id="sc-left">50</span> <span
+            style="color:var(--ink3)">Remaining</span>
+        </div>
+
+        <div id="mcq-container"></div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // ── MCQ DATA ──
+    const mcqs = [
+      { q: "In direct speech, the exact words are enclosed in:", opts: ["Brackets", "Quotation marks", "Parentheses", "Dashes"], ans: 1, exp: "Direct speech uses quotation marks to show the speaker's exact words." },
+      { q: "Which sentence is an example of reported speech?", opts: ["He said, I am tired.", "She asked, Are you ready?", "Riya said that she was preparing for her exam.", "The teacher said, Open your books."], ans: 2, exp: "Reported speech has no quotation marks and the tense/pronoun is changed." },
+      { q: "What happens to 'will' in reported speech?", opts: ["Changes to 'would'", "Changes to 'shall'", "Stays as 'will'", "Changes to 'could'"], ans: 0, exp: "'will' shifts to 'would' in reported speech (future to conditional)." },
+      { q: "'Today' in direct speech becomes ___ in reported speech.", opts: ["Yesterday", "That time", "That day", "This day"], ans: 2, exp: "Time expressions shift: today becomes that day." },
+      { q: "Which reporting verb is used for a polite request?", opts: ["Ordered", "Requested", "Exclaimed", "Announced"], ans: 1, exp: "Requested is the appropriate reporting verb for a polite request." },
+      { q: "Structure for reporting a Yes/No question is:", opts: ["asked + wh-word + subj + verb", "asked + if/whether + subj + verb", "said + that + subj + verb", "told + object + to + verb"], ans: 1, exp: "Yes/No questions use if or whether as connectors in reported speech." },
+      { q: "'Tomorrow' in direct speech changes to ___ in reported speech.", opts: ["Yesterday", "The previous day", "The next day", "That time"], ans: 2, exp: "Tomorrow becomes the next day or the following day." },
+      { q: "According to the SON rule, 2nd person pronouns change to match the:", opts: ["Subject of reporting clause", "Object of reporting clause", "Third person pronoun", "Speaker's pronoun"], ans: 1, exp: "In SON: S=1st person changes to Subject, O=2nd person changes to Object, N=3rd person has No change." },
+      { q: "Which sentence correctly reports: She said, I am very tired?", opts: ["She said she is very tired.", "She said that she was very tired.", "She told that I was very tired.", "She says she is tired."], ans: 1, exp: "am backshifts to was; I changes to she (subject of reporting clause)." },
+      { q: "Which connector is NOT used in reported Wh- questions?", opts: ["where", "when", "if", "how"], ans: 2, exp: "if/whether is only for Yes/No questions. Wh- questions use the question word directly." },
+      { q: "'Yesterday' in direct speech becomes ___ in reported speech.", opts: ["The next day", "The same day", "The previous day", "That night"], ans: 2, exp: "Yesterday becomes the previous day or the day before." },
+      { q: "Which is the correct reported form of: He asked, Where do you work?", opts: ["He asked where do I work.", "He asked where I worked.", "He asked where did I work.", "He asked if I work there."], ans: 1, exp: "Wh- questions in reported speech: no inversion, no question mark, tense backshifted." },
+      { q: "'Can' in direct speech changes to ___ in reported speech.", opts: ["may", "must", "could", "should"], ans: 2, exp: "Modal can changes to could in reported speech." },
+      { q: "'Now' in direct speech becomes ___ in reported speech.", opts: ["Here", "Just", "Then", "At that time"], ans: 2, exp: "Now becomes then in reported speech." },
+      { q: "Reporting offers usually uses which structure?", opts: ["object + if + verb", "to + base verb", "not to + verb", "wh-word + subject"], ans: 1, exp: "Offers use offered/promised/agreed + to + base verb." },
+      { q: "Which sentence correctly reports: She said, I can drop you home?", opts: ["She said she can drop me home.", "She offered to drop me home.", "She told that she drops me home.", "She said if she drops me home."], ans: 1, exp: "Offers use offered to + base verb. Can signals an offer here." },
+      { q: "'May' in direct speech becomes ___ in reported speech.", opts: ["might", "should", "would", "can"], ans: 0, exp: "May backshifts to might in reported speech." },
+      { q: "Tense does NOT change in reported speech when the statement is:", opts: ["A past event", "A future plan", "A universal truth", "A command"], ans: 2, exp: "Universal truths (e.g., the sun rises in the east) do not undergo tense backshift." },
+      { q: "What does 'must' typically change to in reported speech?", opts: ["should", "would", "had to / must", "could"], ans: 2, exp: "Must can remain must (logical necessity) or change to had to (obligation)." },
+      { q: "'Here' in direct speech becomes ___ in reported speech.", opts: ["this", "there", "then", "now"], ans: 1, exp: "Proximity word here becomes there in reported speech." },
+      { q: "Which is the correct reported form of: She said, Please wait outside?", opts: ["She said to wait outside.", "She requested me to wait outside.", "She ordered wait outside.", "She told that I wait outside."], ans: 1, exp: "Requests use: reporting verb + object + to + base verb." },
+      { q: "'Am/is/are' changes to ___ in reported speech.", opts: ["has/have", "had", "was/were", "will be"], ans: 2, exp: "Present forms am/is/are backshift to was/were." },
+      { q: "'Ago' in direct speech becomes ___ in reported speech.", opts: ["after", "then", "before", "since"], ans: 2, exp: "Ago becomes before in reported speech." },
+      { q: "Which sentence correctly reports: He said, I have got a toothache?", opts: ["He said he has a toothache.", "He said he had got a toothache.", "He told he has got toothache.", "He says he has a toothache."], ans: 1, exp: "Present perfect have got backshifts to past perfect had got." },
+      { q: "What is the structure for reporting a request?", opts: ["subject + asked + wh-word", "reporting verb + object + to/not to + base verb", "said + that + subject", "asked + if + subject + verb"], ans: 1, exp: "Requests: reporting verb (ordered/requested/begged) + object + to/not to + base verb." },
+      { q: "Which reporting verb suits a warning like: Don't touch that!?", opts: ["requested", "warned", "offered", "promised"], ans: 1, exp: "Warned is the appropriate verb for a cautionary command." },
+      { q: "'This' in direct speech becomes ___ in reported speech.", opts: ["that", "here", "those", "these"], ans: 0, exp: "Demonstrative this changes to that; these changes to those." },
+      { q: "Which correctly reports: Shall we start the meeting? Ram said.", opts: ["Ram asked if we shall start the meeting.", "Ram suggested starting the meeting then.", "Ram offered to start the meeting.", "Ram said shall we start."], ans: 1, exp: "Shall we for group suggestions is reported as suggested + gerund (-ing)." },
+      { q: "What changes in reported questions compared to direct questions?", opts: ["The answer only", "Subject-verb inversion is removed and no question mark", "The reporting verb becomes past", "Only the pronoun changes"], ans: 1, exp: "Reported questions are rewritten as statements: no inversion, no question mark." },
+      { q: "Which is NOT a reporting verb for offers?", opts: ["offered", "warned", "promised", "agreed"], ans: 1, exp: "Warned is used for requests/commands, not offers." },
+      { q: "'Was/were' in direct speech changes to ___ in reported speech.", opts: ["is/are", "had been", "has been", "will be"], ans: 1, exp: "Past was/were backshifts to had been in reported speech." },
+      { q: "'Shall' in direct speech changes to ___ in reported speech.", opts: ["will", "should", "can", "might"], ans: 1, exp: "Shall shifts to should in reported speech." },
+      { q: "Which correctly reports: Ravi said to me, You are my best friend?", opts: ["Ravi said I was his best friend.", "Ravi told me that I was his best friend.", "Ravi said that you are his friend.", "Ravi told me you were best friend."], ans: 1, exp: "you (2nd person, object) becomes I (reporter's perspective). are becomes was. my becomes his." },
+      { q: "Reported questions use which verbs?", opts: ["said, told", "asked, inquired, wanted to know", "offered, promised", "warned, ordered"], ans: 1, exp: "Reporting verbs for questions include: asked, inquired, wanted to know, wondered." },
+      { q: "What does 'tonight' become in reported speech?", opts: ["that day", "last night", "that night", "this evening"], ans: 2, exp: "Tonight changes to that night in reported speech." },
+      { q: "Which correctly reports: I will help you with the project, he said?", opts: ["He said he will help with project.", "He offered to help me with the project.", "He told that he helps with project.", "He said he would help you."], ans: 1, exp: "I will help you signals an offer, so we use offered to help me." },
+      { q: "'These' in direct speech becomes ___ in reported speech.", opts: ["this", "those", "that", "them"], ans: 1, exp: "These (plural demonstrative) changes to those." },
+      { q: "Which correctly reports: The teacher said, Open your books?", opts: ["The teacher said to open books.", "The teacher instructed the students to open their books.", "The teacher ordered that they open.", "The teacher said if we open books."], ans: 1, exp: "Commands: instructed/ordered + object + to + base verb. your changes to their." },
+      { q: "'Last night' changes to ___ in reported speech.", opts: ["that night", "the previous night", "the night after", "tonight"], ans: 1, exp: "Last night becomes the previous night or the night before." },
+      { q: "Which sentence shows a correct Yes/No reported question?", opts: ["She asked where I was ready.", "She asked if I was ready.", "She asked whether I am ready.", "She asked am I ready."], ans: 1, exp: "Yes/No questions: asked + if/whether + subject + verb (no inversion, past tense)." },
+      { q: "Present continuous tense in direct speech changes to ___ in reported speech.", opts: ["past perfect", "past simple", "past continuous", "present perfect"], ans: 2, exp: "Present Continuous (is/are + -ing) changes to Past Continuous (was/were + -ing)." },
+      { q: "Which word in the SON rule represents 'no change'?", opts: ["S", "O", "N", "All of them"], ans: 2, exp: "N in SON = 3rd person pronouns (he/she/it/they) do not change." },
+      { q: "Which correctly reports: I am going to college, she said?", opts: ["She said she is going to college.", "She said that she was going to college.", "She told I was going to college.", "She said she went to college."], ans: 1, exp: "Present continuous changes to past continuous. I (1st person) changes to she (subject of reporting clause)." },
+      { q: "In reported speech, which of these does NOT change?", opts: ["Tense of verb", "Pronoun", "Universal truth statement", "Time expression"], ans: 2, exp: "Universal truths (scientific facts) keep their original tense in reported speech." },
+      { q: "He asked, What time will you arrive? Reported form:", opts: ["He asked what time I will arrive.", "He asked what time would I arrive.", "He asked what time I would arrive.", "He asked if what time I arrived."], ans: 2, exp: "Wh- question: asked + wh-word + subject + verb. will changes to would. No inversion." },
+      { q: "Which reporting verb suits a desperate plea?", opts: ["ordered", "warned", "begged", "instructed"], ans: 2, exp: "Begged is used for desperate or emotional requests." },
+      { q: "Which correctly reports: May I open the window for you? she said.", opts: ["She said may she open the window.", "She offered to open the window for me.", "She asked if she open window.", "She requested to open window."], ans: 1, exp: "May I is an offer of help, so we use offered to + base verb." },
+      { q: "'Present perfect' in direct speech backshifts to ___.", opts: ["past simple", "past perfect", "past continuous", "future perfect"], ans: 1, exp: "Present Perfect (have/has + past participle) changes to Past Perfect (had + past participle)." },
+      { q: "Which sentence is WRONG in reported speech?", opts: ["He said that he was tired.", "She asked if I was ready.", "He asked where did I work.", "She told me to wait outside."], ans: 2, exp: "He asked where did I work is wrong. No auxiliary inversion in reported questions. Correct form: He asked where I worked." },
+      { q: "Geetha says, My father is an Engineer. Reported form:", opts: ["Geetha said her father was an Engineer.", "Geetha says that her father is an Engineer.", "Geetha told her father is Engineer.", "Geetha said my father is Engineer."], ans: 1, exp: "Reporting verb is present tense (says), so no backshift occurs. My changes to her." },
+      { q: "Which sentence correctly uses 'told' vs 'said'?", opts: ["She told that she was tired.", "She said me she was tired.", "She told me she was tired.", "She said to that she was tired."], ans: 2, exp: "told must be followed by an object (told me/him/her). said does not need an object." }
+    ];
+
+    let mode = 'study';
+    let scores = { correct: 0, wrong: 0 };
+    let answered = {};
+
+    function buildMCQs() {
+      answered = {};
+      const container = document.getElementById('mcq-container');
+      container.innerHTML = '';
+      mcqs.forEach(function (mcq, i) {
+        var optBtns = mcq.opts.map(function (o, oi) {
+          return '<button class="mcq-opt" data-qi="' + i + '" data-oi="' + oi + '" onclick="selectOpt(' + i + ',' + oi + ')">' + String.fromCharCode(65 + oi) + ') ' + o + '</button>';
+        }).join('');
+        var ansHidden = mode === 'practice' ? 'hidden' : '';
+        var html = '<span class="mcq-q-num">Q' + (i + 1) + '/50</span>' +
+          '<div class="mcq-q">' + mcq.q + '</div>' +
+          '<div class="mcq-options">' + optBtns + '</div>' +
+          '<div class="mcq-answer ' + ansHidden + '" id="ans-' + i + '">' +
+          '<strong>Answer: ' + String.fromCharCode(65 + mcq.ans) + ') ' + mcq.opts[mcq.ans] + '</strong><br>' +
+          '<em>' + mcq.exp + '</em>' +
+          '</div>';
+        var div = document.createElement('div');
+        div.className = 'mcq-item';
+        div.id = 'mcq-' + i;
+        div.innerHTML = html;
+        container.appendChild(div);
+      });
+    }
+
+    function selectOpt(qi, oi) {
+      if (mode !== 'practice') return;
+      if (answered[qi] !== undefined) return;
+      answered[qi] = oi;
+      var mcq = mcqs[qi];
+      var opts = document.querySelectorAll('[data-qi="' + qi + '"]');
+      opts.forEach(function (o) { o.classList.add('disabled'); });
+      if (oi === mcq.ans) {
+        opts[oi].classList.add('correct');
+        scores.correct++;
+      } else {
+        opts[oi].classList.add('wrong');
+        opts[mcq.ans].classList.add('correct');
+        scores.wrong++;
+      }
+      document.getElementById('ans-' + qi).classList.remove('hidden');
+      updateScore();
+    }
+
+    function updateScore() {
+      document.getElementById('sc-correct').textContent = scores.correct;
+      document.getElementById('sc-wrong').textContent = scores.wrong;
+      document.getElementById('sc-left').textContent = 50 - scores.correct - scores.wrong;
+    }
+
+    function setMode(m) {
+      mode = m;
+      scores = { correct: 0, wrong: 0 };
+      document.getElementById('mode-study').classList.toggle('active', m === 'study');
+      document.getElementById('mode-practice').classList.toggle('active', m === 'practice');
+      document.getElementById('score-bar').style.display = m === 'practice' ? 'flex' : 'none';
+      updateScore();
+      buildMCQs();
+    }
+
+    function resetAll() {
+      scores = { correct: 0, wrong: 0 };
+      updateScore();
+      buildMCQs();
+    }
+
+    buildMCQs();
+
+    // ── TOGGLE SECTIONS ──
+    function toggleSection(bodyId, btnId) {
+      var body = document.getElementById(bodyId);
+      var btn = document.getElementById(btnId);
+      if (body.classList.contains('collapsed')) {
+        body.classList.remove('collapsed');
+        body.style.maxHeight = body.scrollHeight + 'px';
+        btn.textContent = '\u2212';
+      } else {
+        body.style.maxHeight = body.scrollHeight + 'px';
+        setTimeout(function () { body.classList.add('collapsed'); }, 10);
+        btn.textContent = '+';
+      }
+    }
+
+    // Init section heights after MCQs are built
+    setTimeout(function () {
+      document.querySelectorAll('.section-body').forEach(function (b) {
+        b.style.maxHeight = b.scrollHeight + 'px';
+      });
+    }, 100);
+
+    // ── DARK MODE ──
+    document.getElementById('dark-toggle').addEventListener('click', function () {
+      document.body.toggleAttribute('data-dark');
+      this.textContent = document.body.hasAttribute('data-dark') ? '\u2600\uFE0F' : '\uD83C\uDF19';
+    });
+
+    // ── PROGRESS BAR ──
+    window.addEventListener('scroll', function () {
+      var total = document.body.scrollHeight - window.innerHeight;
+      var pct = (window.scrollY / total) * 100;
+      document.getElementById('progress-bar').style.width = pct + '%';
+      var st = document.getElementById('scroll-top');
+      st.classList.toggle('show', window.scrollY > 300);
+    });
+
+    // ── SCROLL REVEAL ──
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(function (el) { observer.observe(el); });
+
+    // ── SEARCH ──
+    document.getElementById('search-input').addEventListener('input', function () {
+      var q = this.value.trim().toLowerCase();
+      document.querySelectorAll('mark.search-mark').forEach(function (m) {
+        var parent = m.parentNode;
+        parent.replaceChild(document.createTextNode(m.textContent), m);
+        parent.normalize();
+      });
+      if (!q || q.length < 2) return;
+      var walker = document.createTreeWalker(document.querySelector('.container'), NodeFilter.SHOW_TEXT);
+      var nodes = [];
+      while (walker.nextNode()) nodes.push(walker.currentNode);
+      nodes.forEach(function (node) {
+        var pn = node.parentNode;
+        if (!pn || pn.nodeName === 'SCRIPT' || pn.nodeName === 'STYLE' || pn.nodeName === 'MARK') return;
+        var val = node.nodeValue;
+        if (val.toLowerCase().indexOf(q) < 0) return;
+        var span = document.createElement('span');
+        span.innerHTML = val.replace(new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi'), function (m) {
+          return '<mark class="search-mark">' + m + '</mark>';
+        });
+        pn.replaceChild(span, node);
+      });
+    });
+  </script>
+</body>
+
+</html>

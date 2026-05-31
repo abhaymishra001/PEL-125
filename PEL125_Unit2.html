@@ -1,0 +1,2236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PEL125 – Unit II Notes | Statements & Questions</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Kalam:wght@300;400;700&family=Nunito:wght@300;400;600;700;800&family=Patrick+Hand&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --paper: #FEFCF7;
+      --paper2: #F8F4EC;
+      --ink: #1a1a2e;
+      --ink-light: #3d3d5c;
+      --blue: #4A90D9;
+      --blue-light: #D6EAFF;
+      --blue-soft: #E8F4FF;
+      --yellow: #FFE066;
+      --yellow-light: #FFF8CC;
+      --pink: #FF8FAB;
+      --pink-light: #FFE4EC;
+      --lavender: #B39DDB;
+      --lavender-light: #EDE7F6;
+      --mint: #66BB6A;
+      --mint-light: #E8F5E9;
+      --orange: #FF8A65;
+      --orange-light: #FBE9E7;
+      --red: #EF5350;
+      --teal: #26C6DA;
+      --teal-light: #E0F7FA;
+      --ruled-line: rgba(74, 144, 217, 0.12);
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.12);
+    }
+
+    .dark-mode {
+      --paper: #1a1a2e;
+      --paper2: #16213e;
+      --ink: #e8e8f0;
+      --ink-light: #b0b0cc;
+      --blue-light: #1e3a5f;
+      --blue-soft: #172a45;
+      --yellow-light: #3a3000;
+      --pink-light: #3a1520;
+      --lavender-light: #2a2040;
+      --mint-light: #1a3020;
+      --orange-light: #3a1a10;
+      --teal-light: #0a2a30;
+      --ruled-line: rgba(255, 255, 255, 0.05);
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--paper2);
+      color: var(--ink);
+      font-family: 'Nunito', sans-serif;
+      min-height: 100vh;
+      position: relative;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    /* Paper texture via repeating lines */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: repeating-linear-gradient(transparent, transparent 27px,
+          var(--ruled-line) 27px, var(--ruled-line) 28px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Margin line */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 80px;
+      bottom: 0;
+      width: 2px;
+      background: rgba(255, 100, 100, 0.15);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── PROGRESS BAR ── */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--blue), var(--pink), var(--mint));
+      width: 0%;
+      z-index: 9999;
+      transition: width 0.1s;
+    }
+
+    /* ── NAV ── */
+    #sticky-nav {
+      position: fixed;
+      top: 4px;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(254, 252, 247, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 2px solid var(--ruled-line);
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      transition: background 0.3s;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .dark-mode #sticky-nav {
+      background: rgba(22, 33, 62, 0.95);
+    }
+
+    .nav-title {
+      font-family: 'Caveat', cursive;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--blue);
+      margin-right: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-decoration: none;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: var(--blue-light);
+      color: var(--blue);
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .nav-links a:hover {
+      background: var(--blue);
+      color: white;
+      transform: translateY(-1px);
+    }
+
+    #search-box {
+      border: 2px solid var(--blue-light);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.8rem;
+      background: var(--paper);
+      color: var(--ink);
+      outline: none;
+      width: 160px;
+      transition: all 0.3s;
+    }
+
+    #search-box:focus {
+      border-color: var(--blue);
+      width: 200px;
+    }
+
+    .nav-btn {
+      border: none;
+      border-radius: 20px;
+      padding: 5px 12px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: 'Nunito', sans-serif;
+    }
+
+    .btn-dark {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .btn-print {
+      background: var(--mint-light);
+      color: var(--mint);
+      border: 2px solid var(--mint);
+    }
+
+    .btn-pdf {
+      background: var(--pink-light);
+      color: var(--pink);
+      border: 2px solid var(--pink);
+    }
+
+    .nav-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    /* ── MAIN WRAPPER ── */
+    .wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 90px 20px 80px 100px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── TITLE SECTION ── */
+    .title-section {
+      text-align: center;
+      margin-bottom: 50px;
+      animation: fadeInDown 0.8s ease;
+    }
+
+    .subject-badge {
+      display: inline-block;
+      background: var(--yellow);
+      color: var(--ink);
+      font-family: 'Kalam', cursive;
+      font-size: 0.9rem;
+      font-weight: 700;
+      padding: 4px 18px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+      transform: rotate(-1deg);
+      box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .unit-title-label {
+      font-family: 'Caveat', cursive;
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: var(--blue);
+      line-height: 1.1;
+      position: relative;
+      display: inline-block;
+    }
+
+    .unit-title-label::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--yellow);
+      border-radius: 4px;
+    }
+
+    .unit-blank {
+      font-family: 'Caveat', cursive;
+      font-size: 2.8rem;
+      color: var(--ink-light);
+      border-bottom: 3px dashed var(--blue);
+      padding: 0 20px;
+      display: inline-block;
+      min-width: 200px;
+    }
+
+    .unit-subtitle {
+      font-family: 'Kalam', cursive;
+      font-size: 1.1rem;
+      color: var(--ink-light);
+      margin-top: 10px;
+    }
+
+    .deco-stars {
+      font-size: 1.5rem;
+      margin: 0 8px;
+      animation: spin 4s linear infinite;
+      display: inline-block;
+    }
+
+    /* ── SECTION HEADERS ── */
+    .section-header {
+      font-family: 'Caveat', cursive;
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 50px 0 20px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-header .sec-icon {
+      font-size: 1.5rem;
+    }
+
+    .section-header::after {
+      content: '';
+      flex: 1;
+      height: 2px;
+      background: linear-gradient(90deg, currentColor, transparent);
+      opacity: 0.3;
+      border-radius: 2px;
+    }
+
+    .hdr-blue {
+      color: var(--blue);
+    }
+
+    .hdr-pink {
+      color: var(--pink);
+    }
+
+    .hdr-mint {
+      color: var(--mint);
+    }
+
+    .hdr-orange {
+      color: var(--orange);
+    }
+
+    .hdr-lavender {
+      color: var(--lavender);
+    }
+
+    .hdr-teal {
+      color: var(--teal);
+    }
+
+    /* ── STICKY NOTE CARDS ── */
+    .sticky-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 18px;
+      margin-bottom: 30px;
+    }
+
+    .sticky {
+      border-radius: 4px;
+      padding: 18px 16px;
+      font-family: 'Kalam', cursive;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      position: relative;
+      box-shadow: 3px 6px 20px rgba(0, 0, 0, 0.1), inset 0 -4px 0 rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s, box-shadow 0.2s;
+      animation: fadeInUp 0.5s ease both;
+    }
+
+    .sticky:hover {
+      transform: translateY(-4px) rotate(0.5deg);
+      box-shadow: 5px 12px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .sticky::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 30px;
+      height: 16px;
+      background: rgba(0, 0, 0, 0.15);
+      border-radius: 2px;
+    }
+
+    .sticky-title {
+      font-family: 'Caveat', cursive;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      border-bottom: 2px dashed rgba(0, 0, 0, 0.15);
+      padding-bottom: 4px;
+    }
+
+    .s-yellow {
+      background: #FFF9C4;
+    }
+
+    .s-pink {
+      background: #FCE4EC;
+    }
+
+    .s-blue {
+      background: #E3F2FD;
+    }
+
+    .s-mint {
+      background: #E8F5E9;
+    }
+
+    .s-lavender {
+      background: #EDE7F6;
+    }
+
+    .s-orange {
+      background: #FBE9E7;
+    }
+
+    .dark-mode .s-yellow {
+      background: #3a3000;
+      color: #ffe066;
+    }
+
+    .dark-mode .s-pink {
+      background: #3a1520;
+      color: #ff8fab;
+    }
+
+    .dark-mode .s-blue {
+      background: #0d253a;
+      color: #82c4ff;
+    }
+
+    .dark-mode .s-mint {
+      background: #0d2515;
+      color: #66bb6a;
+    }
+
+    .dark-mode .s-lavender {
+      background: #1e1535;
+      color: #b39ddb;
+    }
+
+    .dark-mode .s-orange {
+      background: #3a1a0d;
+      color: #ff8a65;
+    }
+
+    /* ── CONTENT CARDS ── */
+    .content-card {
+      background: var(--paper);
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-bottom: 22px;
+      box-shadow: var(--shadow);
+      border-left: 5px solid var(--blue);
+      position: relative;
+      overflow: hidden;
+      animation: fadeInUp 0.5s ease both;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .content-card:hover {
+      transform: translateX(4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .content-card.border-pink {
+      border-left-color: var(--pink);
+    }
+
+    .content-card.border-mint {
+      border-left-color: var(--mint);
+    }
+
+    .content-card.border-lavender {
+      border-left-color: var(--lavender);
+    }
+
+    .content-card.border-orange {
+      border-left-color: var(--orange);
+    }
+
+    .content-card.border-teal {
+      border-left-color: var(--teal);
+    }
+
+    .content-card.border-yellow {
+      border-left-color: #F5BC00;
+    }
+
+    .card-title {
+      font-family: 'Caveat', cursive;
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* ── NOTE POINTS ── */
+    .note-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .note-list li {
+      font-family: 'Kalam', cursive;
+      font-size: 0.98rem;
+      line-height: 1.7;
+      padding: 6px 0 6px 28px;
+      position: relative;
+      border-bottom: 1px solid var(--ruled-line);
+    }
+
+    .note-list li:last-child {
+      border-bottom: none;
+    }
+
+    .note-list li::before {
+      content: '✏️';
+      position: absolute;
+      left: 0;
+      font-size: 0.85rem;
+      top: 8px;
+    }
+
+    /* Highlights */
+    .hl-yellow {
+      background: #FFE066;
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-weight: 700;
+    }
+
+    .hl-pink {
+      background: #FFB7C5;
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-weight: 700;
+    }
+
+    .hl-blue {
+      background: #90CAF9;
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-weight: 700;
+    }
+
+    .hl-mint {
+      background: #A5D6A7;
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-weight: 700;
+    }
+
+    .hl-lavender {
+      background: #CE93D8;
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-weight: 700;
+    }
+
+    .dark-mode .hl-yellow {
+      background: #7a6000;
+      color: #ffe;
+    }
+
+    .dark-mode .hl-pink {
+      background: #7a2540;
+      color: #ffe;
+    }
+
+    .dark-mode .hl-blue {
+      background: #1a4a7a;
+      color: #cef;
+    }
+
+    .dark-mode .hl-mint {
+      background: #1a5020;
+      color: #cfc;
+    }
+
+    .dark-mode .hl-lavender {
+      background: #4a2060;
+      color: #ecf;
+    }
+
+    /* Keyword pills */
+    .kw {
+      display: inline-block;
+      background: var(--blue-light);
+      color: var(--blue);
+      font-family: 'Kalam', cursive;
+      font-weight: 700;
+      font-size: 0.82rem;
+      padding: 2px 10px;
+      border-radius: 20px;
+      margin: 2px;
+      border: 1.5px solid var(--blue);
+    }
+
+    /* Formula boxes */
+    .formula-box {
+      background: linear-gradient(135deg, var(--blue-soft), var(--lavender-light));
+      border: 2px dashed var(--blue);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin: 14px 0;
+      font-family: 'Caveat', cursive;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--blue);
+      text-align: center;
+    }
+
+    .dark-mode .formula-box {
+      background: linear-gradient(135deg, #0d1a35, #1a1535);
+    }
+
+    /* Memory trick */
+    .memory-box {
+      background: var(--yellow-light);
+      border: 2px solid var(--yellow);
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin: 12px 0;
+      font-family: 'Kalam', cursive;
+      font-size: 0.95rem;
+      position: relative;
+    }
+
+    .memory-box::before {
+      content: '🧠 Memory Trick: ';
+      font-weight: 700;
+      color: #7a6000;
+    }
+
+    .dark-mode .memory-box {
+      background: #2a2000;
+      border-color: #7a6000;
+    }
+
+    .dark-mode .memory-box::before {
+      color: #ffe066;
+    }
+
+    /* Example box */
+    .example-box {
+      background: var(--mint-light);
+      border-left: 4px solid var(--mint);
+      border-radius: 0 8px 8px 0;
+      padding: 12px 16px;
+      margin: 10px 0;
+      font-family: 'Kalam', cursive;
+      font-size: 0.92rem;
+    }
+
+    .example-box .ex-label {
+      font-weight: 700;
+      color: var(--mint);
+      margin-bottom: 4px;
+      font-family: 'Caveat', cursive;
+      font-size: 1rem;
+    }
+
+    .dark-mode .example-box {
+      background: #0d2515;
+    }
+
+    /* Tables */
+    .note-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      font-family: 'Kalam', cursive;
+      font-size: 0.9rem;
+      overflow: hidden;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
+    }
+
+    .note-table th {
+      background: var(--blue);
+      color: white;
+      padding: 10px 14px;
+      text-align: left;
+      font-family: 'Caveat', cursive;
+      font-size: 1rem;
+    }
+
+    .note-table td {
+      padding: 9px 14px;
+      border-bottom: 1px solid var(--ruled-line);
+    }
+
+    .note-table tr:nth-child(even) td {
+      background: var(--blue-soft);
+    }
+
+    .dark-mode .note-table tr:nth-child(even) td {
+      background: #0d1a2e;
+    }
+
+    /* Collapse button */
+    .collapse-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'Caveat', cursive;
+      font-size: 1rem;
+      color: var(--ink-light);
+      padding: 2px 8px;
+      border-radius: 8px;
+      transition: all 0.2s;
+      margin-left: auto;
+    }
+
+    .collapse-btn:hover {
+      background: var(--blue-light);
+    }
+
+    .collapsible-content {
+      transition: all 0.4s ease;
+      overflow: hidden;
+    }
+
+    /* ── EXAM SECTION ── */
+    .exam-card {
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 16px;
+      animation: fadeInUp 0.5s ease both;
+      transition: transform 0.2s;
+    }
+
+    .exam-card:hover {
+      transform: translateX(4px);
+    }
+
+    .exam-imp {
+      background: var(--pink-light);
+      border: 2px solid var(--pink);
+    }
+
+    .exam-faq {
+      background: var(--yellow-light);
+      border: 2px solid var(--yellow);
+    }
+
+    .exam-short {
+      background: var(--mint-light);
+      border: 2px solid var(--mint);
+    }
+
+    .exam-long {
+      background: var(--lavender-light);
+      border: 2px solid var(--lavender);
+    }
+
+    .exam-viva {
+      background: var(--teal-light);
+      border: 2px solid var(--teal);
+    }
+
+    .dark-mode .exam-imp {
+      background: #3a1520;
+    }
+
+    .dark-mode .exam-faq {
+      background: #3a3000;
+    }
+
+    .dark-mode .exam-short {
+      background: #0d2515;
+    }
+
+    .dark-mode .exam-long {
+      background: #1a1535;
+    }
+
+    .dark-mode .exam-viva {
+      background: #0a2530;
+    }
+
+    .exam-badge {
+      display: inline-block;
+      font-family: 'Caveat', cursive;
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 3px 12px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+
+    .badge-pink {
+      background: var(--pink);
+      color: white;
+    }
+
+    .badge-yellow {
+      background: #F5BC00;
+      color: white;
+    }
+
+    .badge-mint {
+      background: var(--mint);
+      color: white;
+    }
+
+    .badge-lavender {
+      background: var(--lavender);
+      color: white;
+    }
+
+    .badge-teal {
+      background: var(--teal);
+      color: white;
+    }
+
+    .exam-card ol,
+    .exam-card ul {
+      padding-left: 20px;
+    }
+
+    .exam-card li {
+      font-family: 'Kalam', cursive;
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+
+    /* ── CHEAT SHEET ── */
+    .cheat-sheet {
+      background: var(--paper);
+      border: 3px solid var(--ink);
+      border-radius: 12px;
+      padding: 30px;
+      position: relative;
+      box-shadow: 6px 6px 0 var(--ink);
+    }
+
+    .cheat-title {
+      font-family: 'Caveat', cursive;
+      font-size: 2rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 20px;
+      border-bottom: 3px double var(--ink);
+      padding-bottom: 12px;
+    }
+
+    .cheat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media(max-width:600px) {
+      .cheat-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .cheat-block {
+      background: var(--blue-light);
+      border-radius: 8px;
+      padding: 14px;
+      font-family: 'Kalam', cursive;
+      font-size: 0.88rem;
+      line-height: 1.7;
+    }
+
+    .dark-mode .cheat-block {
+      background: #0d1a35;
+    }
+
+    .cheat-block h4 {
+      font-family: 'Caveat', cursive;
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+      color: var(--blue);
+      border-bottom: 1px solid var(--blue);
+      padding-bottom: 4px;
+    }
+
+    /* ── MCQ SECTION ── */
+    .mcq-controls {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .mcq-score {
+      font-family: 'Caveat', cursive;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--mint);
+      margin-left: auto;
+    }
+
+    .practice-toggle {
+      background: var(--blue);
+      color: white;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .practice-toggle:hover {
+      background: #357abd;
+      transform: translateY(-2px);
+    }
+
+    .mcq-item {
+      background: var(--paper);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 14px;
+      box-shadow: var(--shadow);
+      animation: fadeInUp 0.4s ease both;
+      transition: all 0.2s;
+    }
+
+    .mcq-item:hover {
+      box-shadow: var(--shadow-lg);
+    }
+
+    .mcq-q {
+      font-family: 'Kalam', cursive;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--ink);
+    }
+
+    .mcq-qnum {
+      display: inline-block;
+      background: var(--blue);
+      color: white;
+      border-radius: 50%;
+      width: 26px;
+      height: 26px;
+      line-height: 26px;
+      text-align: center;
+      font-family: 'Caveat', cursive;
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-right: 8px;
+      flex-shrink: 0;
+    }
+
+    .mcq-options {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .mcq-opt {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: 'Kalam', cursive;
+      font-size: 0.93rem;
+      border: 2px solid var(--ruled-line);
+      transition: all 0.2s;
+      background: var(--paper2);
+    }
+
+    .mcq-opt:hover {
+      border-color: var(--blue);
+      background: var(--blue-soft);
+    }
+
+    .mcq-opt.selected {
+      border-color: var(--blue);
+      background: var(--blue-light);
+    }
+
+    .mcq-opt.correct {
+      border-color: var(--mint);
+      background: var(--mint-light);
+    }
+
+    .mcq-opt.wrong {
+      border-color: var(--red);
+      background: #FFEBEE;
+    }
+
+    .dark-mode .mcq-opt.wrong {
+      background: #3a0a0a;
+    }
+
+    .opt-letter {
+      background: var(--blue-light);
+      color: var(--blue);
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      line-height: 24px;
+      text-align: center;
+      font-family: 'Caveat', cursive;
+      font-weight: 700;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+
+    .mcq-opt.correct .opt-letter {
+      background: var(--mint);
+      color: white;
+    }
+
+    .mcq-opt.wrong .opt-letter {
+      background: var(--red);
+      color: white;
+    }
+
+    .mcq-answer {
+      margin-top: 12px;
+      padding: 12px 16px;
+      border-radius: 8px;
+      background: var(--mint-light);
+      border: 1.5px solid var(--mint);
+      font-family: 'Kalam', cursive;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      display: none;
+    }
+
+    .mcq-answer.show {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .ans-label {
+      font-family: 'Caveat', cursive;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--mint);
+    }
+
+    .dark-mode .mcq-answer {
+      background: #0d2515;
+    }
+
+    .show-ans-btn {
+      background: none;
+      border: 2px solid var(--blue);
+      color: var(--blue);
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-family: 'Kalam', cursive;
+      font-size: 0.85rem;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: all 0.2s;
+    }
+
+    .show-ans-btn:hover {
+      background: var(--blue);
+      color: white;
+    }
+
+    /* ── SCROLL TO TOP ── */
+    #scroll-top {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--blue);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      font-size: 1.3rem;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(74, 144, 217, 0.4);
+      z-index: 500;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+    }
+
+    #scroll-top.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    #scroll-top:hover {
+      transform: scale(1.1);
+      background: #357abd;
+    }
+
+    /* ── SEARCH HIGHLIGHT ── */
+    .search-hl {
+      background: #FFE066;
+      border-radius: 2px;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translateY(0)
+      }
+
+      50% {
+        transform: translateY(-6px)
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ── MCQ SCORE TRACKER ── */
+    #score-tracker {
+      position: sticky;
+      top: 60px;
+      background: var(--paper);
+      border-radius: 12px;
+      padding: 12px 20px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      z-index: 100;
+      flex-wrap: wrap;
+    }
+
+    .score-pill {
+      font-family: 'Caveat', cursive;
+      font-size: 1.1rem;
+      font-weight: 700;
+      padding: 4px 16px;
+      border-radius: 20px;
+    }
+
+    .score-correct {
+      background: var(--mint-light);
+      color: var(--mint);
+    }
+
+    .score-wrong {
+      background: #FFEBEE;
+      color: var(--red);
+    }
+
+    .score-total {
+      background: var(--blue-light);
+      color: var(--blue);
+    }
+
+    /* Doodle decorations */
+    .doodle {
+      position: absolute;
+      font-size: 1.5rem;
+      opacity: 0.12;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* Responsive */
+    @media(max-width:640px) {
+      .wrapper {
+        padding: 90px 14px 60px 20px;
+      }
+
+      body::after {
+        display: none;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .unit-title-label {
+        font-size: 2.5rem;
+      }
+
+      .cheat-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .sticky-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /* Print styles */
+    @media print {
+
+      #sticky-nav,
+      #scroll-top,
+      #progress-bar,
+      .nav-btn,
+      .practice-toggle,
+      .show-ans-btn,
+      .collapse-btn {
+        display: none !important;
+      }
+
+      .wrapper {
+        padding: 20px 30px;
+      }
+
+      body::before,
+      body::after {
+        display: none;
+      }
+
+      .mcq-answer {
+        display: block !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="progress-bar"></div>
+
+  <!-- NAV -->
+  <nav id="sticky-nav">
+    <a href="index.html" class="nav-btn" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 4px;">🏠 Home</a>
+    <div class="nav-title">📓 PEL125 Notes</div>
+    <div class="nav-links">
+      <a href="#overview">Overview</a>
+      <a href="#notes">Notes</a>
+      <a href="#exam">Exam Focus</a>
+      <a href="#revision">Quick Revision</a>
+      <a href="#mcq">50 MCQs</a>
+    </div>
+    <input type="text" id="search-box" placeholder="🔍 Search notes…" oninput="searchNotes(this.value)">
+    <button class="nav-btn btn-dark" onclick="toggleDark()">🌙 Dark</button>
+    <button class="nav-btn btn-print" onclick="window.print()">🖨️ Print</button>
+  </nav>
+
+  <div class="wrapper" id="main-content">
+
+    <!-- ══ TITLE ══ -->
+    <div class="title-section">
+      <div class="subject-badge">PEL125 · Upper Intermediate Communication Skills-I</div>
+      <div>
+        <span class="deco-stars">⭐</span>
+        <span class="unit-title-label">UNIT : 2 Statements & Questions</span>
+
+        <span class="deco-stars">⭐</span>
+      </div>
+      <div class="unit-subtitle">Statements &amp; Questions · Direct &amp; Indirect Objects · Question Types</div>
+      <div style="margin-top:10px;font-family:'Kalam',cursive;font-size:0.88rem;color:var(--ink-light);">
+        📚 Textbook: Oxford Practice Grammar (Intermediate) · John Eastwood
+      </div>
+    </div>
+
+    <!-- ══ 1. QUICK OVERVIEW ══ -->
+    <section id="overview">
+      <div class="section-header hdr-blue reveal">
+        <span class="sec-icon">📌</span> Quick Overview
+      </div>
+
+      <div class="sticky-grid reveal">
+        <div class="sticky s-blue" style="animation-delay:0.1s">
+          <div class="sticky-title">📋 Unit Summary</div>
+          This unit covers how sentences are structured with objects, how to form different types of questions (Yes/No,
+          Wh-, Subject, Object), negative statements, and agreement structures (So/Neither/I think so).
+        </div>
+        <div class="sticky s-yellow" style="animation-delay:0.2s">
+          <div class="sticky-title">🎯 Learning Objectives</div>
+          ✓ Identify direct &amp; indirect objects<br>
+          ✓ Form Yes/No &amp; Wh-questions<br>
+          ✓ Distinguish subject vs object questions<br>
+          ✓ Use negative statements &amp; questions<br>
+          ✓ Use So/Neither/I think so
+        </div>
+        <div class="sticky s-pink" style="animation-delay:0.3s">
+          <div class="sticky-title">🔑 Key Concepts</div>
+          Direct Object · Indirect Object · Yes/No Question · Wh-Question · Subject Question · Object Question ·
+          Prepositions in Wh-questions · Negative Statements · So/Neither
+        </div>
+        <div class="sticky s-mint" style="animation-delay:0.4s">
+          <div class="sticky-title">📖 Important Terms</div>
+          <b>DO</b> = Direct Object<br>
+          <b>IO</b> = Indirect Object<br>
+          <b>Aux</b> = Auxiliary verb<br>
+          <b>SQ</b> = Subject Question<br>
+          <b>OQ</b> = Object Question<br>
+          <b>Neg</b> = Negative
+        </div>
+        <div class="sticky s-lavender" style="animation-delay:0.5s">
+          <div class="sticky-title">💡 Quick Formulas</div>
+          S + V + DO<br>
+          S + V + IO + DO<br>
+          Aux + S + V? (Yes/No)<br>
+          WH + Aux + S + V? (Wh)<br>
+          WH + V + O? (Subject Q)
+        </div>
+        <div class="sticky s-orange" style="animation-delay:0.6s">
+          <div class="sticky-title">⚡ Fast Facts</div>
+          · Only action verbs have DOs<br>
+          · IOs come BEFORE DOs<br>
+          · Subject Qs: NO do/does/did<br>
+          · Object Qs: NEED do/does/did<br>
+          · "So" = positive agreement<br>
+          · "Neither" = negative agreement
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ 2. DETAILED NOTES ══ -->
+    <section id="notes">
+      <div class="section-header hdr-pink reveal">
+        <span class="sec-icon">✏️</span> Detailed Handwritten Notes
+      </div>
+
+      <!-- 2.1 Direct Objects -->
+      <div class="content-card border-blue reveal">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div class="card-title" style="color:var(--blue)">📍 Direct Objects (DO)</div>
+          <button class="collapse-btn" onclick="toggleCollapse(this)">▲ Collapse</button>
+        </div>
+        <div class="collapsible-content">
+          <div class="formula-box">Formula: Subject + Verb + <span style="color:var(--pink)">Direct Object</span></div>
+          <ul class="note-list">
+            <li>The <span class="hl-yellow">direct object</span> is the thing/person that the verb's action is performed
+              on.</li>
+            <li>Ask <span class="hl-blue">"What?"</span> or <span class="hl-blue">"Whom?"</span> after the verb → that
+              answer is the direct object.</li>
+            <li>ONLY <span class="hl-mint">action verbs</span> can have direct objects. Linking verbs (am, is, are, was,
+              were) <b>cannot</b>.</li>
+            <li>A direct object is <b>NEVER</b> an adverb or the object of a preposition.</li>
+          </ul>
+          <div class="example-box">
+            <div class="ex-label">📝 Examples</div>
+            The company <b>launched</b> <span class="hl-pink">a new digital platform</span>. → DO =
+            <em>platform</em><br>
+            The manager <b>approved</b> <span class="hl-pink">the proposal</span>. → DO = <em>proposal</em><br>
+            The message <b>reached</b> <span class="hl-pink">the manager</span>. → DO = <em>manager</em><br>
+            His landlord is <b>raising</b> <span class="hl-pink">the rent</span>. → DO = <em>rent</em>
+          </div>
+          <div class="memory-box">
+            To find DO: Ask "Subject Verb <b>WHAT?</b>" The answer = Direct Object!
+          </div>
+          <table class="note-table">
+            <tr>
+              <th>Sentence</th>
+              <th>Verb</th>
+              <th>Direct Object</th>
+            </tr>
+            <tr>
+              <td>She bought flowers.</td>
+              <td>bought</td>
+              <td>flowers ✅</td>
+            </tr>
+            <tr>
+              <td>He runs quickly.</td>
+              <td>runs</td>
+              <td>❌ (no DO)</td>
+            </tr>
+            <tr>
+              <td>They reviewed the code.</td>
+              <td>reviewed</td>
+              <td>the code ✅</td>
+            </tr>
+            <tr>
+              <td>She is happy.</td>
+              <td>is (linking)</td>
+              <td>❌ (linking verb)</td>
+            </tr>
+          </table>
+          <div style="margin-top:10px">
+            <b>Key Practice Answers:</b> 1→b) the proposal &nbsp; 2→c) his advice &nbsp; 3→c) valuable data
+          </div>
+        </div>
+      </div>
+
+      <!-- 2.2 Indirect Objects -->
+      <div class="content-card border-pink reveal">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div class="card-title" style="color:var(--pink)">📍 Indirect Objects (IO)</div>
+          <button class="collapse-btn" onclick="toggleCollapse(this)">▲ Collapse</button>
+        </div>
+        <div class="collapsible-content">
+          <div class="formula-box">Formula: Subject + Verb + <span style="color:var(--orange)">Indirect Object</span> +
+            <span style="color:var(--pink)">Direct Object</span>
+          </div>
+          <ul class="note-list">
+            <li>The <span class="hl-pink">indirect object</span> tells us <b>TO WHOM</b> or <b>FOR WHOM</b> the action
+              is done.</li>
+            <li>It appears <b>between the verb and direct object</b>.</li>
+            <li>Can be rewritten using a prepositional phrase with <span class="hl-blue">"to"</span> or <span
+                class="hl-blue">"for"</span>.</li>
+            <li>Common verbs that take IO: <span class="kw">give</span> <span class="kw">send</span> <span
+                class="kw">show</span> <span class="kw">tell</span> <span class="kw">teach</span> <span
+                class="kw">bring</span> <span class="kw">make</span> <span class="kw">buy</span> <span
+                class="kw">lend</span> <span class="kw">offer</span></li>
+            <li>⚠️ If "to/for + noun" = prepositional phrase → NOT an indirect object!</li>
+          </ul>
+          <div class="example-box">
+            <div class="ex-label">📝 Examples</div>
+            My mom sent <span class="hl-pink">me</span> <span class="hl-mint">a package</span>. → IO=<em>me</em>,
+            DO=<em>package</em><br>
+            I bought <span class="hl-pink">her</span> <span class="hl-mint">flowers</span> = I bought flowers <b>for
+              her</b>.<br>
+            She taught <span class="hl-pink">us</span> <span class="hl-mint">grammar</span>. → IO=<em>us</em>,
+            DO=<em>grammar</em><br>
+            The HR manager sent <span class="hl-pink">the candidates</span> <span class="hl-mint">an offer
+              letter</span>.
+          </div>
+          <div class="memory-box">
+            Indirect Object = the RECIPIENT. Ask "Verb DO <b>to WHOM / for WHOM</b>?" → that = IO
+          </div>
+          <table class="note-table">
+            <tr>
+              <th>Sentence</th>
+              <th>IO?</th>
+              <th>Reason</th>
+            </tr>
+            <tr>
+              <td>The manager gave <b>the team</b> clear instructions.</td>
+              <td>✅ TRUE</td>
+              <td>team receives instructions</td>
+            </tr>
+            <tr>
+              <td>She explained the procedure <b>to the interns</b>.</td>
+              <td>❌ FALSE</td>
+              <td>prepositional phrase, not IO</td>
+            </tr>
+            <tr>
+              <td>The professor offered <b>a detailed explanation</b> to class.</td>
+              <td>❌ FALSE</td>
+              <td>it is the Direct Object</td>
+            </tr>
+            <tr>
+              <td>They sent <b>their clients</b> the final report.</td>
+              <td>✅ TRUE</td>
+              <td>clients receive the report</td>
+            </tr>
+            <tr>
+              <td>The trainer promised <b>the participants</b> sessions.</td>
+              <td>✅ TRUE</td>
+              <td>participants are promised something</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- 2.3 Yes/No Questions -->
+      <div class="content-card border-mint reveal">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div class="card-title" style="color:var(--mint)">❓ Yes/No Questions</div>
+          <button class="collapse-btn" onclick="toggleCollapse(this)">▲ Collapse</button>
+        </div>
+        <div class="collapsible-content">
+          <ul class="note-list">
+            <li>Can be answered with only <span class="hl-mint">"yes"</span> or <span class="hl-mint">"no"</span>.</li>
+            <li>Always begin with an <span class="hl-blue">auxiliary verb</span> (do, does, did, is, are, was, were,
+              have, has, can, will, etc.).</li>
+          </ul>
+          <div class="formula-box">
+            Rule 1 (be verbs): <b>Invert subject &amp; verb</b><br>
+            Rule 2 (action verbs): <b>Add do/does/did before subject</b><br>
+            Rule 3 (modals): <b>Invert modal &amp; subject</b>
+          </div>
+          <div class="example-box">
+            <div class="ex-label">📝 Examples</div>
+            <b>Be verb:</b> Is the project aligned with company goals?<br>
+            <b>Action verb:</b> Did the client approve the proposal?<br>
+            <b>Modal:</b> Can you swim?<br><br>
+            <b>Speaking Activity Questions:</b><br>
+            • Have you completed a group project recently?<br>
+            • Are you comfortable speaking in English during interviews?<br>
+            • Did you face any challenges in online learning?<br>
+            • Can you adapt to a fast-paced work environment?
+          </div>
+          <div class="memory-box">
+            Quick Tip: If statement has auxiliary → MOVE it to front. If not → ADD do/does/did!
+          </div>
+        </div>
+      </div>
+
+      <!-- 2.4 Wh-Questions -->
+      <div class="content-card border-lavender reveal">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div class="card-title" style="color:var(--lavender)">❓ Wh- Questions</div>
+          <button class="collapse-btn" onclick="toggleCollapse(this)">▲ Collapse</button>
+        </div>
+        <div class="collapsible-content">
+          <ul class="note-list">
+            <li>Used to get <span class="hl-lavender">specific information</span>, not just yes/no answers.</li>
+            <li>Wh-words: <span class="kw">What</span> <span class="kw">When</span> <span class="kw">Where</span> <span
+                class="kw">Why</span> <span class="kw">Who</span> <span class="kw">Whom</span> <span
+                class="kw">Whose</span> <span class="kw">Which</span> <span class="kw">How</span></li>
+          </ul>
+          <div class="formula-box">WH-word + Auxiliary + Subject + Verb</div>
+          <table class="note-table">
+            <tr>
+              <th>WH-word</th>
+              <th>Asks about</th>
+              <th>Example</th>
+            </tr>
+            <tr>
+              <td><b>What</b></td>
+              <td>thing/object</td>
+              <td>What is this? / What time is it?</td>
+            </tr>
+            <tr>
+              <td><b>Why</b></td>
+              <td>reason</td>
+              <td>Why were you late?</td>
+            </tr>
+            <tr>
+              <td><b>Who</b></td>
+              <td>person (subject)</td>
+              <td>Who is that woman?</td>
+            </tr>
+            <tr>
+              <td><b>When</b></td>
+              <td>time/occasion</td>
+              <td>When did you arrive?</td>
+            </tr>
+            <tr>
+              <td><b>How</b></td>
+              <td>manner/way</td>
+              <td>How do you go to school?</td>
+            </tr>
+            <tr>
+              <td><b>How much</b></td>
+              <td>quantity (uncountable)</td>
+              <td>How much homework?</td>
+            </tr>
+            <tr>
+              <td><b>How many</b></td>
+              <td>quantity (countable)</td>
+              <td>How many books?</td>
+            </tr>
+            <tr>
+              <td><b>Which</b></td>
+              <td>choice</td>
+              <td>Which country? / Which device?</td>
+            </tr>
+            <tr>
+              <td><b>Whom</b></td>
+              <td>person (object)</td>
+              <td>Whom did you meet?</td>
+            </tr>
+            <tr>
+              <td><b>Whose</b></td>
+              <td>possession</td>
+              <td>Whose resume was selected?</td>
+            </tr>
+          </table>
+          <div class="example-box">
+            <div class="ex-label">📝 Fill-in-the-blank Answers</div>
+            1-Why · 2-Who · 3-Whom · 4-When · 5-Which · 6-How · 7-Which · 8-Whose · 9-What · 10-What
+          </div>
+          <div class="memory-box">
+            WH-questions give DETAILED answers → Very important in interviews and professional communication!
+          </div>
+        </div>
+      </div>
+
+      <!-- 2.5 Subject vs Object Questions -->
+      <div class="content-card border-orange reveal">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div class="card-title" style="color:var(--orange)">🔀 Subject vs. Object Questions</div>
+          <button class="collapse-btn" onclick="toggleCollapse(this)">▲ Collapse</button>
+        </div>
+        <div class="collapsible-content">
+          <table class="note-table">
+            <tr>
+              <th style="background:#66BB6A">Subject Question (SQ)</th>
+              <th style="background:#FF8A65">Object Question (OQ)</th>
+            </tr>
+            <tr>
+              <td>Asks about the <b>subject</b> (WHO does the action)</td>
+              <td>Asks about the <b>object</b> (WHOM receives the action)</td>
+            </tr>
+            <tr>
+              <td><b>Does NOT</b> use do/does/did</td>
+              <td><b>DOES</b> use do/does/did</td>
+            </tr>
+            <tr>
+              <td>Structure: WH + V + (rest)</td>
+              <td>Structure: WH + do/does/did + S + V</td>
+            </tr>
+            <tr>
+              <td>Who <b>led</b> the team? (No did!)</td>
+              <td>Whom did the company <b>appoint</b>?</td>
+            </tr>
+            <tr>
+              <td>What <b>caused</b> the failure?</td>
+              <td>What did you <b>discuss</b>?</td>
+            </tr>
+          </table>
+          <div class="example-box">
+            <div class="ex-label">📝 Practice Answers</div>
+            1→ b) Who completed… (SQ) &nbsp;|&nbsp; 2→ b) Who did you contact… (OQ)<br>
+            3→ a) Which student won… (SQ) &nbsp;|&nbsp; 4→ a) What caused… (SQ)<br>
+            5→ a) Who did the interviewer select… (OQ) &nbsp;|&nbsp; 6→ b) Which company offered… (SQ)
+          </div>
+          <div class="memory-box">
+            TRICK: If WH-word IS the subject → no did/does/do needed. If WH-word is the OBJECT → must add do/does/did!
+          </div>
+        </div>
+      </div>
+
+      <!-- 2.6 Prepositions in Wh-questions -->
+      <div class="content-card border-teal reveal">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div class="card-title" style="color:var(--teal)">📌 Prepositions in Wh-questions</div>
+          <button class="collapse-btn" onclick="toggleCollapse(this)">▲ Collapse</button>
+        </div>
+        <div class="collapsible-content">
+          <ul class="note-list">
+            <li>A preposition can come <span class="hl-blue">at the END</span> (informal) OR <span
+                class="hl-pink">before the Wh-word</span> (formal).</li>
+          </ul>
+          <table class="note-table">
+            <tr>
+              <th>Informal (Preposition at end)</th>
+              <th>Formal (Preposition before Wh-word)</th>
+            </tr>
+            <tr>
+              <td>Who are you talking <b>to</b>?</td>
+              <td><b>To</b> whom are you talking?</td>
+            </tr>
+            <tr>
+              <td>What are you looking <b>for</b>?</td>
+              <td><b>For</b> what are you searching?</td>
+            </tr>
+            <tr>
+              <td>Where did she come <b>from</b>?</td>
+              <td>(From where did she come?)</td>
+            </tr>
+            <tr>
+              <td>Which city do you live <b>in</b>?</td>
+              <td><b>In</b> which city do you live?</td>
+            </tr>
+          </table>
+          <div class="memory-box">
+            Informal → preposition at END (everyday use). Formal → preposition BEFORE wh-word (exams, writing).
+          </div>
+        </div>
+      </div>
+
+      <!-- 2.7 Negative Statements -->
+      <div class="content-card border-yellow reveal">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div class="card-title" style="color:#c8a000">🚫 Negative Statements</div>
+          <button class="collapse-btn" onclick="toggleCollapse(this)">▲ Collapse</button>
+        </div>
+        <div class="collapsible-content">
+          <ul class="note-list">
+            <li>A sentence stating something is <span class="hl-pink">NOT true</span> or <span class="hl-pink">did not
+                happen</span>.</li>
+            <li>Common negative words: <span class="kw">not</span> <span class="kw">never</span> <span
+                class="kw">no</span> <span class="kw">nobody</span> <span class="kw">nothing</span> <span
+                class="kw">hardly</span> <span class="kw">rarely</span> <span class="kw">barely</span></li>
+          </ul>
+          <div class="formula-box">
+            With Auxiliary: Subject + Auxiliary + <b>not</b> + Verb<br>
+            Without Auxiliary: Subject + do/does/did + <b>not</b> + base verb
+          </div>
+          <div class="example-box">
+            <div class="ex-label">📝 Examples</div>
+            She is <b>not</b> working today. (auxiliary = is)<br>
+            They have <b>not</b> arrived yet. (auxiliary = have)<br>
+            I do <b>not</b> like coffee. (no auxiliary → add do)<br>
+            She did <b>not</b> finish the exam. (past → add did)
+          </div>
+        </div>
+      </div>
+
+      <!-- 2.8 Negative Questions -->
+      <div class="content-card border-pink reveal">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div class="card-title" style="color:var(--pink)">❓ Negative Questions</div>
+          <button class="collapse-btn" onclick="toggleCollapse(this)">▲ Collapse</button>
+        </div>
+        <div class="collapsible-content">
+          <ul class="note-list">
+            <li>Used to: express <span class="hl-yellow">surprise</span>, confirm information, or make polite
+              suggestions.</li>
+          </ul>
+          <div class="formula-box">Auxiliary + n't + Subject + Verb?</div>
+          <div class="example-box">
+            <div class="ex-label">📝 Examples (convert to negative questions)</div>
+            "They have informed the client about the delay." → <b>Haven't they informed the client about the
+              delay?</b><br>
+            "Quality should be our top priority." → <b>Shouldn't quality be our top priority?</b><br>
+            "You have submitted the file." → <b>Haven't you submitted the file?</b>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2.9 So / Neither -->
+      <div class="content-card border-lavender reveal">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div class="card-title" style="color:var(--lavender)">🤝 So / Neither Do I Statements</div>
+          <button class="collapse-btn" onclick="toggleCollapse(this)">▲ Collapse</button>
+        </div>
+        <div class="collapsible-content">
+          <table class="note-table">
+            <tr>
+              <th style="background:#B39DDB">SO (Positive Agreement)</th>
+              <th style="background:#66BB6A">NEITHER (Negative Agreement)</th>
+            </tr>
+            <tr>
+              <td>Use with positive statements</td>
+              <td>Use with negative statements</td>
+            </tr>
+            <tr>
+              <td>Structure: So + Aux/Modal + Subject</td>
+              <td>Structure: Neither + Aux/Modal + Subject</td>
+            </tr>
+            <tr>
+              <td>Tom has gone → <b>So has Nick</b></td>
+              <td>File hasn't been backed up → <b>Neither has the other one</b></td>
+            </tr>
+            <tr>
+              <td>United won → <b>So did Rangers</b></td>
+              <td>Emma isn't here → <b>Neither/Nor is Matthew</b></td>
+            </tr>
+            <tr>
+              <td>We're overloaded → <b>So are we</b></td>
+              <td>Doesn't support update → <b>Neither does this version</b></td>
+            </tr>
+          </table>
+          <div class="memory-box">
+            POSITIVE statement → use <b>SO</b> &nbsp;|&nbsp; NEGATIVE statement → use <b>NEITHER/NOR</b><br>
+            Always match the auxiliary from the original sentence!
+          </div>
+        </div>
+      </div>
+
+      <!-- 2.10 I Think So -->
+      <div class="content-card border-teal reveal">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div class="card-title" style="color:var(--teal)">💭 I Think So Statements</div>
+          <button class="collapse-btn" onclick="toggleCollapse(this)">▲ Collapse</button>
+        </div>
+        <div class="collapsible-content">
+          <ul class="note-list">
+            <li>Expresses <span class="hl-blue">personal opinion, belief, or uncertainty</span>.</li>
+            <li>Use "so" after: <span class="kw">be afraid</span> <span class="kw">believe</span> <span
+                class="kw">expect</span> <span class="kw">guess</span> <span class="kw">hope</span> <span
+                class="kw">suppose</span> <span class="kw">think</span></li>
+            <li>⚠️ In negative: put "not" with the <b>opinion verb</b>, NOT the following verb.</li>
+          </ul>
+          <div class="formula-box">Structure: I think + (that) + clause &nbsp;|&nbsp; Positive: I hope so. &nbsp;|&nbsp;
+            Negative: I hope not.</div>
+          <div class="example-box">
+            <div class="ex-label">📝 Examples</div>
+            Will the team meet the deadline? → <b>I expect so.</b> / <b>I don't expect so.</b><br>
+            Is there a risk of delays? → <b>I'm afraid so.</b> / <b>I'm afraid not.</b><br>
+            Will the proposal receive funding? → <b>I hope so.</b> / <b>I hope not.</b>
+          </div>
+          <div class="memory-box">
+            ⚠️ "I don't think so." (NOT "I think not so.") — negation goes with the opinion verb!
+          </div>
+        </div>
+      </div>
+
+      <!-- Paragraph Analysis -->
+      <div class="content-card border-blue reveal">
+        <div class="card-title" style="color:var(--blue)">📄 Paragraph Analysis (Exam-style)</div>
+        <div
+          style="background:var(--blue-soft);border-radius:10px;padding:16px;font-family:'Kalam',cursive;font-size:0.92rem;line-height:1.8;margin-bottom:14px;">
+          "During the placement drive, the training coordinator <b>gave</b> the final-year <u>students</u> clear
+          <u>instructions</u> about the interview process. She <b>shared</b> the <u>schedule</u> with the candidates and
+          <b>offered</b> <u>them</u> practical <u>tips</u>…"
+        </div>
+        <table class="note-table">
+          <tr>
+            <th>Category</th>
+            <th>Examples from paragraph</th>
+          </tr>
+          <tr>
+            <td>Direct Object</td>
+            <td>instructions, schedule, tips</td>
+          </tr>
+          <tr>
+            <td>Indirect Object</td>
+            <td>students, candidates, them</td>
+          </tr>
+          <tr>
+            <td>Yes/No Question</td>
+            <td>Have you prepared your answers…?</td>
+          </tr>
+          <tr>
+            <td>Wh-Questions</td>
+            <td>When did you decide…? Why did you choose…?</td>
+          </tr>
+          <tr>
+            <td>Subject Question</td>
+            <td>Who would conduct the final interview?</td>
+          </tr>
+          <tr>
+            <td>Object Question</td>
+            <td>Whom the panel would evaluate first?</td>
+          </tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- ══ 3. EXAM FOCUS ══ -->
+    <section id="exam">
+      <div class="section-header hdr-orange reveal">
+        <span class="sec-icon">⭐</span> Exam Focus Section
+      </div>
+
+      <div class="exam-card exam-imp reveal">
+        <div class="exam-badge badge-pink">⭐ Most Important Questions</div>
+        <ol>
+          <li>What is the difference between a Direct Object and an Indirect Object? Give examples.</li>
+          <li>Distinguish between Subject Questions and Object Questions with examples.</li>
+          <li>Explain the two positions of prepositions in Wh-questions with examples.</li>
+          <li>How do "So" and "Neither" function in agreement statements? Give 3 examples each.</li>
+          <li>Write 5 Yes/No questions and convert them to negative questions.</li>
+        </ol>
+      </div>
+
+      <div class="exam-card exam-faq reveal">
+        <div class="exam-badge badge-yellow">🔁 Frequently Asked Questions</div>
+        <ol>
+          <li>Can a linking verb have a direct object? (Answer: No)</li>
+          <li>Give an example where the same sentence contains both IO and DO.</li>
+          <li>Why does a subject question NOT use do/does/did?</li>
+          <li>Identify the type of question: "Who broke the window?" (Subject Question)</li>
+          <li>Transform: "She explained the rules to us." → Use IO instead of prepositional phrase.</li>
+        </ol>
+      </div>
+
+      <div class="exam-card exam-short reveal">
+        <div class="exam-badge badge-mint">📝 Short Answer Questions (2–3 marks)</div>
+        <ol>
+          <li>Define direct object. Give formula and two examples.</li>
+          <li>What is "I think so"? When is it used? Give example.</li>
+          <li>Identify DO and IO: "The teacher gave the students worksheets."</li>
+          <li>Write a negative statement and convert it to a negative question.</li>
+          <li>Identify: "What caused the system failure?" — Subject or Object question?</li>
+          <li>Transform informal Wh-question to formal: "Who are you speaking to?"</li>
+        </ol>
+      </div>
+
+      <div class="exam-card exam-long reveal">
+        <div class="exam-badge badge-lavender">📚 Long Answer Questions (5–10 marks)</div>
+        <ol>
+          <li>Write a paragraph (100 words) using at least: 2 direct objects, 2 indirect objects, 1 Yes/No question, 1
+            Wh-question, and 1 subject question.</li>
+          <li>Explain all types of questions covered in Unit II with definition, structure, and examples. (Yes/No, Wh,
+            Subject, Object)</li>
+          <li>Explain "So/Neither Do I" and "I Think So" statements with 5 examples each.</li>
+          <li>Read the paragraph given and identify: DO, IO, Yes/No Q, Wh-Q, Subject Q, Object Q.</li>
+          <li>Compare subject vs. object questions using a table with 5 examples of each.</li>
+        </ol>
+      </div>
+
+      <div class="exam-card exam-viva reveal">
+        <div class="exam-badge badge-teal">🎤 Viva Questions</div>
+        <ol>
+          <li>What is the formula for indirect object sentences?</li>
+          <li>Give an example of a sentence with both IO and DO.</li>
+          <li>How do you form a Yes/No question from: "She has completed the project."?</li>
+          <li>"Who approved the plan?" — is this a subject or object question? Why?</li>
+          <li>What is the difference between "I think not" and "I don't think so"?</li>
+          <li>Give a negative agreement to: "I haven't submitted the form."</li>
+          <li>What verbs commonly take indirect objects? Name 5.</li>
+          <li>What is the more formal way to say "Who are you waiting for?"</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ══ 4. QUICK REVISION SHEET ══ -->
+    <section id="revision">
+      <div class="section-header hdr-mint reveal">
+        <span class="sec-icon">📋</span> Quick Revision Sheet
+      </div>
+      <div class="cheat-sheet reveal">
+        <div class="cheat-title">⚡ CHEAT SHEET — Unit II: Statements &amp; Questions</div>
+        <div class="cheat-grid">
+          <div class="cheat-block">
+            <h4>🔵 Direct Object</h4>
+            • What/whom the verb acts on<br>
+            • Formula: S + V + DO<br>
+            • Ask "What?" or "Whom?" after verb<br>
+            • Only with action verbs<br>
+            • NOT adverb/prep phrase<br>
+            • Ex: She bought <b>flowers</b>
+          </div>
+          <div class="cheat-block" style="background:var(--pink-light)">
+            <h4>🩷 Indirect Object</h4>
+            • Recipient of the action<br>
+            • Formula: S + V + IO + DO<br>
+            • Sits between verb and DO<br>
+            • = "to/for + noun" prepositional form<br>
+            • Verbs: give, send, teach, show…<br>
+            • Ex: She gave <b>us</b> worksheets
+          </div>
+          <div class="cheat-block" style="background:var(--mint-light)">
+            <h4>💚 Yes/No Questions</h4>
+            • Answer: yes or no only<br>
+            • Be verb → invert S and V<br>
+            • Action verb → add do/does/did<br>
+            • Modal → invert modal + S<br>
+            • Ex: Did she finish? / Can you come?
+          </div>
+          <div class="cheat-block" style="background:var(--lavender-light)">
+            <h4>💜 Wh- Questions</h4>
+            • What, When, Where, Why, Who, Whom, Whose, Which, How<br>
+            • Structure: WH + Aux + S + V<br>
+            • Give detailed info answers<br>
+            • Used in interviews<br>
+            • Ex: Why did you choose this role?
+          </div>
+          <div class="cheat-block" style="background:var(--orange-light)">
+            <h4>🟠 Subject vs Object Q</h4>
+            • Subject Q: WH = subject → NO do/did<br>
+            &nbsp; "Who called?" (who = subject)<br>
+            • Object Q: WH = object → ADD do/did<br>
+            &nbsp; "Who did you call?" (you = subject)<br>
+            • KEY: who does the action = subject
+          </div>
+          <div class="cheat-block" style="background:var(--teal-light)">
+            <h4>🩵 Prepositions in Wh-Q</h4>
+            • Informal → preposition at END<br>
+            &nbsp; "Who are you talking to?"<br>
+            • Formal → preposition BEFORE wh<br>
+            &nbsp; "To whom are you talking?"<br>
+            • Both are grammatically correct!
+          </div>
+          <div class="cheat-block" style="background:var(--yellow-light)">
+            <h4>🟡 Negative Statements</h4>
+            • With aux: S + aux + not + V<br>
+            &nbsp; She is NOT working today.<br>
+            • Without aux: S + do/did + not + V<br>
+            &nbsp; I do NOT like coffee.<br>
+            • neg words: never, nobody, nothing…
+          </div>
+          <div class="cheat-block" style="background:var(--blue-light)">
+            <h4>🔷 So / Neither / I think so</h4>
+            • POSITIVE → So + aux + S<br>
+            &nbsp; "I passed. So did she."<br>
+            • NEGATIVE → Neither + aux + S<br>
+            &nbsp; "I haven't eaten. Neither have they."<br>
+            • Opinion: I hope so / I hope not<br>
+            &nbsp; Neg: "I <u>don't</u> think so." ✅
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ 5. 50 MCQs ══ -->
+    <section id="mcq">
+      <div class="section-header hdr-lavender reveal">
+        <span class="sec-icon">🧩</span> 50 MCQs — Practice Zone
+      </div>
+
+      <div id="score-tracker">
+        <span style="font-family:'Caveat',cursive;font-size:1.1rem;font-weight:700;">Score Tracker:</span>
+        <span class="score-pill score-correct">✅ Correct: <span id="sc-correct">0</span></span>
+        <span class="score-pill score-wrong">❌ Wrong: <span id="sc-wrong">0</span></span>
+        <span class="score-pill score-total">Total: <span id="sc-total">0</span>/50</span>
+        <button class="practice-toggle" onclick="resetAll()">🔄 Reset All</button>
+        <button class="practice-toggle" onclick="showAllAnswers()" style="background:var(--orange)">👁️ Show All
+          Answers</button>
+      </div>
+
+      <div id="mcq-container"></div>
+    </section>
+
+  </div><!-- /wrapper -->
+
+  <!-- Scroll Top -->
+  <button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+  <script>
+    // ── MCQ DATA ──
+    const mcqs = [
+      // Direct Object
+      { q: "Which of the following is the direct object in: 'The manager approved the proposal'?", opts: ["manager", "approved", "proposal", "The"], ans: 2, exp: "The direct object is what the verb acts upon. 'Approved what?' → the proposal." },
+      { q: "Direct objects are found only with:", opts: ["Linking verbs", "Action verbs", "Modal verbs", "Helping verbs only"], ans: 1, exp: "Only action (transitive) verbs can have direct objects. Linking verbs (is, are, am) cannot." },
+      { q: "Identify the direct object: 'His landlord is raising the rent.'", opts: ["landlord", "is", "raising", "rent"], ans: 3, exp: "'Raising what?' → the rent. 'Rent' is the direct object." },
+      { q: "Which of these is NOT a direct object?", opts: ["She bought flowers.", "He drove a car.", "She runs quickly.", "They reviewed the code."], ans: 2, exp: "'Runs quickly' — 'quickly' is an adverb, not a direct object. The sentence has no object." },
+      { q: "What question do you ask to find the direct object?", opts: ["Who did it?", "Where was it?", "What or whom after the verb?", "Why did it happen?"], ans: 2, exp: "The trick to finding a DO is to ask 'Subject + Verb + WHAT/WHOM?' — the answer is the DO." },
+      { q: "In 'The committee approved the proposal after long deliberation', what is the DO?", opts: ["committee", "after long deliberation", "the proposal", "approved"], ans: 2, exp: "'Approved what?' → the proposal. Prepositional phrases like 'after long deliberation' are never DOs." },
+      { q: "Formula for a sentence with a direct object:", opts: ["S + V + IO + DO", "S + DO + V", "S + V + DO", "S + IO + V"], ans: 2, exp: "The standard formula is Subject + Verb + Direct Object." },
+      { q: "Which verb CAN have a direct object?", opts: ["is", "seems", "approved", "became"], ans: 2, exp: "'Approved' is an action verb and can take a direct object. 'Is,' 'seems,' 'became' are linking verbs." },
+      // Indirect Object
+      { q: "In 'She taught us grammar', what is the indirect object?", opts: ["she", "us", "grammar", "taught"], ans: 1, exp: "The indirect object is 'us' — the recipient of the teaching. Formula: S + V + IO(us) + DO(grammar)." },
+      { q: "Which of the following contains an indirect object?", opts: ["She runs every morning.", "He bought flowers for her.", "The manager gave the team instructions.", "They arrived late."], ans: 2, exp: "'Gave the team(IO) instructions(DO)' — 'the team' is the indirect object." },
+      { q: "Indirect objects appear:", opts: ["Before the subject", "After the direct object", "Between the verb and direct object", "At the end of the sentence"], ans: 2, exp: "IO always sits between the verb and the direct object: S + V + IO + DO." },
+      { q: "'I bought her flowers' can be rewritten as:", opts: ["I bought flowers to her", "I bought flowers for her", "I bought flowers with her", "For her I bought"], ans: 1, exp: "Indirect objects can be rewritten using 'for' + noun as a prepositional phrase." },
+      { q: "Which sentence has a FALSE indirect object identification?", opts: ["The manager gave the team instructions (IO=team)", "She explained the procedure to the interns (IO=interns)", "They sent their clients the report (IO=clients)", "He promised the participants sessions (IO=participants)"], ans: 1, exp: "'To the interns' is a prepositional phrase, NOT an indirect object. A true IO comes directly before the DO." },
+      { q: "Common verbs that take indirect objects include:", opts: ["run, walk, sleep", "give, send, teach, buy", "arrive, go, come", "be, seem, appear"], ans: 1, exp: "Verbs like give, send, show, tell, teach, bring, make, buy, lend, offer commonly take indirect objects." },
+      { q: "In 'The HR manager sent the candidates an offer letter', the IO is:", opts: ["HR manager", "sent", "candidates", "offer letter"], ans: 2, exp: "'Sent whom an offer letter?' → the candidates. Candidates = IO; offer letter = DO." },
+      { q: "Formula for a sentence with both IO and DO:", opts: ["S + V + DO + IO", "S + IO + V + DO", "S + V + IO + DO", "IO + S + V + DO"], ans: 2, exp: "Correct order is Subject + Verb + Indirect Object + Direct Object." },
+      // Yes/No Questions
+      { q: "Yes/No questions begin with:", opts: ["WH-words", "Auxiliary verbs", "Subject", "Negative words"], ans: 1, exp: "Yes/No questions always begin with auxiliary verbs: do, does, did, is, are, was, were, have, can, will, etc." },
+      { q: "To form a Yes/No question with a 'be' verb, you:", opts: ["Add do before subject", "Invert subject and verb", "Add did at the end", "Use a WH-word"], ans: 1, exp: "With 'be' verbs: Invert subject and verb. 'She is here' → 'Is she here?'" },
+      { q: "'The client approved the proposal.' → Correct Yes/No question:", opts: ["The client approved the proposal?", "Approved the client the proposal?", "Did the client approve the proposal?", "Does the client approved the proposal?"], ans: 2, exp: "Action verb (approved) → Add 'did' before subject. 'Did the client approve the proposal?'" },
+      { q: "Which is a correctly formed Yes/No question?", opts: ["Can you swim?", "You can swim?", "Swim can you?", "Do you can swim?"], ans: 0, exp: "With modals, invert modal and subject: Can + you + swim? ✅" },
+      { q: "'She has completed the project.' Yes/No form:", opts: ["Did she complete the project?", "Has she completed the project?", "Is she completed the project?", "She has completed the project?"], ans: 1, exp: "'Has' is an auxiliary verb → move to front: 'Has she completed the project?'" },
+      // Wh-Questions
+      { q: "Which WH-word asks about reason?", opts: ["When", "Where", "Why", "Which"], ans: 2, exp: "'Why' asks for a reason or explanation. 'Why were you late?' → Sorry, I missed my bus." },
+      { q: "Structure of a Wh-question:", opts: ["Subject + WH + Aux + V", "WH + Aux + Subject + V", "Aux + WH + Subject + V", "Subject + V + WH"], ans: 1, exp: "Correct structure: WH-word + Auxiliary + Subject + Verb (+ rest of sentence)." },
+      { q: "Which WH-word is used for countable quantities?", opts: ["How much", "How many", "How often", "How long"], ans: 1, exp: "'How many' is used with countable nouns. 'How much' is for uncountable nouns." },
+      { q: "'Which device do you prefer for coding?' asks about:", opts: ["person", "time", "choice between options", "reason"], ans: 2, exp: "'Which' asks about a choice or selection between specific options." },
+      { q: "Correct WH-question: '_______ did the team handle the unexpected failure?'", opts: ["What", "When", "How", "Which"], ans: 2, exp: "'How' asks about manner or method — how something was done." },
+      { q: "'_______ resume was selected for the final round?'", opts: ["Who", "Whom", "Whose", "Which"], ans: 2, exp: "'Whose' asks about possession/ownership. 'Whose resume' = which person's resume." },
+      { q: "'_______ is responsible for approving the project report?'", opts: ["Whom", "Whose", "Which", "Who"], ans: 3, exp: "'Who' asks about a person as the subject. Here the person IS the subject performing the responsibility." },
+      // Subject vs Object Questions
+      { q: "Subject questions do NOT use:", opts: ["WH-words", "do/does/did", "action verbs", "be verbs"], ans: 1, exp: "In subject questions, the WH-word replaces the subject, so no auxiliary do/does/did is needed." },
+      { q: "'Who led the product development team?' is a:", opts: ["Object question", "Subject question", "Yes/No question", "Negative question"], ans: 1, exp: "'Who' = subject (it did the leading). No 'did' is used → Subject Question." },
+      { q: "'Whom did the company appoint as project lead?' is a:", opts: ["Subject question", "Object question", "Wh-question with no auxiliary", "Negative question"], ans: 1, exp: "'Whom' = object (company appointed someone). 'Did' is used → Object Question." },
+      { q: "Which is the correct subject question?", opts: ["Who did complete the task?", "Who completed the task?", "Who did the task completed?", "Did who complete the task?"], ans: 1, exp: "Subject question: WH-word replaces subject → no 'did'. 'Who completed the task?' ✅" },
+      { q: "'What caused the system failure?' is a:", opts: ["Object question", "Subject question", "Yes/No question", "Negative question"], ans: 1, exp: "'What' is the subject (it caused the failure). No 'did' needed → Subject Question." },
+      { q: "'Who did you contact for the internship?' is a:", opts: ["Subject question", "Object question", "Wh-question without auxiliary", "Simple statement"], ans: 1, exp: "'Who' is the object (you contacted someone). 'Did' is used → Object Question." },
+      // Prepositions in Wh-questions
+      { q: "Prepositions in Wh-questions can be placed:", opts: ["Only at the beginning", "Only at the end", "At the end (informal) or before the WH-word (formal)", "Only before the subject"], ans: 2, exp: "Rule: preposition at END (informal/spoken) OR before WH-word (formal/written)." },
+      { q: "Formal version of 'Who are you talking to?':", opts: ["Whom are you talking?", "To whom are you talking?", "Whom are you talking to?", "To who are you talking?"], ans: 1, exp: "Formal structure: Preposition + Whom + aux + subject + verb → 'To whom are you talking?'" },
+      { q: "'What are you looking for?' → formal version:", opts: ["For what you are looking?", "For what are you looking?", "What are you looking?", "What for you are looking?"], ans: 1, exp: "Formal: Preposition + WH + aux + subject + verb → 'For what are you looking?'" },
+      { q: "Which position of preposition is more common in casual conversation?", opts: ["Before the WH-word", "After the WH-word", "At the end of the question", "At the beginning"], ans: 2, exp: "In everyday/spoken English, the preposition comes at the end: 'Where did she come from?'" },
+      // Negative Statements
+      { q: "Common negative words include:", opts: ["never, nobody, nothing, hardly", "always, usually, often", "very, really, quite", "some, many, few"], ans: 0, exp: "Common negative words: not, never, no, nobody, nothing, hardly, rarely, barely." },
+      { q: "Correct negative statement without auxiliary:", opts: ["She not finished the exam.", "She didn't finish the exam.", "She finished not the exam.", "Not she finished the exam."], ans: 1, exp: "Without auxiliary: Subject + did + not + base verb → 'She did not/didn't finish the exam.'" },
+      { q: "'She is working today.' → Negative form:", opts: ["She not is working today.", "She is not working today.", "She is working not today.", "Not she is working today."], ans: 1, exp: "With auxiliary 'is': Subject + auxiliary + not + verb → 'She is not working today.'" },
+      // Negative Questions
+      { q: "Negative questions are used to:", opts: ["Give information", "Express surprise, confirm info, or make polite suggestions", "Ask for personal opinions only", "Agree with statements"], ans: 1, exp: "Negative questions express surprise, confirm information, or make polite suggestions." },
+      { q: "Structure of a negative question:", opts: ["Not + subject + verb + ?", "Subject + aux + not + verb + ?", "Aux + n't + subject + verb + ?", "WH + not + subject + verb + ?"], ans: 2, exp: "Structure: Auxiliary + n't + Subject + Verb? e.g., 'Haven't you submitted the file?'" },
+      // So / Neither
+      { q: "'So' is used to agree with:", opts: ["Negative statements", "Positive statements", "Interrogative statements", "Imperative statements"], ans: 1, exp: "'So' expresses agreement with POSITIVE statements. 'Tom has gone. So has Nick.'" },
+      { q: "'Neither' is used to agree with:", opts: ["Positive statements", "Questions", "Negative statements", "Requests"], ans: 2, exp: "'Neither' expresses agreement with NEGATIVE statements. 'I haven't eaten. Neither have they.'" },
+      { q: "'United won.' → Agreement using So:", opts: ["So won Rangers.", "So did Rangers.", "So Rangers did.", "Neither did Rangers."], ans: 1, exp: "So + auxiliary (did, matching tense) + subject → 'So did Rangers.' ✅" },
+      { q: "'Emma isn't here tonight.' → Agreement:", opts: ["So is Matthew.", "Neither isn't Matthew.", "Neither/Nor is Matthew.", "So isn't Matthew."], ans: 2, exp: "Negative statement + agreement → 'Neither/Nor is Matthew.' Match the auxiliary 'is'." },
+      // I Think So
+      { q: "'I think so' is used to express:", opts: ["Definite facts", "Personal opinion, belief, or uncertainty", "Commands", "Direct questions"], ans: 1, exp: "'I think so' expresses personal opinion, belief, or uncertainty about something." },
+      { q: "Correct negative form of 'I think so':", opts: ["I think not so.", "I not think so.", "I don't think so.", "I think so not."], ans: 2, exp: "In negative sentences, 'not' goes with the opinion verb (think), NOT the following verb: 'I don't think so.'" },
+      { q: "Which verb CANNOT be followed by 'so' in 'I think so' pattern?", opts: ["hope", "expect", "run", "suppose"], ans: 2, exp: "'Run' is an action verb, not an opinion verb. 'So' follows: be afraid, believe, expect, guess, hope, suppose, think." },
+      { q: "'Will the proposal receive funding?' → Appropriate uncertain positive response:", opts: ["I think not.", "I hope so.", "Neither do I.", "So do I."], ans: 1, exp: "To express hopeful uncertainty about a future event: 'I hope so.' ✅" },
+    ];
+
+    // ── RENDER MCQs ──
+    function renderMCQs() {
+      const container = document.getElementById('mcq-container');
+      container.innerHTML = '';
+      mcqs.forEach((m, i) => {
+        const div = document.createElement('div');
+        div.className = 'mcq-item reveal';
+        div.style.animationDelay = (i * 0.03) + 's';
+        div.innerHTML = `
+      <div class="mcq-q"><span class="mcq-qnum">${i + 1}</span> ${m.q}</div>
+      <div class="mcq-options" id="opts-${i}">
+        ${m.opts.map((o, j) => `
+          <div class="mcq-opt" onclick="selectOpt(${i},${j})" id="opt-${i}-${j}">
+            <span class="opt-letter">${'ABCD'[j]}</span> ${o}
+          </div>`).join('')}
+      </div>
+      <button class="show-ans-btn" onclick="revealAnswer(${i})">👁 Show Answer</button>
+      <div class="mcq-answer" id="ans-${i}">
+        <div class="ans-label">✅ Answer: ${['A', 'B', 'C', 'D'][m.ans]}) ${m.opts[m.ans]}</div>
+        <div style="margin-top:6px;color:var(--ink-light)">📖 ${m.exp}</div>
+      </div>`;
+        container.appendChild(div);
+      });
+      revealOnScroll();
+    }
+
+    let correct = 0, wrong = 0;
+    const answered = {};
+
+    function selectOpt(qi, oi) {
+      if (answered[qi] !== undefined) return;
+      answered[qi] = oi;
+      const isCorrect = oi === mcqs[qi].ans;
+      if (isCorrect) correct++; else wrong++;
+      document.getElementById('sc-correct').textContent = correct;
+      document.getElementById('sc-wrong').textContent = wrong;
+      document.getElementById('sc-total').textContent = correct + wrong;
+
+      for (let j = 0; j < 4; j++) {
+        const el = document.getElementById(`opt-${qi}-${j}`);
+        if (j === mcqs[qi].ans) el.classList.add('correct');
+        else if (j === oi && !isCorrect) el.classList.add('wrong');
+      }
+      revealAnswer(qi);
+    }
+
+    function revealAnswer(qi) {
+      const el = document.getElementById(`ans-${qi}`);
+      el.classList.add('show');
+    }
+
+    function showAllAnswers() {
+      mcqs.forEach((_, i) => revealAnswer(i));
+    }
+
+    function resetAll() {
+      Object.keys(answered).forEach(k => delete answered[k]);
+      correct = 0; wrong = 0;
+      document.getElementById('sc-correct').textContent = 0;
+      document.getElementById('sc-wrong').textContent = 0;
+      document.getElementById('sc-total').textContent = 0;
+      renderMCQs();
+    }
+
+    // ── DARK MODE ──
+    function toggleDark() {
+      document.body.classList.toggle('dark-mode');
+      const btn = document.querySelector('.btn-dark');
+      btn.textContent = document.body.classList.contains('dark-mode') ? '☀️ Light' : '🌙 Dark';
+    }
+
+    // ── COLLAPSE ──
+    function toggleCollapse(btn) {
+      const content = btn.closest('.content-card').querySelector('.collapsible-content');
+      if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+        content.style.maxHeight = '0px';
+        content.style.opacity = '0';
+        btn.textContent = '▼ Expand';
+      } else {
+        content.style.maxHeight = content.scrollHeight + 'px';
+        content.style.opacity = '1';
+        btn.textContent = '▲ Collapse';
+      }
+    }
+
+    // ── PROGRESS BAR ──
+    window.addEventListener('scroll', () => {
+      const st = document.documentElement.scrollTop;
+      const sh = document.documentElement.scrollHeight - window.innerHeight;
+      document.getElementById('progress-bar').style.width = (st / sh * 100) + '%';
+      const btn = document.getElementById('scroll-top');
+      btn.classList.toggle('visible', st > 400);
+    });
+
+    // ── SCROLL REVEAL ──
+    function revealOnScroll() {
+      const els = document.querySelectorAll('.reveal');
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+      }, { threshold: 0.08 });
+      els.forEach(el => obs.observe(el));
+    }
+
+    // ── SEARCH ──
+    function searchNotes(val) {
+      // Remove old highlights
+      document.querySelectorAll('.search-hl').forEach(el => {
+        el.outerHTML = el.innerHTML;
+      });
+      if (!val || val.length < 2) return;
+      const content = document.getElementById('main-content');
+      const walker = document.createTreeWalker(content, NodeFilter.SHOW_TEXT);
+      const matches = [];
+      let node;
+      while ((node = walker.nextNode())) {
+        if (['SCRIPT', 'STYLE'].includes(node.parentNode.tagName)) continue;
+        if (node.textContent.toLowerCase().includes(val.toLowerCase())) {
+          matches.push(node);
+        }
+      }
+      matches.forEach(node => {
+        const re = new RegExp(`(${val})`, 'gi');
+        const span = document.createElement('span');
+        span.innerHTML = node.textContent.replace(re, '<mark class="search-hl">$1</mark>');
+        node.parentNode.replaceChild(span, node);
+      });
+      if (matches.length > 0) {
+        document.querySelector('.search-hl')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+
+    // ── INIT ──
+    renderMCQs();
+    revealOnScroll();
+  </script>
+</body>
+
+</html>

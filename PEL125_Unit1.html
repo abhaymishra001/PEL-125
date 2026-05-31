@@ -1,0 +1,1678 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PEL-125 Unit I Notes</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Kalam:wght@300;400;700&family=Patrick+Hand&family=Nunito:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --white: #FFFFFF;
+      --beige: #F8F5EE;
+      --paper: #FFFDF7;
+      --sky: #87CEEB;
+      --sky-light: #E8F4FD;
+      --yellow: #FFF3B0;
+      --yellow-dark: #F7C948;
+      --pink: #FFE4E8;
+      --pink-dark: #F78FA7;
+      --lavender: #EDE7F6;
+      --lavender-dark: #9C6FE4;
+      --mint: #E8F5E9;
+      --mint-dark: #4CAF82;
+      --ink: #2C2C2C;
+      --ink-light: #555;
+      --blue-accent: #4A90D9;
+      --red-accent: #E74C3C;
+      --orange-accent: #F39C12;
+      --green-accent: #27AE60;
+      --purple-accent: #8E44AD;
+      --shadow: rgba(0, 0, 0, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      background: var(--beige);
+      font-family: 'Nunito', sans-serif;
+      color: var(--ink);
+      min-height: 100vh;
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 27px, #e8e0d0 27px, #e8e0d0 28px),
+        repeating-linear-gradient(90deg, transparent, transparent 27px, transparent 27px);
+      background-size: 100% 28px;
+    }
+
+    body.dark {
+      --white: #1a1a2e;
+      --beige: #16213e;
+      --paper: #0f3460;
+      --ink: #e0e0e0;
+      --ink-light: #bbb;
+      --sky-light: #1a2a3a;
+      --yellow: #2a2a00;
+      --pink: #2a0a10;
+      --lavender: #1a1030;
+      --mint: #0a2a15;
+      background-color: #16213e;
+      background-image: repeating-linear-gradient(0deg, transparent, transparent 27px, rgba(255, 255, 255, 0.05) 27px, rgba(255, 255, 255, 0.05) 28px);
+    }
+
+    /* PROGRESS BAR */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #F7C948, #F78FA7, #9C6FE4, #4A90D9);
+      width: 0%;
+      z-index: 9999;
+      transition: width 0.1s
+    }
+
+    /* NAVBAR */
+    nav {
+      position: sticky;
+      top: 4px;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 2px dashed #e0d5c5;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      box-shadow: 0 2px 20px var(--shadow);
+    }
+
+    body.dark nav {
+      background: rgba(22, 33, 62, 0.9);
+      border-bottom-color: #333
+    }
+
+    .nav-brand {
+      font-family: 'Caveat', cursive;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--blue-accent);
+      margin-right: auto
+    }
+
+    .nav-btn {
+      background: var(--yellow);
+      border: 2px solid var(--yellow-dark);
+      color: var(--ink);
+      padding: 5px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .nav-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 2px 2px 0 var(--yellow-dark)
+    }
+
+    #search-bar {
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 2px solid #ddd;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.85rem;
+      width: 180px;
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    body.dark #search-bar {
+      background: #1a2a3a;
+      border-color: #444;
+      color: #eee
+    }
+
+    /* MAIN */
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 20px 16px 80px
+    }
+
+    /* TITLE BLOCK */
+    .title-block {
+      background: var(--paper);
+      border: 3px solid #e8dfc8;
+      border-radius: 16px;
+      padding: 28px 30px 20px;
+      margin-bottom: 30px;
+      position: relative;
+      box-shadow: 4px 4px 0 #e0d5c5, 8px 8px 0 #d8ccb8;
+      text-align: center;
+    }
+
+    .title-block::before {
+      content: '📓';
+      position: absolute;
+      top: -18px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 2rem
+    }
+
+    .title-unit {
+      font-family: 'Caveat', cursive;
+      font-size: 1.1rem;
+      color: #999;
+      letter-spacing: 2px
+    }
+
+    .title-input {
+      font-family: 'Kalam', cursive;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--blue-accent);
+      border: none;
+      border-bottom: 3px dashed var(--blue-accent);
+      background: transparent;
+      width: 100%;
+      text-align: center;
+      outline: none;
+      padding: 4px 0;
+      margin-top: 6px;
+    }
+
+    .title-sub {
+      font-family: 'Patrick Hand', cursive;
+      color: var(--ink-light);
+      margin-top: 8px;
+      font-size: 0.95rem
+    }
+
+    .corner-doodle {
+      position: absolute;
+      font-size: 1.4rem;
+      opacity: 0.5
+    }
+
+    .corner-doodle.tl {
+      top: 8px;
+      left: 12px
+    }
+
+    .corner-doodle.tr {
+      top: 8px;
+      right: 12px
+    }
+
+    /* SECTION WRAPPER */
+    .section {
+      background: var(--paper);
+      border-radius: 16px;
+      border: 2px solid #e8dfc8;
+      margin-bottom: 28px;
+      overflow: hidden;
+      box-shadow: 3px 3px 0 #e0d5c5;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 20px;
+      cursor: pointer;
+      font-family: 'Caveat', cursive;
+      font-size: 1.4rem;
+      font-weight: 700;
+      border-bottom: 2px dashed #e8dfc8;
+      transition: background 0.2s;
+    }
+
+    .section-header:hover {
+      background: rgba(0, 0, 0, 0.02)
+    }
+
+    .section-body {
+      padding: 20px
+    }
+
+    .section-body.collapsed {
+      display: none
+    }
+
+    .toggle-icon {
+      font-size: 1.2rem;
+      transition: transform 0.3s
+    }
+
+    .rotated {
+      transform: rotate(180deg)
+    }
+
+    /* COLOR THEMES FOR SECTIONS */
+    .sec-blue .section-header {
+      background: var(--sky-light);
+      color: var(--blue-accent);
+      border-bottom-color: var(--sky)
+    }
+
+    .sec-yellow .section-header {
+      background: var(--yellow);
+      color: #a07800;
+      border-bottom-color: var(--yellow-dark)
+    }
+
+    .sec-pink .section-header {
+      background: var(--pink);
+      color: #c0005a;
+      border-bottom-color: var(--pink-dark)
+    }
+
+    .sec-lavender .section-header {
+      background: var(--lavender);
+      color: var(--lavender-dark);
+      border-bottom-color: #c9b0f0
+    }
+
+    .sec-mint .section-header {
+      background: var(--mint);
+      color: #1b7a45;
+      border-bottom-color: var(--mint-dark)
+    }
+
+    .sec-orange .section-header {
+      background: #FFF3E0;
+      color: #e65100;
+      border-bottom-color: #FF9800
+    }
+
+    /* STICKY NOTES */
+    .sticky-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 16px
+    }
+
+    .sticky {
+      padding: 16px;
+      border-radius: 4px 4px 4px 4px;
+      font-family: 'Kalam', cursive;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.08);
+      position: relative;
+      transform: rotate(var(--rot, 0deg));
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .sticky:hover {
+      transform: rotate(0deg) scale(1.02);
+      box-shadow: 4px 6px 16px rgba(0, 0, 0, 0.15);
+      z-index: 10
+    }
+
+    .sticky::before {
+      content: '';
+      position: absolute;
+      top: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 30px;
+      height: 12px;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 2px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2)
+    }
+
+    .sticky.yellow {
+      background: #FFF9C4;
+      --rot: -1deg
+    }
+
+    .sticky.pink {
+      background: #FCE4EC;
+      --rot: 1.5deg
+    }
+
+    .sticky.blue {
+      background: #E3F2FD;
+      --rot: -0.5deg
+    }
+
+    .sticky.green {
+      background: #E8F5E9;
+      --rot: 2deg
+    }
+
+    .sticky.purple {
+      background: #F3E5F5;
+      --rot: -1.5deg
+    }
+
+    .sticky.orange {
+      background: #FFF3E0;
+      --rot: 1deg
+    }
+
+    .sticky h4 {
+      font-weight: 700;
+      margin-bottom: 6px;
+      font-size: 1rem
+    }
+
+    /* NOTES CONTENT */
+    .topic-block {
+      background: var(--paper);
+      border-radius: 12px;
+      border-left: 5px solid var(--blue-accent);
+      padding: 14px 18px;
+      margin-bottom: 16px;
+      box-shadow: 2px 2px 8px var(--shadow);
+    }
+
+    .topic-block.pink-border {
+      border-left-color: var(--pink-dark)
+    }
+
+    .topic-block.green-border {
+      border-left-color: var(--mint-dark)
+    }
+
+    .topic-block.yellow-border {
+      border-left-color: var(--yellow-dark)
+    }
+
+    .topic-block.purple-border {
+      border-left-color: var(--lavender-dark)
+    }
+
+    .topic-block.orange-border {
+      border-left-color: #FF9800
+    }
+
+    .topic-title {
+      font-family: 'Caveat', cursive;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .handwritten {
+      font-family: 'Kalam', cursive;
+      font-size: 0.95rem;
+      line-height: 1.8
+    }
+
+    .handwritten li {
+      margin-bottom: 5px;
+      list-style: none;
+      padding-left: 24px;
+      position: relative
+    }
+
+    .handwritten li::before {
+      content: '✏️';
+      position: absolute;
+      left: 0;
+      font-size: 0.8rem
+    }
+
+    .highlight {
+      background: linear-gradient(180deg, transparent 50%, #FFF176 50%);
+      padding: 0 2px
+    }
+
+    .highlight-pink {
+      background: linear-gradient(180deg, transparent 50%, #FFB3C1 50%);
+      padding: 0 2px
+    }
+
+    .highlight-blue {
+      background: linear-gradient(180deg, transparent 50%, #B3E5FC 50%);
+      padding: 0 2px
+    }
+
+    .highlight-green {
+      background: linear-gradient(180deg, transparent 50%, #C8E6C9 50%);
+      padding: 0 2px
+    }
+
+    .def-box {
+      background: var(--yellow);
+      border: 2px dashed var(--yellow-dark);
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin: 10px 0;
+      font-family: 'Kalam', cursive;
+      font-size: 0.9rem;
+    }
+
+    .memory-trick {
+      background: linear-gradient(135deg, #f093fb22, #f5576c22);
+      border: 2px dashed var(--pink-dark);
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin: 10px 0;
+      font-family: 'Kalam', cursive;
+      font-size: 0.9rem;
+    }
+
+    .memory-trick::before {
+      content: '🧠 Memory Trick: ';
+      font-weight: 700;
+      color: var(--pink-dark)
+    }
+
+    .example-box {
+      background: var(--mint);
+      border-left: 4px solid var(--mint-dark);
+      border-radius: 0 8px 8px 0;
+      padding: 8px 14px;
+      margin: 8px 0;
+      font-family: 'Patrick Hand', cursive;
+      font-size: 0.9rem;
+    }
+
+    .warning-box {
+      background: #FFF3E0;
+      border: 2px dashed #FF9800;
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin: 10px 0;
+      font-family: 'Kalam', cursive;
+      font-size: 0.9rem;
+    }
+
+    .warning-box::before {
+      content: '⚠️ ';
+      font-size: 1rem
+    }
+
+    /* TABLE */
+    .note-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'Patrick Hand', cursive;
+      font-size: 0.9rem;
+      margin: 12px 0
+    }
+
+    .note-table th {
+      background: var(--blue-accent);
+      color: #fff;
+      padding: 8px 12px;
+      text-align: left
+    }
+
+    .note-table td {
+      padding: 8px 12px;
+      border-bottom: 1px dashed #ddd
+    }
+
+    .note-table tr:nth-child(even) td {
+      background: var(--sky-light)
+    }
+
+    body.dark .note-table td {
+      border-bottom-color: #333
+    }
+
+    body.dark .note-table tr:nth-child(even) td {
+      background: #1a2a3a
+    }
+
+    /* EXAM SECTION */
+    .exam-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 14px
+    }
+
+    .exam-card {
+      border-radius: 12px;
+      padding: 16px;
+      border: 2px solid transparent;
+      transition: transform 0.2s
+    }
+
+    .exam-card:hover {
+      transform: translateY(-3px)
+    }
+
+    .exam-card.imp {
+      background: #FFF3E0;
+      border-color: #FF9800
+    }
+
+    .exam-card.faq {
+      background: #E3F2FD;
+      border-color: #2196F3
+    }
+
+    .exam-card.short {
+      background: #E8F5E9;
+      border-color: #4CAF50
+    }
+
+    .exam-card.long {
+      background: #F3E5F5;
+      border-color: #9C27B0
+    }
+
+    .exam-card.viva {
+      background: #FCE4EC;
+      border-color: #E91E63
+    }
+
+    .exam-card h4 {
+      font-family: 'Caveat', cursive;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 10px
+    }
+
+    .exam-card ol,
+    .exam-card ul {
+      padding-left: 18px;
+      font-family: 'Kalam', cursive;
+      font-size: 0.88rem;
+      line-height: 1.7
+    }
+
+    /* REVISION SHEET */
+    .revision-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 10px
+    }
+
+    .rev-item {
+      background: var(--paper);
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-family: 'Kalam', cursive;
+      font-size: 0.85rem;
+      border-left: 4px solid var(--blue-accent);
+    }
+
+    .rev-item strong {
+      display: block;
+      color: var(--blue-accent);
+      font-size: 0.9rem;
+      margin-bottom: 3px
+    }
+
+    .cheatsheet-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 8px
+    }
+
+    .chip {
+      background: var(--yellow);
+      border: 1px solid var(--yellow-dark);
+      border-radius: 20px;
+      padding: 3px 10px;
+      font-family: 'Kalam', cursive;
+      font-size: 0.82rem;
+      display: inline-block;
+    }
+
+    .chip.pink {
+      background: var(--pink);
+      border-color: var(--pink-dark)
+    }
+
+    .chip.blue {
+      background: var(--sky-light);
+      border-color: var(--sky)
+    }
+
+    .chip.green {
+      background: var(--mint);
+      border-color: var(--mint-dark)
+    }
+
+    .chip.purple {
+      background: var(--lavender);
+      border-color: var(--lavender-dark)
+    }
+
+    /* MCQ */
+    .mcq-controls {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+      align-items: center
+    }
+
+    .score-display {
+      background: var(--mint);
+      border: 2px solid var(--mint-dark);
+      border-radius: 10px;
+      padding: 8px 20px;
+      font-family: 'Caveat', cursive;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--mint-dark);
+    }
+
+    .mcq-item {
+      background: var(--paper);
+      border: 2px solid #e8dfc8;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 14px;
+      transition: border-color 0.2s;
+    }
+
+    .mcq-item:hover {
+      border-color: var(--blue-accent)
+    }
+
+    .mcq-q {
+      font-family: 'Kalam', cursive;
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 12px
+    }
+
+    .mcq-q span {
+      color: var(--blue-accent);
+      font-size: 1rem
+    }
+
+    .mcq-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px
+    }
+
+    .mcq-opt {
+      background: var(--beige);
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      padding: 7px 12px;
+      cursor: pointer;
+      font-family: 'Kalam', cursive;
+      font-size: 0.88rem;
+      transition: all 0.15s;
+      text-align: left;
+    }
+
+    .mcq-opt:hover:not(:disabled) {
+      background: var(--sky-light);
+      border-color: var(--sky)
+    }
+
+    .mcq-opt.correct {
+      background: #C8E6C9;
+      border-color: var(--mint-dark);
+      color: #1b5e20
+    }
+
+    .mcq-opt.wrong {
+      background: #FFCDD2;
+      border-color: var(--red-accent);
+      color: #b71c1c
+    }
+
+    .mcq-opt:disabled {
+      cursor: default
+    }
+
+    .mcq-reveal {
+      background: var(--yellow);
+      border: 2px dashed var(--yellow-dark);
+      border-radius: 8px;
+      padding: 8px 12px;
+      margin-top: 10px;
+      font-family: 'Kalam', cursive;
+      font-size: 0.85rem;
+      display: none;
+    }
+
+    .mcq-reveal.show {
+      display: block
+    }
+
+    .mode-toggle-btn {
+      background: var(--lavender);
+      border: 2px solid var(--lavender-dark);
+      color: var(--lavender-dark);
+      padding: 7px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      transition: all 0.2s;
+    }
+
+    .mode-toggle-btn:hover {
+      background: var(--lavender-dark);
+      color: #fff
+    }
+
+    /* SCROLL TOP */
+    #scroll-top {
+      position: fixed;
+      bottom: 28px;
+      right: 24px;
+      background: var(--blue-accent);
+      color: #fff;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(74, 144, 217, 0.5);
+      transform: scale(0);
+      transition: transform 0.3s;
+      z-index: 500;
+      border: none;
+    }
+
+    #scroll-top.show {
+      transform: scale(1)
+    }
+
+    #scroll-top:hover {
+      background: #357abd
+    }
+
+    /* PRINT BUTTON */
+    .print-btn {
+      background: var(--mint);
+      border: 2px solid var(--mint-dark);
+      color: var(--mint-dark);
+      padding: 7px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    /* SEARCH HIGHLIGHT */
+    .search-highlight {
+      background: #FFD54F;
+      border-radius: 3px;
+      padding: 0 2px
+    }
+
+    /* MARGIN NOTE */
+    .margin-note {
+      float: right;
+      width: 120px;
+      margin: 0 0 10px 16px;
+      background: var(--pink);
+      border-left: 3px solid var(--pink-dark);
+      padding: 6px 10px;
+      border-radius: 0 8px 8px 0;
+      font-family: 'Caveat', cursive;
+      font-size: 0.85rem;
+      color: #c0005a;
+      transform: rotate(1.5deg);
+    }
+
+    @media(max-width:600px) {
+      .mcq-options {
+        grid-template-columns: 1fr
+      }
+
+      .margin-note {
+        float: none;
+        width: auto;
+        margin: 0 0 10px 0
+      }
+
+      nav {
+        padding: 8px 12px;
+        gap: 8px
+      }
+
+      .title-input {
+        font-size: 1.6rem
+      }
+    }
+
+    @media print {
+
+      nav,
+      #scroll-top,
+      #progress-bar,
+      .nav-btn,
+      .mode-toggle-btn,
+      .print-btn,
+      .mcq-controls {
+        display: none !important
+      }
+
+      .section-body.collapsed {
+        display: block !important
+      }
+
+      body {
+        background: white;
+        background-image: none
+      }
+
+      .section {
+        break-inside: avoid
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="progress-bar"></div>
+
+  <nav>
+    <a href="index.html" class="nav-btn" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 4px;">🏠 Home</a>
+    <div class="nav-brand">📒 PEL-125 Notes</div>
+    <input type="text" id="search-bar" placeholder="🔍 Search notes..." oninput="searchNotes(this.value)">
+    <button class="nav-btn" onclick="toggleAll(true)">📂 Expand All</button>
+    <button class="nav-btn" onclick="toggleAll(false)">📁 Collapse All</button>
+    <button class="nav-btn" onclick="toggleDark()">🌙 Dark Mode</button>
+    <button class="print-btn" onclick="window.print()">🖨️ Print</button>
+  </nav>
+
+  <main id="main-content">
+
+    <!-- TITLE -->
+    <div class="title-block">
+      <span class="corner-doodle tl">⭐</span>
+      <span class="corner-doodle tr">📌</span>
+      <div class="title-unit">UNIT : 1</div>
+      <div class="title-unit">Parts of Speech — Pronouns Adverbs</div>
+      <div class="title-sub">PEL-125 | Upper Intermediate Communication Skills-I </div>
+    </div>
+
+    <!-- SECTION 1: QUICK OVERVIEW -->
+    <div class="section sec-blue" id="sec1">
+      <div class="section-header" onclick="toggleSection('body1','icon1')">
+        <span>📌 Section 1: Quick Overview</span>
+        <span class="toggle-icon" id="icon1">▼</span>
+      </div>
+      <div class="section-body" id="body1">
+        <div class="sticky-grid">
+          <div class="sticky yellow" style="--rot:-1.5deg">
+            <h4>📋 Unit Summary</h4>
+            This unit covers <strong>Parts of Speech</strong> with focus on Pronouns (5 types) and Adverbs (types,
+            positions, linking words). Crucial for grammar accuracy in speaking & writing.
+          </div>
+          <div class="sticky pink" style="--rot:1deg">
+            <h4>🎯 Learning Objectives</h4>
+            ✔ Use personal, reflexive, reciprocal, substitute & emphatic pronouns correctly<br>
+            ✔ Place adverbs in front/mid/end positions<br>
+            ✔ Identify 5 types of adverbs<br>
+            ✔ Use sentence adverbs & linking words
+          </div>
+          <div class="sticky blue" style="--rot:-0.8deg">
+            <h4>🔑 Key Concepts</h4>
+            • Pronoun types & usage rules<br>
+            • Reflexive vs Emphatic pronouns<br>
+            • Substitute pronouns (one/ones/so/not)<br>
+            • Adverb modification rules<br>
+            • Position of adverbs (F/M/E)<br>
+            • Sentence & linking adverbs
+          </div>
+          <div class="sticky green" style="--rot:2deg">
+            <h4>📚 Important Terms</h4>
+            Pronoun, Antecedent, Reflexive, Reciprocal, Emphatic, Substitute, Adverb, Manner, Frequency, Degree,
+            Conjunctive Adverb, Sentence Adverb
+          </div>
+          <div class="sticky purple" style="--rot:-1deg">
+            <h4>⚡ Quick Stats</h4>
+            <strong>5</strong> Pronoun Types<br>
+            <strong>5</strong> Adverb Types<br>
+            <strong>3</strong> Adverb Positions<br>
+            <strong>Textbook:</strong> Oxford Practice Grammar by John Eastwood
+          </div>
+          <div class="sticky orange" style="--rot:1.5deg">
+            <h4>🏆 Exam Weightage</h4>
+            This unit is <strong>heavily tested</strong> in MCQs and fill-in-the-blanks. Reflexive vs Emphatic pronoun
+            distinction is a favourite exam question!
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 2: DETAILED NOTES -->
+    <div class="section sec-yellow" id="sec2">
+      <div class="section-header" onclick="toggleSection('body2','icon2')">
+        <span>✍️ Section 2: Detailed Handwritten Notes</span>
+        <span class="toggle-icon" id="icon2">▼</span>
+      </div>
+      <div class="section-body" id="body2">
+
+        <!-- PRONOUNS -->
+        <div class="topic-block">
+          <div class="topic-title" style="color:var(--blue-accent)">🔵 1. Personal Pronouns</div>
+          <div class="def-box">📖 <strong>Definition:</strong> A <span class="highlight">pronoun is a word that replaces
+              a noun</span> to avoid repetition. Personal pronouns refer to specific persons or things.</div>
+          <ul class="handwritten">
+            <li>Two forms: <span class="highlight-blue">Subject Form</span> (does the action) and <span
+                class="highlight-pink">Object Form</span> (receives the action)</li>
+          </ul>
+          <table class="note-table" style="margin-top:10px">
+            <tr>
+              <th>Person</th>
+              <th>Subject (Singular)</th>
+              <th>Subject (Plural)</th>
+              <th>Object (Singular)</th>
+              <th>Object (Plural)</th>
+            </tr>
+            <tr>
+              <td>1st</td>
+              <td>I</td>
+              <td>we</td>
+              <td>me</td>
+              <td>us</td>
+            </tr>
+            <tr>
+              <td>2nd</td>
+              <td>you</td>
+              <td>you</td>
+              <td>you</td>
+              <td>you</td>
+            </tr>
+            <tr>
+              <td>3rd</td>
+              <td>he/she/it</td>
+              <td>they</td>
+              <td>him/her/it</td>
+              <td>them</td>
+            </tr>
+          </table>
+          <div class="example-box">✅ <strong>She</strong> forgot the meeting. (Subject) | I haven't seen
+            <strong>her</strong> today. (Object)</div>
+          <div class="memory-trick">Subject pronouns = <strong>I, we</strong> feel important (they come first!). Object
+            pronouns = <strong>me, us</strong> receive things!</div>
+          <div class="warning-box"><strong>Special Uses:</strong> THERE+BE (existence): "There <em>is</em> a phone box"
+            | IT = time/weather/distance/situation: "It's raining" | YOU/ONE = generic person | THEY = people in general
+          </div>
+        </div>
+
+        <!-- REFLEXIVE PRONOUNS -->
+        <div class="topic-block pink-border">
+          <div class="topic-title" style="color:var(--pink-dark)">🌸 2. Reflexive Pronouns</div>
+          <div class="def-box">📖 <strong>Definition:</strong> Reflexive pronouns <span class="highlight-pink">refer
+              back to the subject</span> — when the subject and object are the same person.</div>
+          <table class="note-table">
+            <tr>
+              <th>Person</th>
+              <th>Singular</th>
+              <th>Plural</th>
+            </tr>
+            <tr>
+              <td>1st</td>
+              <td>myself</td>
+              <td>ourselves</td>
+            </tr>
+            <tr>
+              <td>2nd</td>
+              <td>yourself</td>
+              <td>yourselves</td>
+            </tr>
+            <tr>
+              <td>3rd</td>
+              <td>himself/herself/itself</td>
+              <td>themselves</td>
+            </tr>
+          </table>
+          <ul class="handwritten" style="margin-top:10px">
+            <li><strong>When to use:</strong> Subject acts on itself → <em>Mark made <span
+                  class="highlight">himself</span> a sandwich</em></li>
+            <li><strong>After prepositions (most):</strong> <em>Look after <span
+                  class="highlight">themselves</span></em></li>
+            <li><strong>To emphasize:</strong> <em>I did it <span class="highlight">myself</span></em></li>
+          </ul>
+          <div class="warning-box"><strong>Common Mistake:</strong> ❌ "The gunman shot him" (wrong if subject=object) →
+            ✅ "The gunman shot <strong>himself</strong>" | BUT after PLACE prepositions: "Behind <strong>me</strong>"
+            (NOT myself) — use regular pronouns!</div>
+          <div class="example-box">🔧 <strong>Tech Writing:</strong> "The system <strong>resets</strong>" (not resets
+            itself) | "The algorithm adapts <strong>itself</strong> to new data" (for emphasis only)</div>
+          <div style="margin-top:12px">
+            <strong style="font-family:'Caveat',cursive;font-size:1.1rem;color:var(--pink-dark)">⚠️ Verbs that DON'T use
+              Reflexive:</strong>
+            <div class="cheatsheet-row" style="margin-top:6px">
+              <span class="chip pink">afford</span><span class="chip pink">concentrate</span><span
+                class="chip pink">decide</span><span class="chip pink">relax</span><span
+                class="chip pink">remember</span><span class="chip pink">hurry</span><span
+                class="chip pink">meet</span><span class="chip pink">rest</span><span class="chip pink">wake
+                up</span><span class="chip pink">sit down</span><span class="chip pink">wonder</span><span
+                class="chip pink">complain</span>
+            </div>
+          </div>
+          <div class="example-box" style="margin-top:10px">
+            <strong>Common Idioms:</strong> enjoy yourself = have a good time | help yourself = take what you want | by
+            myself = alone/on my own
+          </div>
+        </div>
+
+        <!-- RECIPROCAL PRONOUNS -->
+        <div class="topic-block green-border">
+          <div class="topic-title" style="color:var(--mint-dark)">🔄 3. Reciprocal Pronouns</div>
+          <div class="def-box">📖 <strong>Definition:</strong> Reciprocal pronouns show <span
+              class="highlight-green">mutual action between two or more people</span> — A does X to B, and B does the
+            same to A.</div>
+          <ul class="handwritten">
+            <li><strong>Only two:</strong> <span class="highlight-green">each other</span> (2 people) and <span
+                class="highlight-green">one another</span> (3+ people) — but used interchangeably today!</li>
+            <li>They respect <strong>one another's</strong> opinions | They don't like <strong>each other</strong></li>
+            <li>Possessive form: use apostrophe → <strong>each other's</strong> phone numbers</li>
+          </ul>
+          <table class="note-table" style="margin-top:8px">
+            <tr>
+              <th>Each Other (Mutual)</th>
+              <th>Themselves (Individual)</th>
+            </tr>
+            <tr>
+              <td>They're laughing at each other<br>(A at B, B at A)</td>
+              <td>They're laughing at themselves<br>(each person at themselves)</td>
+            </tr>
+          </table>
+          <div class="memory-trick">EACH OTHER = mutual exchange. Think of two mirrors facing each other! 🪞🪞</div>
+        </div>
+
+        <!-- SUBSTITUTE PRONOUNS -->
+        <div class="topic-block yellow-border">
+          <div class="topic-title" style="color:#a07800">🔄 4. Substitute Pronouns</div>
+          <div class="def-box">📖 <strong>Definition:</strong> Replace nouns to avoid repetition. Main substitutes:
+            <span class="highlight">one, ones, so, not</span></div>
+          <ul class="handwritten">
+            <li><strong>ONE</strong> = replaces a singular countable noun → "I need a pen. Do you have <span
+                class="highlight">one</span>?"</li>
+            <li><strong>ONES</strong> = replaces plural countable nouns → "I like the blue shirts, not the white <span
+                class="highlight">ones</span>."</li>
+            <li><strong>SO</strong> = replaces affirmative clause → "Will it work?" → "I hope <span
+                class="highlight">so</span>"</li>
+            <li><strong>NOT</strong> = replaces negative clause → "I hope <span class="highlight">not</span>" / "I'm
+              afraid <span class="highlight">not</span>"</li>
+          </ul>
+          <table class="note-table" style="margin-top:8px">
+            <tr>
+              <th>Question</th>
+              <th>Affirmative (SO)</th>
+              <th>Negative (NOT)</th>
+            </tr>
+            <tr>
+              <td>Will it work?</td>
+              <td>I hope so</td>
+              <td>I hope not</td>
+            </tr>
+            <tr>
+              <td>Is she ready?</td>
+              <td>I think so</td>
+              <td>I don't think so</td>
+            </tr>
+            <tr>
+              <td>Can you attend?</td>
+              <td>I expect so</td>
+              <td>I'm afraid not</td>
+            </tr>
+          </table>
+          <div class="warning-box"><strong>DON'T USE one/ones with:</strong> Uncountable nouns ("some one" ❌) |
+            Possessives alone ("my one" ❌) | After numbers alone ("three ones" ❌)<br><strong>DO USE with:</strong>
+            Adjectives ("the red one" ✅) | this/that/these/those | which</div>
+        </div>
+
+        <!-- EMPHATIC PRONOUNS -->
+        <div class="topic-block purple-border">
+          <div class="topic-title" style="color:var(--lavender-dark)">💥 5. Emphatic Pronouns</div>
+          <div class="def-box">📖 <strong>Definition:</strong> Same form as reflexive pronouns (myself, yourself, etc.)
+            but used for <span class="highlight">emphasis</span> or to show <span class="highlight">independent/unaided
+              action</span>.</div>
+          <ul class="handwritten">
+            <li><strong>Use 1 – Without Help:</strong> "I built this boat <span class="highlight">myself</span>" =
+              without anyone's help</li>
+            <li><strong>Use 2 – Special Emphasis:</strong> "The manager <span class="highlight">himself</span> welcomed
+              us" = the manager personally, not staff</li>
+            <li>Position: after the noun/pronoun it relates to</li>
+            <li><span class="highlight-pink">EMPHATIC = OPTIONAL</span> — can be removed without changing basic meaning
+            </li>
+          </ul>
+          <table class="note-table" style="margin-top:8px">
+            <tr>
+              <th>Reflexive (NECESSARY)</th>
+              <th>Emphatic (OPTIONAL)</th>
+            </tr>
+            <tr>
+              <td>"She hurt <strong>herself</strong>"<br>❌ Cannot be removed</td>
+              <td>"She <strong>herself</strong> did it"<br>✅ Can be removed</td>
+            </tr>
+          </table>
+          <div class="memory-trick">REFLEXIVE = necessary for meaning (like a mirror, essential) | EMPHATIC = optional
+            stress (like bold text — adds intensity!) 💪</div>
+          <div class="example-box">📐 <strong>Engineering Context:</strong> "The CEO <strong>himself</strong> approved
+            the design" | "We tested the software <strong>ourselves</strong>" | "The algorithm <strong>itself</strong>
+            is efficient"</div>
+        </div>
+
+        <!-- ADVERBS -->
+        <div class="topic-block" style="border-left-color:#FF6B9D">
+          <div class="topic-title" style="color:#FF6B9D">⚡ 6. Adverbs — Definition & Modification</div>
+          <div class="def-box">📖 <strong>Definition:</strong> An adverb <span class="highlight">modifies verbs,
+              adjectives, or other adverbs</span>. It tells HOW, WHEN, WHERE, or TO WHAT EXTENT an action happens.</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:12px 0">
+            <div
+              style="background:var(--sky-light);padding:12px;border-radius:10px;text-align:center;font-family:'Kalam',cursive">
+              <div style="font-size:1.5rem">🏃</div>
+              <strong>Modifies VERB</strong><br>
+              <small>She ran <span class="highlight">quickly</span></small><br>
+              <small>Comes after verb/object</small>
+            </div>
+            <div
+              style="background:var(--pink);padding:12px;border-radius:10px;text-align:center;font-family:'Kalam',cursive">
+              <div style="font-size:1.5rem">✨</div>
+              <strong>Modifies ADJECTIVE</strong><br>
+              <small>The proposal was <span class="highlight">exceptionally</span> comprehensive</small><br>
+              <small>Comes BEFORE adjective</small>
+            </div>
+            <div
+              style="background:var(--lavender);padding:12px;border-radius:10px;text-align:center;font-family:'Kalam',cursive">
+              <div style="font-size:1.5rem">🔥</div>
+              <strong>Modifies ADVERB</strong><br>
+              <small>She ran <span class="highlight">very</span> quickly</small><br>
+              <small>Comes BEFORE other adverb</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- TYPES OF ADVERBS -->
+        <div class="topic-block orange-border">
+          <div class="topic-title" style="color:#e65100">📊 7. Types of Adverbs</div>
+          <div class="memory-trick">Memory: <strong>M-P-T-F-D</strong> → <strong>M</strong>anner,
+            <strong>P</strong>lace, <strong>T</strong>ime, <strong>F</strong>requency, <strong>D</strong>egree →
+            "<strong>M</strong>y <strong>P</strong>arrot <strong>T</strong>alks <strong>F</strong>ast
+            <strong>D</strong>aily" 🦜</div>
+          <table class="note-table" style="margin-top:10px">
+            <tr>
+              <th>Type</th>
+              <th>Function</th>
+              <th>Key Examples</th>
+              <th>Sentence Example</th>
+            </tr>
+            <tr>
+              <td><strong>Manner</strong></td>
+              <td>HOW something happens</td>
+              <td>quickly, carefully, politely, meticulously</td>
+              <td>He ran <em>quickly</em>.</td>
+            </tr>
+            <tr>
+              <td><strong>Place</strong></td>
+              <td>WHERE it happens</td>
+              <td>here, there, outside, nearby, abroad</td>
+              <td>They met <em>outside</em>.</td>
+            </tr>
+            <tr>
+              <td><strong>Time</strong></td>
+              <td>WHEN it happens</td>
+              <td>now, soon, yesterday, today, already</td>
+              <td>We'll leave <em>soon</em>.</td>
+            </tr>
+            <tr>
+              <td><strong>Frequency</strong></td>
+              <td>HOW OFTEN it happens</td>
+              <td>always, usually, often, rarely, never</td>
+              <td>She <em>always</em> smiles.</td>
+            </tr>
+            <tr>
+              <td><strong>Degree</strong></td>
+              <td>TO WHAT EXTENT</td>
+              <td>very, quite, extremely, rather, too, highly</td>
+              <td>It's <em>very</em> cold.</td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- POSITION OF ADVERBS -->
+        <div class="topic-block" style="border-left-color:#00BCD4">
+          <div class="topic-title" style="color:#00838F">📍 8. Position of Adverbs</div>
+          <div class="def-box">Adverbs can appear in <span class="highlight">3 positions</span>: <strong>Front</strong>
+            (beginning), <strong>Mid</strong> (middle), <strong>End</strong> (end of sentence)</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:12px 0">
+            <div
+              style="background:#E0F7FA;padding:12px;border-radius:10px;font-family:'Kalam',cursive;border-top:4px solid #00BCD4">
+              <strong style="color:#00838F">📌 FRONT Position</strong><br>
+              <small>Adverb at start, usually sentence adverbs for emphasis</small><br><br>
+              <em>Undoubtedly, she already submitted the paper.</em><br>
+              <em>Remarkably, the team finished.</em><br>
+              <em>Historically, this region...</em>
+            </div>
+            <div
+              style="background:#E8F5E9;padding:12px;border-radius:10px;font-family:'Kalam',cursive;border-top:4px solid #4CAF50">
+              <strong style="color:#1b7a45">🎯 MID Position</strong><br>
+              <small>Between subject and verb (or after auxiliary verb)</small><br><br>
+              <em>He <strong>frequently</strong> travels abroad.</em><br>
+              <em>I have <strong>rarely</strong> seen this.</em><br>
+              <em>She will <strong>certainly</strong> address it.</em>
+            </div>
+            <div
+              style="background:#FFF3E0;padding:12px;border-radius:10px;font-family:'Kalam',cursive;border-top:4px solid #FF9800">
+              <strong style="color:#e65100">🔚 END Position</strong><br>
+              <small>After the verb or object — most common</small><br><br>
+              <em>Tom ate his breakfast <strong>quickly</strong>.</em><br>
+              <em>We played volleyball <strong>yesterday</strong>.</em><br>
+              <em>She arrived <strong>with great precision</strong>.</em>
+            </div>
+          </div>
+          <div class="warning-box"><strong>VERB + OBJECT Rule:</strong> Adverb does NOT go between verb and direct
+            object!<br>
+            ❌ "Tom ate quickly his breakfast" → ✅ "Tom ate his breakfast <strong>quickly</strong>"<br>
+            ❌ "We played yesterday volleyball" → ✅ "We played volleyball <strong>yesterday</strong>"<br>
+            EXCEPTION: Adverb CAN go before a long object → "Detectives examined <strong>carefully</strong> the contents
+            of the dead man's pockets."</div>
+        </div>
+
+        <!-- SENTENCE ADVERBS & LINKING WORDS -->
+        <div class="topic-block" style="border-left-color:#9C27B0">
+          <div class="topic-title" style="color:#7B1FA2">🔗 9. Sentence Adverbs & Linking Words</div>
+          <div class="def-box">📖 <strong>Sentence Adverbs:</strong> Modify the <span class="highlight">whole
+              sentence</span>, not a single word. Express the speaker's attitude.</div>
+          <ul class="handwritten">
+            <li>Examples: <span class="highlight">Fortunately, certainly, perhaps, of course, probably,
+                undoubtedly</span></li>
+            <li>Can go in front, mid, or end position</li>
+            <li><em>Fortunately,</em> the weather stayed fine. | We <em>probably</em> won't get there in time.</li>
+            <li><strong>Also</strong> → mid position | <strong>too / as well</strong> → end position</li>
+          </ul>
+          <div style="height:12px"></div>
+          <div class="def-box" style="background:var(--lavender);border-color:var(--lavender-dark)">📖 <strong>Linking
+              Words (Conjunctive Adverbs):</strong> Join ideas between clauses or sentences.</div>
+          <ul class="handwritten">
+            <li>Examples: <span class="highlight-blue">however, therefore, moreover, consequently, nevertheless,
+                furthermore</span></li>
+            <li>Often used in formal writing and academic reports</li>
+            <li><em>She was tired; <strong>however</strong>, she finished her work.</em></li>
+          </ul>
+          <table class="note-table" style="margin-top:10px">
+            <tr>
+              <th>Function</th>
+              <th>Linking Words</th>
+            </tr>
+            <tr>
+              <td>Contrast</td>
+              <td>however, nevertheless, on the other hand</td>
+            </tr>
+            <tr>
+              <td>Cause/Result</td>
+              <td>therefore, consequently, thus, hence</td>
+            </tr>
+            <tr>
+              <td>Addition</td>
+              <td>moreover, furthermore, in addition, also</td>
+            </tr>
+            <tr>
+              <td>Sequence</td>
+              <td>firstly, subsequently, finally, then</td>
+            </tr>
+          </table>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SECTION 3: EXAM FOCUS -->
+    <div class="section sec-pink" id="sec3">
+      <div class="section-header" onclick="toggleSection('body3','icon3')">
+        <span>⭐ Section 3: Exam Focus</span>
+        <span class="toggle-icon" id="icon3">▼</span>
+      </div>
+      <div class="section-body" id="body3">
+        <div class="exam-grid">
+          <div class="exam-card imp">
+            <h4>🔥 Most Important Questions</h4>
+            <ol>
+              <li>Distinguish between reflexive and emphatic pronouns with examples</li>
+              <li>Explain the three positions of adverbs with examples</li>
+              <li>What are substitute pronouns? Explain ONE/ONES/SO/NOT</li>
+              <li>Explain reciprocal pronouns with examples</li>
+              <li>Write a note on sentence adverbs and linking words</li>
+            </ol>
+          </div>
+          <div class="exam-card faq">
+            <h4>📋 Frequently Asked Questions</h4>
+            <ol>
+              <li>Identify the type of pronoun: "She hurt herself"</li>
+              <li>Fill in the blank with correct pronoun/adverb</li>
+              <li>Correct the error in the sentence</li>
+              <li>What is the difference between "each other" and "themselves"?</li>
+              <li>Give examples of adverbs modifying adjectives</li>
+            </ol>
+          </div>
+          <div class="exam-card short">
+            <h4>✏️ Short Answer Questions (2-3 marks)</h4>
+            <ol>
+              <li>Define pronoun and list its types covered in Unit 1</li>
+              <li>What are reflexive pronouns? Give complete list</li>
+              <li>When do we NOT use reflexive pronouns? List 5 such verbs</li>
+              <li>Explain mid position of adverbs</li>
+              <li>What are linking words? Give 4 examples</li>
+              <li>Define emphatic pronouns</li>
+            </ol>
+          </div>
+          <div class="exam-card long">
+            <h4>📝 Long Answer Questions (5-7 marks)</h4>
+            <ol>
+              <li>Explain all five types of pronouns covered in Unit 1 with suitable examples</li>
+              <li>Describe the types of adverbs with a table and examples</li>
+              <li>Compare reflexive and emphatic pronouns with at least 5 examples each</li>
+              <li>Write about adverb position rules with clear examples of all three positions</li>
+            </ol>
+          </div>
+          <div class="exam-card viva">
+            <h4>🎤 Viva Questions</h4>
+            <ul>
+              <li>Can emphatic pronoun be removed from a sentence?</li>
+              <li>What happens when subject and object are the same?</li>
+              <li>Why don't we use "relax yourself" in English?</li>
+              <li>What is a conjunctive adverb?</li>
+              <li>Can adverb come between verb and object?</li>
+              <li>What is "one" replacing in "the red one"?</li>
+              <li>How is "each other's" different from "each other"?</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 4: QUICK REVISION -->
+    <div class="section sec-lavender" id="sec4">
+      <div class="section-header" onclick="toggleSection('body4','icon4')">
+        <span>📋 Section 4: Quick Revision Cheat Sheet</span>
+        <span class="toggle-icon" id="icon4">▼</span>
+      </div>
+      <div class="section-body" id="body4">
+        <div
+          style="background:var(--paper);border:3px dashed var(--lavender-dark);border-radius:12px;padding:20px;font-family:'Kalam',cursive">
+          <div
+            style="text-align:center;font-family:'Caveat',cursive;font-size:1.8rem;color:var(--lavender-dark);margin-bottom:16px">
+            ⚡ LAST-MINUTE REVISION SHEET ⚡</div>
+          <div class="revision-grid">
+            <div class="rev-item"><strong>Pronoun</strong>Word that replaces a noun</div>
+            <div class="rev-item" style="border-left-color:var(--pink-dark)"><strong>Personal
+                Pronoun</strong>I/we/you/he/she/it/they (subject) | me/us/you/him/her/it/them (object)</div>
+            <div class="rev-item" style="border-left-color:var(--mint-dark)">
+              <strong>Reflexive</strong>myself/yourself/himself/herself/itself/ourselves/yourselves/themselves —
+              subject=object</div>
+            <div class="rev-item" style="border-left-color:var(--yellow-dark)"><strong>Reciprocal</strong>each other /
+              one another — mutual action between people</div>
+            <div class="rev-item" style="border-left-color:var(--lavender-dark)"><strong>Emphatic</strong>Same form as
+              reflexive BUT optional, used for stress/independence</div>
+            <div class="rev-item" style="border-left-color:#FF9800"><strong>Substitute: ONE/ONES</strong>ONE = singular
+              noun | ONES = plural noun | Use with adjectives/this/that/which</div>
+            <div class="rev-item"><strong>Substitute: SO/NOT</strong>SO = affirmative clause ("I think so") | NOT =
+              negative clause ("I hope not")</div>
+            <div class="rev-item" style="border-left-color:#FF6B9D"><strong>Adverb</strong>Modifies verb (after) /
+              adjective (before) / adverb (before)</div>
+            <div class="rev-item" style="border-left-color:#00BCD4"><strong>Adverb Types</strong>Manner (how) | Place
+              (where) | Time (when) | Frequency (how often) | Degree (extent)</div>
+            <div class="rev-item" style="border-left-color:var(--mint-dark)"><strong>Adverb Position</strong>FRONT =
+              beginning | MID = between S+V | END = after object (most common)</div>
+            <div class="rev-item" style="border-left-color:var(--yellow-dark)"><strong>Key Rule</strong>Adverb NEVER
+              between verb and direct object → Place after object!</div>
+            <div class="rev-item" style="border-left-color:var(--lavender-dark)"><strong>Sentence
+                Adverb</strong>Modifies whole sentence: Fortunately, Certainly, Perhaps, Probably</div>
+            <div class="rev-item" style="border-left-color:#FF9800"><strong>Linking Words</strong>however (contrast) |
+              therefore (result) | moreover (addition) | consequently (effect)</div>
+            <div class="rev-item" style="border-left-color:var(--pink-dark)"><strong>Reflexive vs
+                Emphatic</strong>Reflexive = NECESSARY (changes meaning if removed) | Emphatic = OPTIONAL (adds stress)
+            </div>
+            <div class="rev-item"><strong>Generic Pronouns</strong>YOU/ONE = any person | THEY = people in
+              general/authority</div>
+            <div class="rev-item" style="border-left-color:#FF6B9D"><strong>IT (special uses)</strong>Time: "It's 5pm" |
+              Weather: "It's raining" | Distance: "It's 50 miles" | Situations: "It's odd"</div>
+          </div>
+          <div style="margin-top:16px;padding:12px;background:var(--yellow);border-radius:8px;text-align:center">
+            <strong>🏆 KEY FORMULA: </strong>
+            <span style="color:var(--blue-accent)">REFLEXIVE</span> = subject=object (necessary) |
+            <span style="color:var(--pink-dark)">EMPHATIC</span> = optional stress |
+            <span style="color:var(--mint-dark)">RECIPROCAL</span> = mutual |
+            <span style="color:var(--lavender-dark)">SUBSTITUTE</span> = avoids repetition
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 5: MCQs -->
+    <div class="section sec-mint" id="sec5">
+      <div class="section-header" onclick="toggleSection('body5','icon5')">
+        <span>📝 Section 5: 50 MCQ Practice Questions</span>
+        <span class="toggle-icon" id="icon5">▼</span>
+      </div>
+      <div class="section-body" id="body5">
+        <div class="mcq-controls">
+          <div class="score-display">Score: <span id="score">0</span> / <span id="total-q">50</span></div>
+          <button class="mode-toggle-btn" id="practice-btn" onclick="togglePracticeMode()">🎮 Practice Mode: ON</button>
+          <button class="nav-btn" onclick="resetMCQ()">🔄 Reset All</button>
+          <button class="nav-btn" onclick="showAllAnswers()">👁️ Show All Answers</button>
+        </div>
+        <div id="mcq-container"></div>
+      </div>
+    </div>
+
+  </main>
+
+  <button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">⬆️</button>
+
+  <script>
+    // MCQ DATA
+    const mcqs = [
+      { q: "Which of the following is a subject form personal pronoun?", opts: ["me", "him", "she", "them"], ans: 2, exp: "Subject pronouns perform the action. 'She' is a subject pronoun (e.g., She forgot the meeting). 'Me', 'him', 'them' are object pronouns." },
+      { q: "Fill in the blank: 'I haven't seen ___ today.' (referring to a female friend)", opts: ["she", "her", "hers", "herself"], ans: 1, exp: "'Her' is the object form pronoun used when the pronoun receives the action. The sentence needs an object pronoun after 'seen'." },
+      { q: "Which sentence uses a reflexive pronoun correctly?", opts: ["She hurt she", "The gunman shot him (when subject=object)", "I did it myself", "Behind myself"], ans: 2, exp: "'Myself' is correct when emphasizing that 'I' did it alone. 'She hurt she' is wrong; it should be 'herself'. 'Behind myself' is wrong; use 'me' after place prepositions." },
+      { q: "Which of the following verbs does NOT take a reflexive pronoun in English?", opts: ["dress (in difficult circumstances)", "adapt", "relax", "hurt"], ans: 2, exp: "'Relax' does not use a reflexive pronoun in English. You say 'just relax', not 'relax yourself'. 'Dress herself' (difficult action), 'adapt itself', and 'hurt herself' are all correct." },
+      { q: "'Each other' and 'one another' are examples of ___", opts: ["Reflexive pronouns", "Reciprocal pronouns", "Emphatic pronouns", "Substitute pronouns"], ans: 1, exp: "Reciprocal pronouns show mutual action between two or more people. 'Each other' and 'one another' mean: A does X to B, and B does the same to A." },
+      { q: "Identify the type of pronoun in: 'The Queen herself never carries money.'", opts: ["Reflexive", "Reciprocal", "Emphatic", "Personal"], ans: 2, exp: "'Herself' here is an emphatic pronoun — it adds emphasis (the Queen personally, not someone else). It can be removed without changing the basic meaning, which confirms it's emphatic, not reflexive." },
+      { q: "In 'These books are boring. I prefer those ones.', what does 'ones' replace?", opts: ["Uncountable noun", "The word 'boring'", "The plural noun 'books'", "The word 'those'"], ans: 2, exp: "'Ones' is a substitute pronoun that replaces a plural countable noun ('books') to avoid repetition." },
+      { q: "'Will it work?' → 'I hope ___.' (Affirmative response)", opts: ["not", "so", "it", "them"], ans: 1, exp: "'So' substitutes for an affirmative clause. 'I hope so' means 'I hope it will work.' For negative: 'I hope not.'" },
+      { q: "An adverb can modify which of the following?", opts: ["Only verbs", "Only adjectives", "Verbs, adjectives, and other adverbs", "Only nouns"], ans: 2, exp: "Adverbs are versatile modifiers. They can modify verbs (ran quickly), adjectives (highly persuasive), and other adverbs (very efficiently)." },
+      { q: "In 'She completed the task very efficiently', which word is the adverb modifying another adverb?", opts: ["completed", "task", "very", "efficiently"], ans: 2, exp: "'Very' modifies the adverb 'efficiently'. It shows the degree/intensity of 'efficiently'. Adverbs modifying other adverbs show degree." },
+      { q: "Adverbs modifying adjectives usually come ___", opts: ["After the adjective", "Before the adjective", "At the end of the sentence", "Between subject and verb"], ans: 1, exp: "When an adverb modifies an adjective, it comes BEFORE the adjective. Example: 'The proposal was EXCEPTIONALLY comprehensive.' 'Exceptionally' comes before 'comprehensive'." },
+      { q: "Which sentence shows correct adverb placement with verb and object?", opts: ["Tom ate quickly his breakfast", "Tom quickly ate his breakfast", "Tom ate his breakfast quickly", "Both B and C are correct"], ans: 3, exp: "An adverb generally does NOT go between verb and direct object. 'Tom ate his breakfast quickly' (end position) is most standard. 'Tom quickly ate his breakfast' (mid position) is also acceptable." },
+      { q: "Which type of adverb tells us HOW something happens?", opts: ["Adverb of Place", "Adverb of Manner", "Adverb of Degree", "Adverb of Frequency"], ans: 1, exp: "Adverbs of Manner tell us HOW an action is performed. Examples: quickly, carefully, politely, meticulously." },
+      { q: "'She always smiles.' — 'always' is an adverb of ___", opts: ["Manner", "Place", "Time", "Frequency"], ans: 3, exp: "'Always' tells HOW OFTEN she smiles. Adverbs of frequency include: always, usually, often, sometimes, rarely, never." },
+      { q: "'Fortunately, the weather stayed fine.' — 'Fortunately' is in ___ position.", opts: ["Mid", "End", "Front", "Between verb and object"], ans: 2, exp: "'Fortunately' is at the beginning of the sentence — this is the FRONT position. Sentence adverbs often appear in front position." },
+      { q: "'She will certainly address the concerns.' — 'certainly' is in ___ position.", opts: ["Front", "End", "Mid", "After the object"], ans: 2, exp: "'Certainly' is placed between the auxiliary 'will' and the main verb 'address' — this is the MID position for adverbs." },
+      { q: "Which of the following is a SENTENCE adverb?", opts: ["quickly", "outside", "yesterday", "fortunately"], ans: 3, exp: "Sentence adverbs modify the whole sentence and express the speaker's attitude. 'Fortunately' modifies the entire statement. The others are adverbs of manner, place, and time respectively." },
+      { q: "'However, therefore, moreover' are examples of ___", opts: ["Adverbs of manner", "Sentence adverbs", "Linking words (conjunctive adverbs)", "Adverbs of degree"], ans: 2, exp: "These are linking words or conjunctive adverbs. They join ideas between clauses/sentences and are commonly used in formal writing." },
+      { q: "Which sentence uses 'there + be' correctly?", opts: ["There is some eggs in the fridge", "There are a phone box nearby", "There is a problem with the system", "There have a delays"], ans: 2, exp: "'There is a problem' uses the singular 'is' correctly with singular 'a problem'. 'There are some eggs' (plural) would be correct. 'There have been delays' is the correct form for the last option." },
+      { q: "The reflexive pronoun for 'they' (plural third person) is ___", opts: ["theirselves", "themself", "themselves", "theyselves"], ans: 2, exp: "'Themselves' is the correct reflexive/emphatic pronoun for the third person plural 'they'. Note: 'theirselves' is a common error but incorrect in Standard English." },
+      { q: "'Tom and Mark wrote down each other's phone numbers.' The apostrophe in 'each other's' shows ___", opts: ["Plural form", "Reflexive use", "Possessive form", "Emphatic use"], ans: 2, exp: "The apostrophe 's' in 'each other's' shows possession (possessive form of the reciprocal pronoun). It means: Tom wrote Mark's number AND Mark wrote Tom's number." },
+      { q: "Which sentence uses emphatic pronoun CORRECTLY?", opts: ["She hurt herself (reflexive use)", "The manager himself welcomed us", "I built myself a sandwich", "They laughed themselves"], ans: 1, exp: "'The manager himself welcomed us' — 'himself' is emphatic, stressing that the manager (not staff) personally did it. It can be removed: 'The manager welcomed us' still makes sense." },
+      { q: "'I need some paper.' — Can we substitute 'paper' with 'one'?", opts: ["Yes, always", "No, because paper is uncountable", "Yes, with adjective", "No, after prepositions"], ans: 1, exp: "We CANNOT use 'one/ones' with uncountable nouns. 'Paper' is uncountable. 'I need some one' is incorrect. Only countable nouns can be replaced by 'one/ones'." },
+      { q: "In 'I like the blue shirts, not the white ones', what type of pronoun is 'ones'?", opts: ["Personal pronoun", "Reflexive pronoun", "Substitute pronoun", "Emphatic pronoun"], ans: 2, exp: "'Ones' is a substitute pronoun replacing the plural countable noun 'shirts' to avoid repetition. The main substitute pronouns are: one, ones, so, not." },
+      { q: "Which adverb type does 'extremely' in 'extremely cold' represent?", opts: ["Manner", "Frequency", "Degree", "Place"], ans: 2, exp: "'Extremely' shows the extent/degree of coldness. Adverbs of Degree include: very, quite, extremely, rather, too, highly, significantly, exceptionally." },
+      { q: "'Behind me' — Is this correct or should it be 'behind myself'?", opts: ["'Behind myself' is correct", "'Behind me' is correct", "Both are correct", "Neither is correct"], ans: 1, exp: "After prepositions of PLACE (behind, next to, with, near, etc.), we use REGULAR object pronouns (me, him, her, us), NOT reflexive pronouns. 'Behind me' ✅, 'Behind myself' ❌" },
+      { q: "'I think so' is an example of ___ pronoun substituting a clause.", opts: ["ONE substituting noun", "SO substituting affirmative clause", "NOT substituting negative clause", "ONES substituting plural"], ans: 1, exp: "'SO' substitutes for an affirmative clause. 'I think so' means 'I think [that it is the case]'. For negative: 'I don't think so' or 'I'm afraid not'." },
+      { q: "Which is the CORRECT form: 'We'd better hurry ___'", opts: ["ourselves", "us", "we", "— (no pronoun)"], ans: 3, exp: "'Hurry' is one of the verbs that does NOT use a reflexive pronoun in English. 'We'd better hurry' ✅ | 'We'd better hurry ourselves' ❌. Other such verbs: relax, rest, concentrate, remember." },
+      { q: "Identify the adverb position in: 'He frequently travels abroad.'", opts: ["Front position", "Mid position", "End position", "Between verb and object"], ans: 1, exp: "'Frequently' comes between the subject 'He' and the verb 'travels' — this is the MID position. Frequency adverbs (always, usually, often, rarely, never) typically appear in mid position." },
+      { q: "'It's half past five.' — 'It' here refers to ___", opts: ["A person", "A thing previously mentioned", "Time (special use of IT)", "Weather"], ans: 2, exp: "This is a special use of 'IT' to refer to TIME. 'IT' has special uses: time ('It's 5pm'), weather ('It's raining'), distance ('It's 50 miles away'), and situations ('It's ridiculous')." },
+      { q: "Which sentence has INCORRECT adverb placement?", opts: ["Undoubtedly, she has submitted the paper", "He frequently travels for conferences", "She ate quickly her breakfast", "The team responded remarkably quickly"], ans: 2, exp: "'She ate quickly her breakfast' is INCORRECT because the adverb 'quickly' has been placed between the verb 'ate' and its direct object 'her breakfast'. Correct: 'She ate her breakfast quickly.'" },
+      { q: "'Also' in mid position and 'too/as well' in end position — these are ___", opts: ["Adverbs of manner", "Additive adverbs", "Sentence adverbs", "Linking words"], ans: 1, exp: "'Also', 'too', and 'as well' are additive adverbs. Their positioning rule: 'also' goes in mid position, while 'too' and 'as well' go in end position." },
+      { q: "What type of pronoun is 'you' in 'You shouldn't believe everything you read'?", opts: ["Personal pronoun (2nd person)", "Generic pronoun (meaning 'any person')", "Emphatic pronoun", "Reflexive pronoun"], ans: 1, exp: "In this context, 'you' is a generic pronoun meaning 'any person in general'. It's used in a conversational/informal way. The formal equivalent would be 'one': 'One shouldn't believe everything one reads.'" },
+      { q: "'She enjoyed herself at the party' — 'herself' is ___", opts: ["Emphatic", "Reciprocal", "Reflexive (with idiom 'enjoy yourself')", "Substitute"], ans: 2, exp: "'Enjoy yourself/yourselves' is a common idiom using the reflexive pronoun. It means 'have a good time'. This is one of the cases where a reflexive pronoun IS used with this verb." },
+      { q: "Choose the correctly placed adverb: 'The team managed the project ___ despite setbacks.'", opts: ["remarkably", "remarkable", "remark", "remarks"], ans: 0, exp: "'Remarkably' is the correct adverb form (adjective 'remarkable' + -ly). It modifies the verb phrase 'managed the project' and is placed in end position after the object." },
+      { q: "In terms of adverb types, 'outside' in 'They met outside' is an adverb of ___", opts: ["Manner", "Time", "Place", "Degree"], ans: 2, exp: "'Outside' tells us WHERE they met — it is an adverb of PLACE. Other place adverbs: here, there, nearby, abroad, inside, upstairs, downtown." },
+      { q: "'The committee might possibly revise the proposal.' — 'possibly' is in ___ position.", opts: ["Front", "End", "Mid", "After object"], ans: 2, exp: "'Possibly' appears between the auxiliary 'might' and the main verb 'revise' — this is the MID position. Adverbs expressing possibility/probability commonly appear in mid position." },
+      { q: "Which of the following is NOT a correct use of reflexive pronouns?", opts: ["I did it myself (emphasis)", "She washed herself (difficult action)", "He sat down himself", "Look after themselves"], ans: 2, exp: "'Sit down' does NOT use a reflexive pronoun in English. 'He sat down' ✅ | 'He sat down himself' ❌. Similarly: stand up, lie down, rest, relax, wake up — these don't take reflexives." },
+      { q: "'Consequently' in a sentence connects ___", opts: ["A contrast", "A cause and its result/effect", "An addition", "A sequence"], ans: 1, exp: "'Consequently' is a linking word showing cause-effect relationship. 'The road was icy; consequently, many accidents occurred.' Similar words: therefore, thus, hence, as a result." },
+      { q: "'The program terminates' vs 'The algorithm adapts itself to new data' — the difference is ___", opts: ["Both use reflexive pronouns", "First avoids reflexive (no emphasis needed), second uses emphatic for stress", "Both avoid reflexive", "First uses emphatic, second uses reflexive"], ans: 1, exp: "In technical writing, reflexive pronouns are usually dropped unless needed for emphasis. 'Terminates' needs no reflexive. 'Adapts itself' uses emphatic to stress the algorithm's self-adapting capability." },
+      { q: "Which word can replace 'Can you attend?' in a negative response?", opts: ["I think so", "I hope so", "I'm afraid not", "I expect so"], ans: 2, exp: "For negative responses, we use 'not' as a substitute. 'I'm afraid not' = 'I'm afraid [that I cannot attend].' Other negative patterns: 'I hope not', 'I don't think so'." },
+      { q: "An adverb modifying an adjective: which example is CORRECT?", opts: ["The proposal was comprehensive exceptionally", "Exceptional comprehensive proposal", "The proposal was exceptionally comprehensive", "She exceptionally comprehensive"], ans: 2, exp: "When an adverb modifies an adjective, it comes BEFORE the adjective. 'Exceptionally' (adverb) comes before 'comprehensive' (adjective). Pattern: Adverb + Adjective." },
+      { q: "'They say sugar is bad for you.' — 'They' here refers to ___", opts: ["Specific people mentioned before", "Generic people/authorities in general", "The speaker's friends", "Formal writing's passive subject"], ans: 1, exp: "'They' as a generic pronoun refers to people in general or authorities. It's informal. In formal writing, passive voice is preferred: 'It is said that sugar is bad for you.'" },
+      { q: "'We help each other with homework.' — This can also be written as:", opts: ["We help themselves with homework", "We help one another with homework", "We help ourselves with homework", "We help him with homework"], ans: 1, exp: "'Each other' and 'one another' are interchangeable reciprocal pronouns. 'We help one another with homework' has the same meaning as 'We help each other with homework.'" },
+      { q: "Which sentence correctly uses 'NOT' as a substitute?", opts: ["I think not that it will work", "Is she ready? I don't think so / I don't think not", "Will it rain? I hope not", "I not think she'll come"], ans: 2, exp: "'NOT' substitutes a negative clause. 'I hope not' = 'I hope [that it will not rain].' It's used with verbs like hope, expect, fear, suppose, believe in response to yes/no questions." },
+      { q: "Identify the adverb type in: 'She negotiated the contract strategically.'", opts: ["Frequency", "Manner", "Place", "Time"], ans: 1, exp: "'Strategically' tells us HOW she negotiated — it's an adverb of MANNER. Manner adverbs describe the way an action is performed and typically end in '-ly'." },
+      { q: "'Furthermore' is best classified as a ___", opts: ["Sentence adverb expressing surprise", "Linking word showing addition", "Adverb of frequency", "Personal pronoun substitute"], ans: 1, exp: "'Furthermore' is a linking word (conjunctive adverb) showing ADDITION. It adds information to what was previously stated. Similar: moreover, in addition, additionally, also." },
+      { q: "'I built this boat myself.' — 'myself' emphasizes that I did it ___", opts: ["With great difficulty", "While feeling proud", "Without anyone's help (independently)", "By accident"], ans: 2, exp: "Use 1 of emphatic pronoun = to emphasize independent action (without help). 'I built this boat myself' = 'I built it without anyone's assistance.'" },
+      { q: "Which is the correct position for 'carefully' in 'Detectives examined ___ the contents of the dead man's pockets'?", opts: ["After 'pockets' only", "Only before 'examined'", "Before 'the contents' (acceptable since object is long)", "Never acceptable here"], ans: 2, exp: "Normally adverbs go after the object. BUT when the object is very long, the adverb CAN go before it. 'Detectives examined carefully the contents of the dead man's pockets' is acceptable because the object is lengthy." },
+      { q: "Which sentence correctly identifies ALL the adverb types present: 'She always speaks very politely.'", opts: ["Manner only", "Frequency and Manner only", "Frequency, Degree, and Manner", "Time and Manner"], ans: 2, exp: "'always' = Frequency adverb | 'very' = Degree adverb (modifying 'politely') | 'politely' = Manner adverb. Three adverb types appear in this single sentence!" },
+      { q: "'She was disabled, but she can dress herself.' Why is 'herself' used here?", opts: ["It's emphatic to show pride", "It's reflexive but 'dress' normally omits reflexive; here used because the action is difficult/noteworthy", "It's always required with 'dress'", "It's a reciprocal pronoun"], ans: 1, exp: "Normally 'dress' doesn't need a reflexive pronoun (normal: 'Daniel dressed before going out'). BUT in a DIFFICULT situation, the reflexive IS used: 'She can dress herself' highlights the achievement." }
+    ];
+
+    let practiceMode = true;
+    let answered = new Array(mcqs.length).fill(false);
+    let scores = 0;
+
+    function renderMCQs() {
+      const container = document.getElementById('mcq-container');
+      container.innerHTML = '';
+      mcqs.forEach((m, i) => {
+        const div = document.createElement('div');
+        div.className = 'mcq-item';
+        div.id = 'mcq-' + i;
+        let optsHTML = m.opts.map((o, j) =>
+          `<button class="mcq-opt" id="opt-${i}-${j}" onclick="checkAnswer(${i},${j})">${String.fromCharCode(65 + j)}) ${o}</button>`
+        ).join('');
+        div.innerHTML = `
+      <div class="mcq-q"><span>Q${i + 1}.</span> ${m.q}</div>
+      <div class="mcq-options">${optsHTML}</div>
+      <div class="mcq-reveal" id="reveal-${i}">
+        ✅ <strong>Answer: ${String.fromCharCode(65 + m.ans)}) ${m.opts[m.ans]}</strong><br>
+        💡 <em>${m.exp}</em>
+      </div>`;
+        container.appendChild(div);
+      });
+    }
+
+    function checkAnswer(qi, optIdx) {
+      if (answered[qi]) return;
+      answered[qi] = true;
+      const m = mcqs[qi];
+      for (let j = 0; j < m.opts.length; j++) {
+        const btn = document.getElementById(`opt-${qi}-${j}`);
+        btn.disabled = true;
+        if (j === m.ans) btn.classList.add('correct');
+        else if (j === optIdx && optIdx !== m.ans) btn.classList.add('wrong');
+      }
+      if (optIdx === m.ans) { scores++; document.getElementById('score').textContent = scores; }
+      document.getElementById('reveal-' + qi).classList.add('show');
+    }
+
+    function togglePracticeMode() {
+      practiceMode = !practiceMode;
+      document.getElementById('practice-btn').textContent = '🎮 Practice Mode: ' + (practiceMode ? 'ON' : 'OFF');
+      if (!practiceMode) showAllAnswers();
+    }
+
+    function showAllAnswers() {
+      mcqs.forEach((m, i) => {
+        if (!answered[i]) {
+          answered[i] = true;
+          for (let j = 0; j < m.opts.length; j++) {
+            const btn = document.getElementById(`opt-${i}-${j}`);
+            if (btn) { btn.disabled = true; if (j === m.ans) btn.classList.add('correct'); }
+          }
+          const rev = document.getElementById('reveal-' + i);
+          if (rev) rev.classList.add('show');
+        }
+      });
+    }
+
+    function resetMCQ() {
+      answered = new Array(mcqs.length).fill(false);
+      scores = 0;
+      document.getElementById('score').textContent = '0';
+      renderMCQs();
+    }
+
+    function toggleSection(bodyId, iconId) {
+      const body = document.getElementById(bodyId);
+      const icon = document.getElementById(iconId);
+      body.classList.toggle('collapsed');
+      icon.classList.toggle('rotated');
+    }
+
+    function toggleAll(expand) {
+      document.querySelectorAll('.section-body').forEach(b => {
+        expand ? b.classList.remove('collapsed') : b.classList.add('collapsed');
+      });
+      document.querySelectorAll('.toggle-icon').forEach(i => {
+        expand ? i.classList.remove('rotated') : i.classList.add('rotated');
+      });
+    }
+
+    function toggleDark() {
+      document.body.classList.toggle('dark');
+    }
+
+    function searchNotes(val) {
+      document.querySelectorAll('.search-highlight').forEach(e => {
+        e.outerHTML = e.innerHTML;
+      });
+      if (!val.trim()) return;
+      const regex = new RegExp('(' + val.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+      document.querySelectorAll('.section-body p, .section-body li, .section-body td, .section-body .handwritten, .section-body .def-box, .section-body .example-box').forEach(el => {
+        if (!el.querySelector('input, button, script')) {
+          el.innerHTML = el.innerHTML.replace(regex, '<span class="search-highlight">$1</span>');
+        }
+      });
+      if (val.trim()) {
+        document.querySelectorAll('.section-body').forEach(b => b.classList.remove('collapsed'));
+        document.querySelectorAll('.toggle-icon').forEach(i => i.classList.remove('rotated'));
+      }
+    }
+
+    // Progress bar
+    window.addEventListener('scroll', () => {
+      const doc = document.documentElement;
+      const scroll = doc.scrollTop || document.body.scrollTop;
+      const height = doc.scrollHeight - doc.clientHeight;
+      const pct = (scroll / height) * 100;
+      document.getElementById('progress-bar').style.width = pct + '%';
+      const btn = document.getElementById('scroll-top');
+      scroll > 300 ? btn.classList.add('show') : btn.classList.remove('show');
+    });
+
+    // Stagger section animations
+    document.querySelectorAll('.section').forEach((s, i) => {
+      s.style.animationDelay = (i * 0.1) + 's';
+    });
+
+    renderMCQs();
+    document.getElementById('total-q').textContent = mcqs.length;
+  </script>
+</body>
+
+</html>

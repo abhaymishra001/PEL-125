@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PEL-125 | Unit 6 Notes</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Kalam:wght@300;400;700&family=Patrick+Hand&family=Nunito:wght@300;400;600;700;800&family=Indie+Flower&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FFFEF8;
+    --paper2: #F8F5EE;
+    --ink: #2C2825;
+    --ink-light: #5a534a;
+    --blue: #4A90D9;
+    --blue-light: #EAF4FF;
+    --blue-mid: #C5DFF8;
+    --yellow: #FFD93D;
+    --yellow-light: #FFFBE6;
+    --yellow-mid: #FFF0A0;
+    --pink: #FF6B9D;
+    --pink-light: #FFF0F6;
+    --pink-mid: #FFD6E8;
+    --lavender: #9B72CF;
+    --lavender-light: #F3EEFF;
+    --lavender-mid: #DDD0F5;
+    --mint: #4CAF82;
+    --mint-light: #EDFAF3;
+    --mint-mid: #C2EDD8;
+    --orange: #FF8C42;
+    --orange-light: #FFF3EB;
+    --red: #E84855;
+    --shadow: rgba(0,0,0,0.08);
+    --shadow-md: rgba(0,0,0,0.14);
+    --ruled-line: rgba(0,0,0,0.06);
+    --margin-line: rgba(220,60,60,0.25);
+  }
+  .dark {
+    --paper: #1a1814;
+    --paper2: #22201a;
+    --ink: #f0ece0;
+    --ink-light: #c0b8a8;
+    --blue-light: #1a2a3a;
+    --blue-mid: #1e3a5a;
+    --yellow-light: #2a2510;
+    --yellow-mid: #3a3315;
+    --pink-light: #2a1520;
+    --pink-mid: #3a1f2e;
+    --lavender-light: #1e1530;
+    --lavender-mid: #2d2045;
+    --mint-light: #101e18;
+    --mint-mid: #1a3028;
+    --orange-light: #2a1a0a;
+    --shadow: rgba(0,0,0,0.3);
+    --shadow-md: rgba(0,0,0,0.4);
+    --ruled-line: rgba(255,255,255,0.04);
+    --margin-line: rgba(220,60,60,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--paper2);
+    color: var(--ink);
+    transition: background 0.4s, color 0.4s;
+    overflow-x: hidden;
+  }
+
+  /* PROGRESS BAR */
+  #progress-bar {
+    position: fixed; top: 0; left: 0; height: 3px;
+    background: linear-gradient(90deg, var(--blue), var(--pink), var(--lavender));
+    z-index: 9999; width: 0%; transition: width 0.1s;
+    box-shadow: 0 0 8px rgba(74,144,217,0.5);
+  }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,254,248,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 2px solid var(--yellow-mid);
+    padding: 0 1.5rem;
+    display: flex; align-items: center; gap: 0.5rem;
+    overflow-x: auto; height: 52px;
+    transition: background 0.4s, border-color 0.4s;
+  }
+  .dark nav { background: rgba(26,24,20,0.92); border-color: var(--yellow-mid); }
+  nav a {
+    font-family: 'Caveat', cursive; font-size: 1rem; font-weight: 600;
+    color: var(--ink-light); text-decoration: none; white-space: nowrap;
+    padding: 4px 12px; border-radius: 20px;
+    transition: all 0.2s;
+  }
+  nav a:hover { background: var(--yellow-light); color: var(--ink); }
+  .nav-brand {
+    font-family: 'Kalam', cursive; font-size: 1.15rem; font-weight: 700;
+    color: var(--blue); margin-right: 0.5rem; white-space: nowrap;
+    border-right: 2px solid var(--yellow-mid); padding-right: 0.75rem;
+  }
+  #search-box {
+    margin-left: auto; padding: 4px 14px;
+    border: 1.5px solid var(--blue-mid); border-radius: 20px;
+    background: var(--paper); font-family: 'Nunito', sans-serif;
+    font-size: 0.85rem; color: var(--ink);
+    outline: none; min-width: 150px;
+    transition: all 0.2s;
+  }
+  #search-box:focus { border-color: var(--blue); box-shadow: 0 0 0 3px var(--blue-light); }
+  #dark-toggle {
+    background: var(--yellow-light); border: 1.5px solid var(--yellow);
+    border-radius: 50%; width: 32px; height: 32px; font-size: 1rem;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s; flex-shrink: 0;
+  }
+  #dark-toggle:hover { transform: rotate(20deg) scale(1.1); }
+
+  /* MAIN WRAPPER */
+  .notebook {
+    max-width: 900px; margin: 0 auto; padding: 2rem 1rem 4rem;
+  }
+
+  /* NOTEBOOK PAPER EFFECT */
+  .paper-section {
+    background: var(--paper);
+    border-radius: 8px;
+    box-shadow: 4px 4px 20px var(--shadow), 0 1px 3px var(--shadow);
+    margin-bottom: 2rem;
+    padding: 2rem 2.5rem 2rem 3.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.4s;
+    animation: fadeInUp 0.5s ease both;
+  }
+  .paper-section::before {
+    content: '';
+    position: absolute; top: 0; bottom: 0; left: 2.8rem;
+    width: 2px; background: var(--margin-line);
+  }
+  .paper-section::after {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      transparent, transparent 31px,
+      var(--ruled-line) 31px, var(--ruled-line) 32px
+    );
+    pointer-events: none;
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* TITLE AREA */
+  .title-area {
+    text-align: center; padding: 2.5rem 1rem 1.5rem;
+    background: var(--paper);
+    border-radius: 8px;
+    box-shadow: 4px 4px 20px var(--shadow);
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 0.4s ease both;
+  }
+  .title-area::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--blue), var(--pink), var(--lavender), var(--mint));
+  }
+  .title-subject {
+    font-family: 'Kalam', cursive; font-size: 0.95rem;
+    color: var(--ink-light); letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+  .title-unit {
+    font-family: 'Caveat', cursive; font-size: 3rem; font-weight: 700;
+    color: var(--blue); line-height: 1;
+  }
+  .title-name {
+    font-family: 'Kalam', cursive; font-size: 1.6rem;
+    color: var(--pink); margin: 0.2rem 0 0.8rem;
+    border-bottom: 3px wavy var(--yellow);
+    display: inline-block; padding-bottom: 2px;
+  }
+  .title-tags {
+    display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center;
+    margin-top: 0.75rem;
+  }
+  .tag {
+    font-family: 'Patrick Hand', cursive; font-size: 0.8rem;
+    padding: 3px 12px; border-radius: 20px; font-weight: 600;
+  }
+  .tag-blue { background: var(--blue-light); color: var(--blue); border: 1.5px solid var(--blue-mid); }
+  .tag-pink { background: var(--pink-light); color: var(--pink); border: 1.5px solid var(--pink-mid); }
+  .tag-mint { background: var(--mint-light); color: var(--mint); border: 1.5px solid var(--mint-mid); }
+
+  /* SECTION HEADERS */
+  .section-num {
+    font-family: 'Indie Flower', cursive; font-size: 0.8rem;
+    color: var(--ink-light); margin-bottom: 0.1rem;
+  }
+  .section-heading {
+    font-family: 'Caveat', cursive; font-size: 2rem; font-weight: 700;
+    margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.5rem;
+    position: relative; z-index: 1;
+  }
+  .sh-blue { color: var(--blue); }
+  .sh-pink { color: var(--pink); }
+  .sh-lavender { color: var(--lavender); }
+  .sh-mint { color: var(--mint); }
+  .sh-orange { color: var(--orange); }
+
+  /* COLLAPSIBLE */
+  .collapse-btn {
+    background: none; border: none; cursor: pointer;
+    font-size: 1.2rem; transition: transform 0.3s;
+    color: var(--ink-light);
+  }
+  .collapse-btn.open { transform: rotate(180deg); }
+  .collapsible-content { overflow: hidden; transition: max-height 0.4s ease; }
+
+  /* STICKY CARDS */
+  .sticky-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 1rem; position: relative; z-index: 1;
+  }
+  .sticky {
+    border-radius: 4px; padding: 1rem;
+    position: relative; overflow: hidden;
+    box-shadow: 3px 3px 10px var(--shadow);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: default;
+  }
+  .sticky:hover { transform: rotate(0deg) translateY(-4px) scale(1.02); box-shadow: 5px 8px 20px var(--shadow-md); }
+  .sticky::after {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 28px;
+    background: rgba(0,0,0,0.04);
+  }
+  .sticky-yellow { background: #FFF9C4; border-top: 28px solid #FFE066; }
+  .sticky-blue { background: #E3F2FD; border-top: 28px solid #90CAF9; }
+  .sticky-pink { background: #FCE4EC; border-top: 28px solid #F48FB1; }
+  .sticky-green { background: #E8F5E9; border-top: 28px solid #A5D6A7; }
+  .sticky-lavender { background: #EDE7F6; border-top: 28px solid #CE93D8; }
+  .sticky-orange { background: #FFF3E0; border-top: 28px solid #FFCC80; }
+  .dark .sticky-yellow { background: #2a2610; border-top-color: #a08010; }
+  .dark .sticky-blue { background: #0d1e30; border-top-color: #2a5080; }
+  .dark .sticky-pink { background: #2a0d18; border-top-color: #802040; }
+  .dark .sticky-green { background: #0d1e12; border-top-color: #285c30; }
+  .dark .sticky-lavender { background: #1a1030; border-top-color: #5a3080; }
+  .dark .sticky-orange { background: #2a1800; border-top-color: #804010; }
+  .sticky-title {
+    font-family: 'Kalam', cursive; font-size: 0.85rem; font-weight: 700;
+    color: var(--ink); margin-bottom: 0.5rem;
+  }
+  .sticky ul { padding-left: 1rem; }
+  .sticky li {
+    font-family: 'Patrick Hand', cursive; font-size: 0.88rem;
+    color: var(--ink); line-height: 1.7;
+  }
+
+  /* NOTES CONTENT */
+  .note-block { position: relative; z-index: 1; margin-bottom: 1.5rem; }
+  .note-h2 {
+    font-family: 'Caveat', cursive; font-size: 1.55rem; font-weight: 700;
+    color: var(--lavender); margin: 1.5rem 0 0.6rem;
+    border-bottom: 2px dashed var(--lavender-mid); padding-bottom: 3px;
+  }
+  .note-h3 {
+    font-family: 'Kalam', cursive; font-size: 1.15rem; font-weight: 700;
+    color: var(--blue); margin: 1rem 0 0.4rem;
+  }
+  .note-p {
+    font-family: 'Patrick Hand', cursive; font-size: 1rem;
+    line-height: 1.95; color: var(--ink);
+  }
+  .note-ul { padding-left: 1.4rem; margin: 0.5rem 0; }
+  .note-ul li {
+    font-family: 'Patrick Hand', cursive; font-size: 0.97rem;
+    line-height: 1.9; color: var(--ink); margin-bottom: 0.15rem;
+  }
+  .note-ul li::marker { content: '✏️ '; }
+
+  /* HIGHLIGHT STYLES */
+  .hl-yellow { background: var(--yellow-mid); padding: 1px 4px; border-radius: 3px; }
+  .hl-blue { background: var(--blue-mid); padding: 1px 4px; border-radius: 3px; }
+  .hl-pink { background: var(--pink-mid); padding: 1px 4px; border-radius: 3px; }
+  .hl-mint { background: var(--mint-mid); padding: 1px 4px; border-radius: 3px; }
+  .dark .hl-yellow { background: rgba(255,210,60,0.25); }
+  .dark .hl-blue { background: rgba(74,144,217,0.25); }
+  .dark .hl-pink { background: rgba(255,107,157,0.25); }
+  .dark .hl-mint { background: rgba(76,175,130,0.25); }
+  .def-box {
+    background: var(--blue-light); border-left: 4px solid var(--blue);
+    padding: 0.75rem 1rem; border-radius: 0 8px 8px 0;
+    margin: 0.75rem 0; font-family: 'Patrick Hand', cursive;
+    font-size: 0.97rem; line-height: 1.8; color: var(--ink);
+    transition: background 0.4s;
+  }
+  .tip-box {
+    background: var(--yellow-light); border-left: 4px solid var(--yellow);
+    padding: 0.75rem 1rem; border-radius: 0 8px 8px 0;
+    margin: 0.75rem 0; font-family: 'Patrick Hand', cursive;
+    font-size: 0.95rem; line-height: 1.8; color: var(--ink);
+  }
+  .example-box {
+    background: var(--mint-light); border: 1.5px dashed var(--mint);
+    padding: 0.75rem 1rem; border-radius: 8px;
+    margin: 0.75rem 0; font-family: 'Patrick Hand', cursive;
+    font-size: 0.93rem; line-height: 1.85; color: var(--ink);
+  }
+  .margin-note {
+    position: absolute; left: -2.2rem; top: 0;
+    font-family: 'Indie Flower', cursive; font-size: 0.7rem;
+    color: var(--margin-line); writing-mode: horizontal-tb;
+    transform: none; display: none;
+  }
+
+  /* TABLE */
+  .note-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-family: 'Patrick Hand', cursive; font-size: 0.93rem; position: relative; z-index: 1; }
+  .note-table th { background: var(--blue); color: #fff; padding: 0.5rem 0.75rem; text-align: left; font-family: 'Kalam', cursive; }
+  .note-table td { padding: 0.45rem 0.75rem; border-bottom: 1px solid var(--ruled-line); color: var(--ink); }
+  .note-table tr:nth-child(even) td { background: var(--blue-light); }
+  .dark .note-table tr:nth-child(even) td { background: var(--blue-light); }
+
+  /* EXAM SECTION */
+  .exam-card {
+    border-radius: 10px; padding: 1rem 1.2rem; margin-bottom: 1rem;
+    position: relative; z-index: 1;
+    box-shadow: 2px 2px 8px var(--shadow);
+    transition: transform 0.2s;
+  }
+  .exam-card:hover { transform: translateX(4px); }
+  .exam-card-title {
+    font-family: 'Kalam', cursive; font-size: 1rem; font-weight: 700;
+    margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.4rem;
+  }
+  .ec-yellow { background: var(--yellow-light); border-left: 4px solid var(--yellow); }
+  .ec-blue { background: var(--blue-light); border-left: 4px solid var(--blue); }
+  .ec-pink { background: var(--pink-light); border-left: 4px solid var(--pink); }
+  .ec-mint { background: var(--mint-light); border-left: 4px solid var(--mint); }
+  .ec-lavender { background: var(--lavender-light); border-left: 4px solid var(--lavender); }
+  .exam-q { font-family: 'Patrick Hand', cursive; font-size: 0.95rem; line-height: 1.8; color: var(--ink); }
+  .exam-q li { margin-bottom: 0.3rem; }
+
+  /* CHEAT SHEET */
+  .cheat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 0.75rem; position: relative; z-index: 1; }
+  .cheat-item {
+    font-family: 'Patrick Hand', cursive; font-size: 0.88rem;
+    padding: 0.5rem 0.75rem; border-radius: 6px;
+    line-height: 1.7; color: var(--ink);
+  }
+  .ci-yellow { background: var(--yellow-light); border: 1px solid var(--yellow); }
+  .ci-blue { background: var(--blue-light); border: 1px solid var(--blue-mid); }
+  .ci-pink { background: var(--pink-light); border: 1px solid var(--pink-mid); }
+  .ci-mint { background: var(--mint-light); border: 1px solid var(--mint-mid); }
+  .ci-lavender { background: var(--lavender-light); border: 1px solid var(--lavender-mid); }
+  .cheat-kw { font-family: 'Kalam', cursive; font-weight: 700; }
+
+  /* MCQ SECTION */
+  .mcq-controls { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1.5rem; position: relative; z-index: 1; }
+  .btn {
+    font-family: 'Kalam', cursive; font-size: 0.95rem; font-weight: 700;
+    padding: 8px 18px; border-radius: 24px; border: none; cursor: pointer;
+    transition: all 0.2s; letter-spacing: 0.3px;
+  }
+  .btn-blue { background: var(--blue); color: #fff; }
+  .btn-blue:hover { background: #357ABD; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(74,144,217,0.4); }
+  .btn-pink { background: var(--pink); color: #fff; }
+  .btn-pink:hover { background: #e05585; transform: translateY(-2px); }
+  .btn-mint { background: var(--mint); color: #fff; }
+  .btn-mint:hover { background: #3a9168; transform: translateY(-2px); }
+  .btn-yellow { background: var(--yellow); color: var(--ink); }
+  .btn-yellow:hover { background: #f0c000; transform: translateY(-2px); }
+  .btn-outline { background: transparent; color: var(--ink); border: 2px solid var(--ink-light); }
+  .btn-outline:hover { background: var(--paper2); }
+
+  .mcq-score-bar {
+    background: var(--paper2); border-radius: 10px; padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem; position: relative; z-index: 1;
+    font-family: 'Kalam', cursive; font-size: 1.1rem;
+    border: 2px solid var(--mint-mid);
+    display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+  }
+  .score-display { font-size: 2rem; font-weight: 700; color: var(--mint); }
+
+  .mcq-item {
+    background: var(--paper); border-radius: 10px; padding: 1.25rem;
+    margin-bottom: 1rem; border: 1.5px solid var(--ruled-line);
+    box-shadow: 2px 2px 8px var(--shadow); position: relative; z-index: 1;
+    transition: border-color 0.2s;
+  }
+  .mcq-item.answered-correct { border-color: var(--mint); background: var(--mint-light); }
+  .mcq-item.answered-wrong { border-color: var(--red); background: #fff0f0; }
+  .dark .mcq-item.answered-wrong { background: #2a0808; }
+  .mcq-q {
+    font-family: 'Kalam', cursive; font-size: 1rem; font-weight: 700;
+    color: var(--ink); margin-bottom: 0.75rem; line-height: 1.6;
+  }
+  .mcq-q span { color: var(--blue); }
+  .mcq-options { display: grid; gap: 0.4rem; }
+  .mcq-opt {
+    font-family: 'Patrick Hand', cursive; font-size: 0.95rem;
+    padding: 7px 14px; border-radius: 8px; cursor: pointer;
+    border: 1.5px solid transparent; background: var(--paper2);
+    color: var(--ink); transition: all 0.2s; text-align: left;
+    display: block; width: 100%;
+  }
+  .mcq-opt:hover:not(:disabled) { border-color: var(--blue); background: var(--blue-light); }
+  .mcq-opt.correct { background: var(--mint-light); border-color: var(--mint); color: var(--mint); font-weight: 700; }
+  .mcq-opt.wrong { background: #fff0f0; border-color: var(--red); color: var(--red); }
+  .dark .mcq-opt.wrong { background: #2a0808; }
+  .mcq-explanation {
+    display: none; margin-top: 0.75rem;
+    background: var(--yellow-light); border-left: 3px solid var(--yellow);
+    padding: 0.6rem 0.9rem; border-radius: 0 8px 8px 0;
+    font-family: 'Patrick Hand', cursive; font-size: 0.9rem; line-height: 1.7;
+    color: var(--ink);
+  }
+  .mcq-explanation.show { display: block; animation: fadeInUp 0.3s ease; }
+
+  /* PRACTICE MODE */
+  #practice-mode-ui { display: none; }
+  #practice-mode-ui.active { display: block; }
+  .practice-card {
+    background: var(--paper); border-radius: 16px; padding: 2rem;
+    box-shadow: 0 8px 32px var(--shadow-md); max-width: 600px; margin: 0 auto;
+    text-align: center; position: relative; z-index: 1;
+  }
+  .practice-num { font-family: 'Indie Flower', cursive; font-size: 0.85rem; color: var(--ink-light); margin-bottom: 0.5rem; }
+  .practice-q { font-family: 'Kalam', cursive; font-size: 1.15rem; font-weight: 700; margin-bottom: 1.5rem; line-height: 1.6; color: var(--ink); }
+  .practice-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1rem; }
+  .practice-opt {
+    font-family: 'Patrick Hand', cursive; font-size: 0.97rem;
+    padding: 12px; border-radius: 12px; cursor: pointer;
+    border: 2px solid var(--blue-mid); background: var(--paper2);
+    color: var(--ink); transition: all 0.2s;
+  }
+  .practice-opt:hover:not(:disabled) { border-color: var(--blue); background: var(--blue-light); transform: scale(1.02); }
+  .practice-opt.correct { background: var(--mint-light); border-color: var(--mint); }
+  .practice-opt.wrong { background: #fff0f0; border-color: var(--red); }
+  .dark .practice-opt.wrong { background: #2a0808; }
+  .practice-progress-wrap { height: 6px; background: var(--paper2); border-radius: 3px; margin-bottom: 1rem; }
+  .practice-progress-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--blue), var(--pink)); transition: width 0.3s; }
+  .practice-result { font-family: 'Kalam', cursive; font-size: 1rem; margin-top: 0.5rem; min-height: 1.5rem; }
+
+  /* FLOATING BUTTONS */
+  #scroll-top {
+    position: fixed; bottom: 5rem; right: 1.5rem; z-index: 200;
+    width: 42px; height: 42px; border-radius: 50%;
+    background: var(--blue); color: #fff; border: none; cursor: pointer;
+    font-size: 1.2rem; box-shadow: 0 4px 16px rgba(74,144,217,0.4);
+    display: none; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  #scroll-top:hover { transform: translateY(-3px); background: #357ABD; }
+  #print-btn {
+    position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 200;
+    background: var(--pink); color: #fff; border: none; cursor: pointer;
+    padding: 10px 18px; border-radius: 24px;
+    font-family: 'Kalam', cursive; font-size: 0.95rem; font-weight: 700;
+    box-shadow: 0 4px 16px rgba(255,107,157,0.4);
+    display: flex; align-items: center; gap: 0.4rem;
+    transition: all 0.2s;
+  }
+  #print-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,107,157,0.5); }
+
+  /* SEARCH HIGHLIGHT */
+  .search-highlight { background: var(--yellow); border-radius: 2px; }
+
+  /* DIVIDER */
+  .wavy-divider {
+    text-align: center; font-size: 1.5rem; color: var(--ink-light);
+    opacity: 0.3; margin: -0.5rem 0 0.5rem; position: relative; z-index: 1;
+    letter-spacing: 6px;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 640px) {
+    .paper-section { padding: 1.5rem 1.2rem 1.5rem 2.2rem; }
+    .paper-section::before { left: 1.8rem; }
+    .sticky-grid { grid-template-columns: 1fr 1fr; }
+    .practice-opts { grid-template-columns: 1fr; }
+    .section-heading { font-size: 1.65rem; }
+    nav { gap: 0.25rem; }
+    nav a { font-size: 0.85rem; padding: 3px 8px; }
+  }
+
+  /* PRINT */
+  @media print {
+    nav, #scroll-top, #print-btn, #progress-bar { display: none !important; }
+    .paper-section { box-shadow: none; page-break-inside: avoid; }
+    .mcq-explanation { display: block !important; }
+  }
+
+  /* DOODLE DECORATIONS */
+  .doodle { position: absolute; font-size: 1.5rem; opacity: 0.08; pointer-events: none; user-select: none; }
+
+  /* SEARCH HIDE */
+  .search-hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<nav>
+  <a href="index.html" style="text-decoration: none; margin-right: 10px; display: inline-flex; align-items: center; justify-content: center; gap: 4px; padding: 4px 12px; background: var(--yellow-light); border: 1.5px solid var(--yellow); border-radius: 20px; color: var(--ink); font-family: 'Caveat', cursive; font-size: 1rem; font-weight: 600;">🏠 Home</a>
+  <span class="nav-brand">📓 PEL-125</span>
+  <a href="#overview">Overview</a>
+  <a href="#notes">Notes</a>
+  <a href="#exam">Exam</a>
+  <a href="#revision">Revision</a>
+  <a href="#mcq">MCQs</a>
+  <a href="#practice">Practice</a>
+  <input type="text" id="search-box" placeholder="🔍 Search notes…" oninput="searchNotes(this.value)">
+  <button id="dark-toggle" onclick="toggleDark()" title="Toggle dark mode">🌙</button>
+</nav>
+
+<div class="notebook">
+
+  <!-- TITLE -->
+  <div class="title-area">
+    <div class="title-subject">PEL-125 · Upper Intermediate Communication Skills-I · B.Tech 1st Year</div>
+    <div class="title-unit">UNIT 6</div>
+    <div class="title-name">Vocabulary: Idioms, Collocations & Formulaic Expressions</div>
+    <div class="title-tags">
+      <span class="tag tag-blue">📚 Unit VI</span>
+      <span class="tag tag-pink">✨ Exam Ready</span>
+      <span class="tag tag-mint">🎯 50 MCQs</span>
+    </div>
+  </div>
+
+  <!-- 1. QUICK OVERVIEW -->
+  <div class="paper-section" id="overview">
+    <div class="section-num">Section 01</div>
+    <div class="section-heading sh-blue">
+      🗂️ Quick Overview
+      <button class="collapse-btn open" onclick="toggleSection(this)">▼</button>
+    </div>
+    <div class="collapsible-content" style="max-height:2000px">
+      <div class="sticky-grid">
+        <div class="sticky sticky-yellow">
+          <div class="sticky-title">📋 Unit Summary</div>
+          <ul>
+            <li>Idioms & their meanings</li>
+            <li>Collocations in use</li>
+            <li>Formulaic Expressions</li>
+            <li>Academic Formulaic Language (AFL)</li>
+            <li>Building fluency & confidence</li>
+          </ul>
+        </div>
+        <div class="sticky sticky-blue">
+          <div class="sticky-title">🎯 Learning Objectives</div>
+          <ul>
+            <li>Use idioms naturally</li>
+            <li>Apply collocations correctly</li>
+            <li>Use fixed phrases in writing & speech</li>
+            <li>Understand AFL patterns</li>
+            <li>Improve academic vocabulary</li>
+          </ul>
+        </div>
+        <div class="sticky sticky-pink">
+          <div class="sticky-title">🔑 Key Concepts</div>
+          <ul>
+            <li>Idiom = fixed figurative phrase</li>
+            <li>Collocation = natural word pair</li>
+            <li>Formulaic = ready-made phrases</li>
+            <li>AFL = Academic Formulaic Language</li>
+            <li>Fluency through chunks</li>
+          </ul>
+        </div>
+        <div class="sticky sticky-green">
+          <div class="sticky-title">📝 Important Terms</div>
+          <ul>
+            <li>Figurative language</li>
+            <li>Lexical chunk</li>
+            <li>Fixed expression</li>
+            <li>Collocation pattern</li>
+            <li>Ready-made phrase</li>
+          </ul>
+        </div>
+        <div class="sticky sticky-lavender">
+          <div class="sticky-title">⭐ CO Mapping</div>
+          <ul>
+            <li>CO1: Grammar for speaking</li>
+            <li>CO2: Lexical resources</li>
+            <li>CO4: Fluent communication</li>
+            <li>CO5: Vocabulary in group tasks</li>
+          </ul>
+        </div>
+        <div class="sticky sticky-orange">
+          <div class="sticky-title">🧠 Memory Tip</div>
+          <ul>
+            <li><b>I</b>diom = <b>I</b>magine it!</li>
+            <li><b>C</b>ollocation = <b>C</b>ommon combo</li>
+            <li><b>F</b>ormulaic = <b>F</b>ixed frame</li>
+            <li>Learn in context, not isolation!</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. DETAILED NOTES -->
+  <div class="paper-section" id="notes">
+    <div class="section-num">Section 02</div>
+    <div class="section-heading sh-lavender">
+      ✍️ Detailed Handwritten Notes
+      <button class="collapse-btn open" onclick="toggleSection(this)">▼</button>
+    </div>
+    <div class="collapsible-content" style="max-height:99999px">
+
+      <div class="note-block">
+        <div class="note-h2">Part A: IDIOMS</div>
+
+        <div class="def-box">
+          <strong>📌 Definition:</strong> An <span class="hl-yellow">idiom</span> is a fixed phrase or expression whose meaning <strong>cannot be understood from the literal meanings</strong> of the individual words. It is a figurative expression used naturally by native speakers.<br>
+          <em>Example: "Hit the books" ≠ physically hitting books → means "to study"</em>
+        </div>
+
+        <div class="tip-box">
+          💡 <strong>Memory Trick (3F Rule):</strong> Idioms are <span class="hl-pink">Fixed</span>, <span class="hl-blue">Figurative</span> & <span class="hl-mint">Frequently used</span>. You can't change the words and understand only the overall meaning, not individual words!
+        </div>
+
+        <div class="note-h3">🔵 Why Use Idioms?</div>
+        <ul class="note-ul">
+          <li>Make speech <span class="hl-yellow">colorful and interesting</span></li>
+          <li>Sound like a <span class="hl-blue">natural, fluent</span> English speaker</li>
+          <li>Express complex ideas in <span class="hl-pink">short phrases</span></li>
+          <li>Commonly tested in <span class="hl-mint">exams, interviews & GDs</span></li>
+        </ul>
+
+        <div class="note-h3">🔵 Complete List of Idioms (Exam Oriented)</div>
+
+        <table class="note-table">
+          <thead>
+            <tr><th>Idiom</th><th>Meaning</th><th>Example Sentence</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>A dime a dozen</strong></td><td>Very common, easy to find</td><td>Such ideas are a dime a dozen.</td></tr>
+            <tr><td><strong>A wild goose chase</strong></td><td>A pointless/futile search</td><td>The search became a wild goose chase.</td></tr>
+            <tr><td><strong>Barking up the wrong tree</strong></td><td>Pursuing a mistaken course</td><td>You're barking up the wrong tree here.</td></tr>
+            <tr><td><strong>Beat around the bush</strong></td><td>Avoid the main issue</td><td>Don't beat around the bush—just say it!</td></tr>
+            <tr><td><strong>Bite off more than you can chew</strong></td><td>Take on more than manageable</td><td>She bit off more than she could chew.</td></tr>
+            <tr><td><strong>Costs an arm and a leg</strong></td><td>Extremely expensive</td><td>The renovation cost an arm and a leg.</td></tr>
+            <tr><td><strong>Cry wolf</strong></td><td>Raise false alarms</td><td>If you cry wolf too often, no one will believe you.</td></tr>
+            <tr><td><strong>Don't put all your eggs in one basket</strong></td><td>Avoid concentrating all risk</td><td>Diversify — don't put all eggs in one basket.</td></tr>
+            <tr><td><strong>Don't count chickens before they hatch</strong></td><td>Avoid premature assumptions</td><td>Don't celebrate yet — don't count your chickens.</td></tr>
+            <tr><td><strong>Feeling under the weather</strong></td><td>Feeling unwell</td><td>She feels under the weather today.</td></tr>
+            <tr><td><strong>Find your feet</strong></td><td>Become confident in new situation</td><td>It took months to find his feet in the job.</td></tr>
+            <tr><td><strong>Go cold turkey</strong></td><td>Abruptly stop a habit</td><td>He quit smoking cold turkey.</td></tr>
+            <tr><td><strong>Go bananas</strong></td><td>Become extremely excited/irrational</td><td>The crowd went bananas at the concert.</td></tr>
+            <tr><td><strong>Hit the books</strong></td><td>Study seriously</td><td>Time to hit the books before exams.</td></tr>
+            <tr><td><strong>Hit the nail on the head</strong></td><td>Describe exactly what is correct</td><td>You hit the nail on the head with that remark.</td></tr>
+            <tr><td><strong>In the nick of time</strong></td><td>Just at the last possible moment</td><td>Help arrived in the nick of time.</td></tr>
+            <tr><td><strong>In black and white</strong></td><td>Clearly written/documented</td><td>It's all there in black and white.</td></tr>
+            <tr><td><strong>Jump the shark</strong></td><td>Decline in quality after peak</td><td>That show jumped the shark in season 4.</td></tr>
+            <tr><td><strong>Just around the corner</strong></td><td>Very near in time</td><td>Exams are just around the corner!</td></tr>
+            <tr><td><strong>Keep your chin up</strong></td><td>Stay optimistic</td><td>Keep your chin up — things will improve.</td></tr>
+            <tr><td><strong>Kill two birds with one stone</strong></td><td>Achieve two goals at once</td><td>He killed two birds with one stone.</td></tr>
+            <tr><td><strong>Leave no stone unturned</strong></td><td>Make every possible effort</td><td>She left no stone unturned in her research.</td></tr>
+            <tr><td><strong>Lose your touch</strong></td><td>Lose former skill</td><td>Has he lost his touch as a leader?</td></tr>
+            <tr><td><strong>Make a long story short</strong></td><td>Summarize briefly</td><td>To make a long story short, we failed.</td></tr>
+            <tr><td><strong>Miss the mark</strong></td><td>Fail to achieve intended result</td><td>The campaign missed the mark entirely.</td></tr>
+            <tr><td><strong>Not playing with a full deck</strong></td><td>Lacking sound judgment</td><td>His decisions suggest he's not playing with a full deck.</td></tr>
+            <tr><td><strong>No pain, no gain</strong></td><td>Effort is necessary for success</td><td>No pain, no gain — keep working hard!</td></tr>
+            <tr><td><strong>On the same page</strong></td><td>In agreement</td><td>All team members must be on the same page.</td></tr>
+            <tr><td><strong>Out of hand</strong></td><td>Out of control</td><td>The situation got out of hand quickly.</td></tr>
+            <tr><td><strong>Pull yourself together</strong></td><td>Regain composure</td><td>Pull yourself together before the interview.</td></tr>
+            <tr><td><strong>Put your foot in your mouth</strong></td><td>Say something embarrassing</td><td>I put my foot in my mouth at the meeting.</td></tr>
+            <tr><td><strong>Quick and dirty</strong></td><td>Done hastily, minimal effort</td><td>This is just a quick and dirty prototype.</td></tr>
+            <tr><td><strong>Quiet storm</strong></td><td>Calm yet powerful person</td><td>She's a quiet storm in debates.</td></tr>
+            <tr><td><strong>Run out of steam</strong></td><td>Lose momentum/energy</td><td>The project ran out of steam mid-way.</td></tr>
+            <tr><td><strong>Read between the lines</strong></td><td>Understand hidden meaning</td><td>Read between the lines of her message.</td></tr>
+            <tr><td><strong>Sit on the fence</strong></td><td>Remain undecided</td><td>Stop sitting on the fence and decide!</td></tr>
+            <tr><td><strong>Stick to your guns</strong></td><td>Maintain your stance</td><td>She stuck to her guns despite criticism.</td></tr>
+            <tr><td><strong>Take it with a grain of salt</strong></td><td>Be skeptical</td><td>Take that claim with a grain of salt.</td></tr>
+            <tr><td><strong>The last straw</strong></td><td>Final point of frustration</td><td>That delay was the last straw for the client.</td></tr>
+          </tbody>
+        </table>
+
+        <div class="tip-box">⚡ <strong>Exam Trick:</strong> Remember idioms by grouping them by theme — Body parts (arm & leg, chin, foot), Animals (wild goose, chickens, wolf), Objects (basket, nail, needle)!</div>
+      </div>
+
+      <div class="wavy-divider">~ ~ ~ ~ ~ ~ ~</div>
+
+      <div class="note-block">
+        <div class="note-h2">Part B: COLLOCATIONS</div>
+
+        <div class="def-box">
+          <strong>📌 Definition:</strong> A <span class="hl-blue">collocation</span> is a pair or group of words that <strong>naturally and commonly occur together</strong> in English. They "sound right" to native speakers because of habit, not grammar rules.<br>
+          <em>Example: "make a decision" ✅ (not "do a decision" ❌)</em>
+        </div>
+
+        <div class="tip-box">
+          💡 <strong>Memory Trick (V+N):</strong> Most collocations are <span class="hl-yellow">Verb + Noun</span> pairs. The key is learning WHICH verb goes with WHICH noun. Don't translate from your own language!
+        </div>
+
+        <div class="note-h3">🔵 Types of Collocations</div>
+        <table class="note-table">
+          <thead><tr><th>Type</th><th>Pattern</th><th>Example</th></tr></thead>
+          <tbody>
+            <tr><td>Verb + Noun</td><td>V + N</td><td>make a plan, do homework, take a risk</td></tr>
+            <tr><td>Adjective + Noun</td><td>Adj + N</td><td>heavy rain, strong coffee, hard work</td></tr>
+            <tr><td>Noun + Verb</td><td>N + V</td><td>business runs, time flies</td></tr>
+            <tr><td>Adverb + Adjective</td><td>Adv + Adj</td><td>deeply concerned, highly unlikely</td></tr>
+            <tr><td>Noun + Noun</td><td>N + N</td><td>family business, business partner</td></tr>
+          </tbody>
+        </table>
+
+        <div class="note-h3">🔵 Key Collocations (Master List)</div>
+        <div class="example-box">
+          <strong>With MAKE:</strong> make an appointment, make money, make a plan, make a choice, make a mistake<br>
+          <strong>With DO:</strong> do business, do homework, do the dishes, do your best<br>
+          <strong>With TAKE:</strong> take a risk, take a break, take a seat, take a chance, take a test<br>
+          <strong>With GET:</strong> get a job, get married, get ready, get lost<br>
+          <strong>With HAVE:</strong> have a good time, have a look, have a party, have a problem, have a chance<br>
+          <strong>With KEEP:</strong> keep a secret, keep in touch, keep calm, keep a promise<br>
+          <strong>With RUN:</strong> run a business, run out of time, run a risk, run a marathon<br>
+          <strong>With WIN:</strong> win a game, win a match, win a prize, win support<br>
+          <strong>With BREAK:</strong> break the law, break a promise, break a record<br>
+          <strong>With PAY:</strong> pay attention, pay the price, pay respect, pay a visit<br>
+          <strong>With TELL:</strong> tell the truth, tell a story, tell a lie, tell the difference<br>
+          <strong>With SAVE:</strong> save money, save time, save energy<br>
+          <strong>With CATCH:</strong> catch a cold, catch a bus, catch someone's attention<br>
+          <strong>With COME:</strong> come true, come to a conclusion<br>
+          <strong>With GIVE:</strong> give advice, give a speech, give permission<br>
+        </div>
+
+        <div class="tip-box">
+          ⭐ <strong>Exam Pattern:</strong> "Fill in the correct verb" questions test collocations. Always think: <em>make/do/take/have/get/keep/run</em> — these 7 verbs form 80% of exam collocations!
+        </div>
+      </div>
+
+      <div class="wavy-divider">~ ~ ~ ~ ~ ~ ~</div>
+
+      <div class="note-block">
+        <div class="note-h2">Part C: FORMULAIC EXPRESSIONS</div>
+
+        <div class="def-box">
+          <strong>📌 Definition:</strong> <span class="hl-pink">Formulaic expressions</span> are <strong>fixed, ready-made phrases</strong> that are <strong>learned as whole units</strong>, used in common situations, and sound natural and fluent. They are stored in memory as chunks, not constructed word by word.
+        </div>
+
+        <div class="note-h3">🔵 Academic Formulaic Language (AFL)</div>
+        <div class="note-p">Used in <span class="hl-blue">both written & spoken academic English</span>. These are the "building blocks" of academic communication.</div>
+
+        <div class="note-h3">Core AFL Phrases (High Frequency)</div>
+        <table class="note-table">
+          <thead><tr><th>Expression</th><th>Use/Meaning</th><th>Example</th></tr></thead>
+          <tbody>
+            <tr><td><strong>in terms of</strong></td><td>Regarding / with respect to</td><td>In terms of quality, this is superior.</td></tr>
+            <tr><td><strong>at the same time</strong></td><td>Simultaneously / however</td><td>It is efficient; at the same time, it's costly.</td></tr>
+            <tr><td><strong>from the point of view</strong></td><td>Perspective / viewpoint</td><td>From the point of view of students…</td></tr>
+            <tr><td><strong>in order to</strong></td><td>Purpose / so as to</td><td>In order to improve, one must practice.</td></tr>
+            <tr><td><strong>as well as</strong></td><td>In addition to / also</td><td>It saves time as well as resources.</td></tr>
+            <tr><td><strong>on the other hand</strong></td><td>Contrast / alternative view</td><td>On the other hand, it lacks flexibility.</td></tr>
+            <tr><td><strong>due to the fact that</strong></td><td>Because / since</td><td>Delayed due to the fact that data was missing.</td></tr>
+            <tr><td><strong>it should be noted</strong></td><td>Important to mention</td><td>It should be noted that results vary.</td></tr>
+            <tr><td><strong>a wide range of</strong></td><td>Many types / variety of</td><td>A wide range of factors influence this.</td></tr>
+            <tr><td><strong>there are a number of</strong></td><td>Several / multiple</td><td>There are a number of solutions.</td></tr>
+            <tr><td><strong>take into account</strong></td><td>Consider / factor in</td><td>We must take into account the risks.</td></tr>
+            <tr><td><strong>as can be seen</strong></td><td>As is visible / clearly shown</td><td>As can be seen from the graph…</td></tr>
+            <tr><td><strong>it is clear that</strong></td><td>Obviously / evidently</td><td>It is clear that change is needed.</td></tr>
+            <tr><td><strong>can be used to</strong></td><td>Able to / serves to</td><td>This tool can be used to measure…</td></tr>
+            <tr><td><strong>are likely to</strong></td><td>Probable / expected to</td><td>Prices are likely to rise.</td></tr>
+            <tr><td><strong>in the next section</strong></td><td>Refers forward in writing</td><td>In the next section, we explore…</td></tr>
+            <tr><td><strong>it is interesting to</strong></td><td>Draws attention to something</td><td>It is interesting to note the pattern.</td></tr>
+            <tr><td><strong>it is impossible to</strong></td><td>Cannot be done</td><td>It is impossible to ignore these facts.</td></tr>
+            <tr><td><strong>it is obvious that</strong></td><td>Clearly evident</td><td>It is obvious that effort is required.</td></tr>
+            <tr><td><strong>it is possible to</strong></td><td>Feasible / can be done</td><td>It is possible to improve outcomes.</td></tr>
+            <tr><td><strong>been carried out</strong></td><td>Has been conducted/done</td><td>Research has been carried out.</td></tr>
+            <tr><td><strong>give rise to</strong></td><td>Cause / lead to</td><td>This may give rise to complications.</td></tr>
+            <tr><td><strong>in the context of</strong></td><td>Within the framework of</td><td>In the context of globalization…</td></tr>
+            <tr><td><strong>a high degree of</strong></td><td>Large amount / significant level</td><td>A high degree of uncertainty exists.</td></tr>
+            <tr><td><strong>in the absence of</strong></td><td>Without / lacking</td><td>In the absence of data, we can't conclude.</td></tr>
+            <tr><td><strong>to determine whether</strong></td><td>To find out if</td><td>Tests were done to determine whether…</td></tr>
+            <tr><td><strong>insight into the</strong></td><td>Understanding / awareness of</td><td>This gives insight into the problem.</td></tr>
+            <tr><td><strong>be regarded as</strong></td><td>Considered / viewed as</td><td>This may be regarded as a breakthrough.</td></tr>
+            <tr><td><strong>little or no</strong></td><td>Almost none / barely any</td><td>There is little or no evidence.</td></tr>
+            <tr><td><strong>is based on the</strong></td><td>Founded on / derived from</td><td>The theory is based on the principle…</td></tr>
+          </tbody>
+        </table>
+
+        <div class="note-h3">🔵 How Formulaic Expressions Improve Fluency</div>
+        <ul class="note-ul">
+          <li><span class="hl-yellow">Reduce hesitation</span> while speaking — no need to construct from scratch</li>
+          <li><span class="hl-blue">Save mental processing time</span> — retrieved as a single chunk</li>
+          <li>Make speech <span class="hl-pink">sound natural and native-like</span></li>
+          <li>Help ideas <span class="hl-mint">flow smoothly</span> in writing and presentations</li>
+          <li>Build overall <span class="hl-yellow">speaking and writing confidence</span></li>
+        </ul>
+
+        <div class="tip-box">
+          💡 <strong>Key Insight:</strong> Research shows that <span class="hl-blue">60–70% of everyday language</span> is formulaic! Learning these chunks is more efficient than learning individual grammar rules.
+        </div>
+      </div>
+
+      <div class="wavy-divider">~ ~ ~ ~ ~ ~ ~</div>
+
+      <div class="note-block">
+        <div class="note-h2">Differences: Idiom vs Collocation vs Formulaic Expression</div>
+        <table class="note-table">
+          <thead><tr><th>Feature</th><th>Idiom</th><th>Collocation</th><th>Formulaic Expression</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Meaning</strong></td><td>Non-literal/figurative</td><td>Literal but natural combo</td><td>Fixed phrase, used as unit</td></tr>
+            <tr><td><strong>Flexibility</strong></td><td>Cannot change words</td><td>Slight variation possible</td><td>Mostly fixed</td></tr>
+            <tr><td><strong>Where used</strong></td><td>Informal &amp; formal speech</td><td>Both, any context</td><td>Formal writing &amp; speech</td></tr>
+            <tr><td><strong>Example</strong></td><td>"bite the bullet"</td><td>"make a decision"</td><td>"in terms of"</td></tr>
+            <tr><td><strong>Learning approach</strong></td><td>Learn by visualization</td><td>Learn V+N patterns</td><td>Learn as complete chunk</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 3. EXAM FOCUS -->
+  <div class="paper-section" id="exam">
+    <div class="section-num">Section 03</div>
+    <div class="section-heading sh-pink">
+      🎯 Exam Focus Section
+      <button class="collapse-btn open" onclick="toggleSection(this)">▼</button>
+    </div>
+    <div class="collapsible-content" style="max-height:99999px">
+
+      <div class="exam-card ec-yellow">
+        <div class="exam-title">⭐ Most Important Questions</div>
+        <ol class="exam-q">
+          <li>Define idiom and give 5 examples with meanings and sentences.</li>
+          <li>What are collocations? How are they different from idioms? Give examples.</li>
+          <li>Explain formulaic expressions with examples from Academic Formulaic Language (AFL).</li>
+          <li>How do formulaic expressions improve fluency and confidence in communication?</li>
+          <li>Differentiate between idioms, collocations, and formulaic expressions with a table.</li>
+        </ol>
+      </div>
+
+      <div class="exam-card ec-blue">
+        <div class="exam-title">🔁 Frequently Asked Questions</div>
+        <ol class="exam-q">
+          <li>Write the meanings of: (a) hit the nail on the head (b) beat around the bush (c) costs an arm and a leg</li>
+          <li>Fill in the blanks with correct collocations: She _____ a risk to start the business. (took/made/did)</li>
+          <li>Use any 3 formulaic expressions from AFL in meaningful sentences.</li>
+          <li>What is AFL? Give examples of Core AFL phrases used in academic writing.</li>
+          <li>Explain 'go cold turkey' and 'jump the shark' with context.</li>
+        </ol>
+      </div>
+
+      <div class="exam-card ec-mint">
+        <div class="exam-title">📝 Short Answer Questions (2–3 marks)</div>
+        <ol class="exam-q">
+          <li>What does "in the nick of time" mean? Give a sentence.</li>
+          <li>Name 3 collocations with the verb "make."</li>
+          <li>What is an idiom? Give one example.</li>
+          <li>What is a collocation? How is it different from a random word combination?</li>
+          <li>Write the meaning of "read between the lines."</li>
+          <li>Name 3 Academic Formulaic Language (AFL) phrases.</li>
+          <li>What does "no pain, no gain" mean?</li>
+          <li>Use "take into account" in a sentence.</li>
+        </ol>
+      </div>
+
+      <div class="exam-card ec-lavender">
+        <div class="exam-title">📄 Long Answer Questions (5–7 marks)</div>
+        <ol class="exam-q">
+          <li>Write detailed notes on idioms: definition, importance, and any 10 idioms with meanings and example sentences.</li>
+          <li>Explain collocations with types, importance and at least 15 examples using different verbs (make, do, take, get, have, keep, run).</li>
+          <li>What are formulaic expressions? Explain their role in academic writing and speaking fluency with examples of AFL phrases.</li>
+          <li>Compare and contrast idioms, collocations, and formulaic expressions in a structured essay with definitions, differences, and examples.</li>
+        </ol>
+      </div>
+
+      <div class="exam-card ec-pink">
+        <div class="exam-title">🎤 Viva Questions</div>
+        <ol class="exam-q">
+          <li>Can you use "barking up the wrong tree" in a sentence?</li>
+          <li>What's the difference between "do homework" and "make homework"?</li>
+          <li>Give an example of a formulaic expression used in a research paper.</li>
+          <li>Why can't we say "do a plan" in English? What's the correct collocation?</li>
+          <li>What does "cognitive chunking" mean in language learning?</li>
+          <li>How would you use "it is clear that" in academic writing?</li>
+          <li>Explain "quiet storm" — is this an idiom or a collocation?</li>
+        </ol>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 4. QUICK REVISION -->
+  <div class="paper-section" id="revision">
+    <div class="section-num">Section 04</div>
+    <div class="section-heading sh-mint">
+      ⚡ Quick Revision Sheet
+      <button class="collapse-btn open" onclick="toggleSection(this)">▼</button>
+    </div>
+    <div class="collapsible-content" style="max-height:99999px">
+      <div class="cheat-grid">
+        <div class="cheat-item ci-blue"><span class="cheat-kw">Idiom</span> = Fixed phrase with figurative (non-literal) meaning. Words can't be changed.</div>
+        <div class="cheat-item ci-yellow"><span class="cheat-kw">Collocation</span> = Natural word combination. Most are Verb+Noun. Sounds "right" to native speakers.</div>
+        <div class="cheat-item ci-pink"><span class="cheat-kw">Formulaic Expression</span> = Ready-made chunk. Learned as a whole unit. Boosts fluency.</div>
+        <div class="cheat-item ci-mint"><span class="cheat-kw">AFL</span> = Academic Formulaic Language — phrases used in formal writing & speaking.</div>
+        <div class="cheat-item ci-lavender"><span class="cheat-kw">A dime a dozen</span> = Very common</div>
+        <div class="cheat-item ci-blue"><span class="cheat-kw">Wild goose chase</span> = Pointless search</div>
+        <div class="cheat-item ci-yellow"><span class="cheat-kw">Barking up the wrong tree</span> = Mistaken course</div>
+        <div class="cheat-item ci-pink"><span class="cheat-kw">Beat around the bush</span> = Avoid the main point</div>
+        <div class="cheat-item ci-mint"><span class="cheat-kw">Bite off more than you can chew</span> = Too much responsibility</div>
+        <div class="cheat-item ci-lavender"><span class="cheat-kw">Costs an arm and a leg</span> = Very expensive</div>
+        <div class="cheat-item ci-blue"><span class="cheat-kw">Cry wolf</span> = Raise false alarms</div>
+        <div class="cheat-item ci-yellow"><span class="cheat-kw">Hit the nail on the head</span> = Exactly right</div>
+        <div class="cheat-item ci-pink"><span class="cheat-kw">In the nick of time</span> = Just at the last moment</div>
+        <div class="cheat-item ci-mint"><span class="cheat-kw">On the same page</span> = In agreement</div>
+        <div class="cheat-item ci-lavender"><span class="cheat-kw">Sit on the fence</span> = Undecided</div>
+        <div class="cheat-item ci-blue"><span class="cheat-kw">Read between the lines</span> = Understand hidden meaning</div>
+        <div class="cheat-item ci-yellow"><span class="cheat-kw">No pain, no gain</span> = Effort needed for success</div>
+        <div class="cheat-item ci-pink"><span class="cheat-kw">The last straw</span> = Final frustration point</div>
+        <div class="cheat-item ci-mint"><span class="cheat-kw">make</span> = appointment, plan, choice, mistake, money</div>
+        <div class="cheat-item ci-lavender"><span class="cheat-kw">do</span> = business, homework, dishes, best</div>
+        <div class="cheat-item ci-blue"><span class="cheat-kw">take</span> = risk, break, seat, chance, test</div>
+        <div class="cheat-item ci-yellow"><span class="cheat-kw">have</span> = good time, look, party, problem, chance</div>
+        <div class="cheat-item ci-pink"><span class="cheat-kw">keep</span> = secret, in touch, calm, promise</div>
+        <div class="cheat-item ci-mint"><span class="cheat-kw">run</span> = business, out of time, risk, marathon</div>
+        <div class="cheat-item ci-lavender"><span class="cheat-kw">in terms of</span> = regarding, with respect to</div>
+        <div class="cheat-item ci-blue"><span class="cheat-kw">it is clear that</span> = obviously / evidently</div>
+        <div class="cheat-item ci-yellow"><span class="cheat-kw">a wide range of</span> = many types of / various</div>
+        <div class="cheat-item ci-pink"><span class="cheat-kw">due to the fact that</span> = because / since</div>
+        <div class="cheat-item ci-mint"><span class="cheat-kw">it should be noted</span> = important to mention</div>
+        <div class="cheat-item ci-lavender"><span class="cheat-kw">give rise to</span> = cause / lead to</div>
+        <div class="cheat-item ci-blue"><span class="cheat-kw">in the absence of</span> = without / lacking</div>
+        <div class="cheat-item ci-yellow"><span class="cheat-kw">take into account</span> = consider / factor in</div>
+        <div class="cheat-item ci-pink"><span class="cheat-kw">be regarded as</span> = be considered / viewed as</div>
+        <div class="cheat-item ci-mint"><span class="cheat-kw">little or no</span> = almost none / barely any</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. MCQs -->
+  <div class="paper-section" id="mcq">
+    <div class="section-num">Section 05</div>
+    <div class="section-heading sh-orange">
+      🧩 50 MCQs — Practice Zone
+      <button class="collapse-btn open" onclick="toggleSection(this)">▼</button>
+    </div>
+    <div class="collapsible-content" style="max-height:99999px">
+
+      <div class="mcq-score-bar">
+        <span>Score:</span>
+        <span class="score-display" id="score-num">0</span>
+        <span>/ <span id="score-total">0</span> answered</span>
+        <div style="margin-left:auto; display:flex; gap:0.5rem; flex-wrap:wrap;">
+          <button class="btn btn-mint" onclick="resetMCQs()">🔄 Reset All</button>
+        </div>
+      </div>
+
+      <div id="mcq-list"></div>
+
+    </div>
+  </div>
+
+  <!-- 6. PRACTICE MODE -->
+  <div class="paper-section" id="practice">
+    <div class="section-num">Section 06</div>
+    <div class="section-heading sh-blue">
+      🏆 Interactive Practice Mode
+      <button class="collapse-btn open" onclick="toggleSection(this)">▼</button>
+    </div>
+    <div class="collapsible-content" style="max-height:99999px">
+      <div style="position:relative;z-index:1;text-align:center;padding:1rem 0;">
+        <p class="note-p" style="margin-bottom:1rem;">Test yourself! Questions appear one by one. Get instant feedback and track your score!</p>
+        <div style="display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.5rem;">
+          <button class="btn btn-blue" onclick="startPractice()">▶ Start Practice</button>
+          <button class="btn btn-outline" onclick="stopPractice()">⏹ Stop</button>
+        </div>
+      </div>
+      <div id="practice-mode-ui">
+        <div class="practice-card">
+          <div class="practice-progress-wrap">
+            <div class="practice-progress-fill" id="pp-fill" style="width:0%"></div>
+          </div>
+          <div class="practice-num" id="pp-num">Question 1 of 50</div>
+          <div class="practice-q" id="pp-q">Loading...</div>
+          <div class="practice-opts" id="pp-opts"></div>
+          <div class="practice-result" id="pp-result"></div>
+          <div style="margin-top:1rem;display:flex;gap:0.75rem;justify-content:center;">
+            <button class="btn btn-blue" id="pp-next" onclick="nextPractice()" style="display:none">Next →</button>
+          </div>
+          <div style="margin-top:0.75rem;font-family:'Kalam',cursive;font-size:0.9rem;color:var(--ink-light)">
+            Score: <span id="pp-score">0</span> correct out of <span id="pp-done">0</span> answered
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FLOATING BUTTONS -->
+<button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<button id="print-btn" onclick="window.print()">🖨️ Print Notes</button>
+
+<script>
+// ===== MCQ DATA =====
+const mcqs = [
+  {q:"What is an idiom?",opts:["A literal phrase describing an action","A fixed figurative expression whose meaning differs from individual words","A pair of words that naturally occur together","A ready-made academic phrase"],ans:1,exp:"An idiom is a fixed expression with a figurative meaning that cannot be deduced from the literal meanings of individual words."},
+  {q:"What does 'a dime a dozen' mean?",opts:["Very expensive","Rare and precious","Very common and easy to find","Hard to understand"],ans:2,exp:"'A dime a dozen' means something very common, abundant, or of little value."},
+  {q:"'A wild goose chase' means:",opts:["Chasing geese in a park","A pointless or futile search","A fast running competition","An exciting adventure"],ans:1,exp:"A wild goose chase refers to a foolish, hopeless, or unproductive search."},
+  {q:"'Barking up the wrong tree' means:",opts:["Making noise near a tree","Successfully solving a problem","Pursuing a mistaken or misguided course of action","Climbing the wrong ladder"],ans:2,exp:"To bark up the wrong tree is to pursue a mistaken direction or make a wrong assumption."},
+  {q:"Which idiom means 'to avoid the main topic'?",opts:["Hit the nail on the head","Beat around the bush","Sit on the fence","Read between the lines"],ans:1,exp:"'Beat around the bush' means to avoid coming to the main point; to talk around the subject."},
+  {q:"'Bite off more than you can chew' means:",opts:["Eating too much food","Taking on more responsibility than one can handle","Being overly ambitious in a good way","Refusing to do any work"],ans:1,exp:"This idiom means to attempt more than one is capable of successfully completing."},
+  {q:"'Costs an arm and a leg' means:",opts:["A medical procedure cost","Very cheap","Extremely expensive","Costing exactly two things"],ans:2,exp:"This idiom means something is very expensive."},
+  {q:"'Cry wolf' means:",opts:["To howl loudly","To raise false alarms repeatedly","To call for help genuinely","To be scared of wolves"],ans:1,exp:"'Cry wolf' means to raise false alarms so often that when a real emergency occurs, no one believes you."},
+  {q:"'Don't put all your eggs in one basket' advises:",opts:["Be careful with eggs","Avoid concentrating all resources or risk in one place","Always diversify your diet","Never trust others"],ans:1,exp:"This idiom advises against putting all your resources or hopes into a single plan."},
+  {q:"What does 'feeling under the weather' mean?",opts:["Enjoying outdoor weather","Feeling unwell or ill","Being outdoors in bad weather","Feeling depressed about climate"],ans:1,exp:"'Feeling under the weather' is an idiom meaning to feel ill or not well."},
+  {q:"'Find your feet' means:",opts:["Locate your shoes","Become comfortable and confident in a new situation","Start walking","Learn to dance"],ans:1,exp:"'Find your feet' means to become confident and established in a new situation or role."},
+  {q:"'Go cold turkey' means:",opts:["Cook a frozen turkey","Abruptly and completely stop a habit","Slowly reducing a bad habit","Going vegetarian"],ans:1,exp:"'Go cold turkey' means to suddenly and completely stop doing something, especially a bad habit, without gradual reduction."},
+  {q:"'Hit the books' means:",opts:["Physically strike books","Study seriously","Visit a library","Buy new books"],ans:1,exp:"'Hit the books' is an idiom meaning to study seriously or start studying."},
+  {q:"'Hit the nail on the head' means:",opts:["Hammer a nail correctly","Cause pain to someone","Describe exactly what is correct","Miss the point completely"],ans:2,exp:"'Hit the nail on the head' means to be exactly right, to describe precisely what is happening."},
+  {q:"'In the nick of time' means:",opts:["Inside a clock","Very late","Just at the very last moment","Too early"],ans:2,exp:"'In the nick of time' means just in time; at the last possible moment before it is too late."},
+  {q:"'In black and white' means:",opts:["In a monochrome photo","Clearly documented or written","Very unclear and ambiguous","Racially discriminatory"],ans:1,exp:"'In black and white' means clearly written or printed; in explicit, unambiguous terms."},
+  {q:"'Jump the shark' means:",opts:["A dangerous water sport","A brave act","Decline in quality after reaching a peak","A spectacular achievement"],ans:2,exp:"'Jump the shark' refers to the point when something that was previously popular or good starts to decline in quality."},
+  {q:"'Keep your chin up' advises:",opts:["Maintain proper posture","Stay optimistic and positive despite difficulties","Keep your head high proudly","Don't look down"],ans:1,exp:"'Keep your chin up' means to remain cheerful and optimistic in a difficult situation."},
+  {q:"'Kill two birds with one stone' means:",opts:["Being cruel to animals","Achieving two goals with a single action","Making two mistakes simultaneously","Working twice as hard"],ans:1,exp:"This idiom means to achieve two things with a single action, solving two problems at once."},
+  {q:"'Leave no stone unturned' means:",opts:["Clean the garden","Make every possible effort to achieve something","Ignore obvious solutions","Be lazy in searching"],ans:1,exp:"'Leave no stone unturned' means to try every possible course of action in order to achieve something."},
+  {q:"'Make a long story short' means:",opts:["Write a brief story","Tell a story briefly; to summarize","Avoid telling stories","Tell only the beginning"],ans:1,exp:"This idiom means to get to the point; to summarize a long narrative briefly."},
+  {q:"'Miss the mark' means:",opts:["Fail to reach a target in archery","Fail to achieve the intended result or goal","Accidentally miss a classmate","Forget an important date"],ans:1,exp:"'Miss the mark' means to fail to achieve the intended result or to be unsuccessful in one's attempt."},
+  {q:"'No pain, no gain' means:",opts:["Avoid all pain","Effort and hard work are necessary for success","Pain is enjoyable","Gain always causes pain"],ans:1,exp:"This proverb means that achievement requires some effort, sacrifice, or difficulty."},
+  {q:"'On the same page' means:",opts:["Reading the same book","In agreement or having the same understanding","Sitting next to each other","Working on the same project"],ans:1,exp:"'On the same page' means to have the same understanding, information, or agreement about something."},
+  {q:"'Read between the lines' means:",opts:["Read very carefully","Understand hidden or implied meaning","Skip some lines while reading","Read line by line"],ans:1,exp:"'Read between the lines' means to find the real, hidden meaning in something said or written."},
+  {q:"What is a collocation?",opts:["A type of idiom","A figurative expression","A pair or group of words that naturally and commonly occur together","A grammar rule"],ans:2,exp:"A collocation is a combination of words that naturally go together and sound correct to native speakers."},
+  {q:"Which is the correct collocation?",opts:["Do a plan","Make a plan","Take a plan","Have a plan made"],ans:1,exp:"'Make a plan' is the correct collocation. In English, we use 'make' with plan, decision, choice, mistake, money."},
+  {q:"Which verb collocates with 'homework'?",opts:["Make","Take","Do","Have"],ans:2,exp:"The correct collocation is 'do homework.' 'Do' is used for tasks and activities like do homework, do dishes, do business."},
+  {q:"Which is NOT a correct collocation?",opts:["Take a risk","Do a risk","Run a risk","Take a chance"],ans:1,exp:"'Do a risk' is not a standard English collocation. The correct forms are 'take a risk' or 'run a risk.'"},
+  {q:"'Pay attention' is an example of:",opts:["An idiom","A collocation","A formulaic expression","A proverb"],ans:1,exp:"'Pay attention' is a collocation — a natural verb-noun combination where 'pay' is the correct verb with 'attention.'"},
+  {q:"Which collocation means 'to enter into marriage'?",opts:["Do married","Get married","Make married","Take married"],ans:1,exp:"'Get married' is the correct collocation in English."},
+  {q:"'Keep in touch' means:",opts:["Hold each other","Maintain regular communication","Stay physically close","Touch something repeatedly"],ans:1,exp:"'Keep in touch' is a collocation meaning to maintain contact or communication with someone."},
+  {q:"Which verb pair correctly collocates with 'a cold'?",opts:["Take / catch","Make / catch","Get / catch","Catch / get"],ans:2,exp:"Both 'catch a cold' and 'get a cold' are acceptable collocations. 'Catch a cold' is more traditional."},
+  {q:"What are formulaic expressions?",opts:["Equations used in math","Fixed, ready-made phrases learned as whole units","Phrases created spontaneously","Formal academic vocabulary only"],ans:1,exp:"Formulaic expressions are fixed, ready-made phrases that are learned and stored as complete units, used in common situations."},
+  {q:"AFL stands for:",opts:["Academic Formal Language","Academic Formulaic Language","Advanced Figurative Language","Applied Formulaic Linguistics"],ans:1,exp:"AFL stands for Academic Formulaic Language — phrases commonly used in both written and spoken academic English."},
+  {q:"Which phrase is a Core AFL expression?",opts:["Go bananas","In terms of","A wild goose chase","Hit the books"],ans:1,exp:"'In terms of' is a core AFL (Academic Formulaic Language) expression used in academic writing and speaking."},
+  {q:"'Due to the fact that' is used to express:",opts:["Contrast","Reason/cause","Addition","Result"],ans:1,exp:"'Due to the fact that' is a formulaic expression meaning 'because' — it introduces a reason or cause."},
+  {q:"'It should be noted' is used to:",opts:["Express surprise","Indicate something important to mention","Show contrast","Give instructions"],ans:1,exp:"'It should be noted' is a formulaic expression used to draw attention to something important that the reader/listener should be aware of."},
+  {q:"'A wide range of' means:",opts:["A narrow selection","Exactly three options","Many types / a variety of","A long distance"],ans:2,exp:"'A wide range of' is a formulaic expression meaning many types, varieties, or a large number of different things."},
+  {q:"'Take into account' means:",opts:["Remove from consideration","Consider or factor something in","Count numbers","Account for money"],ans:1,exp:"'Take into account' means to consider or include something as a factor when making a decision or judgment."},
+  {q:"'As can be seen' is used to:",opts:["Express doubt","Show something is clearly visible or obvious","Introduce a contrast","Ask a question"],ans:1,exp:"'As can be seen' is a formulaic expression used to direct attention to something that is clearly visible or demonstrated."},
+  {q:"'Give rise to' means:",opts:["Increase height","Cause or lead to something","Prevent something from happening","Rise early in the morning"],ans:1,exp:"'Give rise to' is a formulaic expression meaning to cause or lead to something, usually something unwanted."},
+  {q:"'In the absence of' means:",opts:["When something is present","Without something / when something is lacking","Despite something","Because of something"],ans:1,exp:"'In the absence of' means when something is not available, present, or lacking."},
+  {q:"'Be regarded as' means:",opts:["Be ignored","Be considered or viewed as","Be removed from","Be questioned about"],ans:1,exp:"'Be regarded as' is a formulaic expression meaning to be considered, viewed, or treated as something."},
+  {q:"How do formulaic expressions help communication?",opts:["They make speech more complex","They reduce hesitation and make speech sound natural","They replace grammar rules entirely","They are only used in writing"],ans:1,exp:"Formulaic expressions improve fluency by reducing hesitation, saving mental processing time, and making speech sound natural and confident."},
+  {q:"Which of these is an example of a formulaic expression from academic writing?",opts:["Costs an arm and a leg","It is clear that","Make a plan","Go bananas"],ans:1,exp:"'It is clear that' is a formulaic academic expression used to state obvious facts or conclusions in formal writing."},
+  {q:"'Little or no' means:",opts:["A large amount","Exactly some","Almost none / barely any","A moderate amount"],ans:2,exp:"'Little or no' is a formulaic expression meaning almost nothing or barely any — indicating near-absence of something."},
+  {q:"'Stick to your guns' means:",opts:["Use weapons","Maintain your position or opinion despite opposition","Follow safety rules","Be physically strong"],ans:1,exp:"'Stick to your guns' means to maintain your position, beliefs, or plan despite criticism or pressure to change."},
+  {q:"'The last straw' refers to:",opts:["The final piece of straw in a haystack","The final problem that causes someone to lose patience","A drinking straw","The most important point"],ans:1,exp:"'The last straw' (or 'the straw that broke the camel's back') is the final problem or annoyance that causes a reaction after many others."},
+  {q:"Which is a correct collocation with 'tell'?",opts:["Tell a plan","Tell a risk","Tell the truth","Tell an appointment"],ans:2,exp:"'Tell the truth' is a correct collocation. Other 'tell' collocations include tell a story, tell a lie, tell the difference."},
+  {q:"'In the context of' is used to mean:",opts:["Outside the subject","Within the framework or setting of something","Against something","Regardless of something"],ans:1,exp:"'In the context of' is a formulaic expression meaning within the particular circumstances, setting, or framework of something."}
+];
+
+// ===== RENDER MCQs =====
+const mcqList = document.getElementById('mcq-list');
+let scores = {};
+
+function renderMCQs() {
+  mcqList.innerHTML = '';
+  mcqs.forEach((m, i) => {
+    const div = document.createElement('div');
+    div.className = 'mcq-item';
+    div.id = `mcq-${i}`;
+    const letters = ['A','B','C','D'];
+    const optsHTML = m.opts.map((o, j) =>
+      `<button class="mcq-opt" id="opt-${i}-${j}" onclick="checkAnswer(${i},${j})">${letters[j]}) ${o}</button>`
+    ).join('');
+    div.innerHTML = `
+      <div class="mcq-q"><span>Q${i+1}.</span> ${m.q}</div>
+      <div class="mcq-options">${optsHTML}</div>
+      <div class="mcq-explanation" id="exp-${i}">
+        <strong>✅ Answer: ${letters[m.ans]}) ${m.opts[m.ans]}</strong><br>
+        <strong>💡 Explanation:</strong> ${m.exp}
+      </div>`;
+    mcqList.appendChild(div);
+  });
+}
+
+function checkAnswer(qi, ai) {
+  if (scores[qi] !== undefined) return;
+  const m = mcqs[qi];
+  const letters = ['A','B','C','D'];
+  for (let j = 0; j < 4; j++) {
+    const btn = document.getElementById(`opt-${qi}-${j}`);
+    btn.disabled = true;
+    if (j === m.ans) btn.classList.add('correct');
+    else if (j === ai && ai !== m.ans) btn.classList.add('wrong');
+  }
+  scores[qi] = (ai === m.ans) ? 1 : 0;
+  document.getElementById(`exp-${qi}`).classList.add('show');
+  const item = document.getElementById(`mcq-${qi}`);
+  item.classList.add(ai === m.ans ? 'answered-correct' : 'answered-wrong');
+  updateScore();
+}
+
+function updateScore() {
+  const correct = Object.values(scores).filter(v => v === 1).length;
+  const total = Object.keys(scores).length;
+  document.getElementById('score-num').textContent = correct;
+  document.getElementById('score-total').textContent = total;
+}
+
+function resetMCQs() {
+  scores = {};
+  renderMCQs();
+  updateScore();
+}
+
+// ===== PRACTICE MODE =====
+let practiceQ = 0, practiceScore = 0, practiceAnswered = 0;
+let practiceOrder = [];
+
+function startPractice() {
+  practiceQ = 0; practiceScore = 0; practiceAnswered = 0;
+  practiceOrder = [...Array(mcqs.length).keys()].sort(() => Math.random() - 0.5);
+  document.getElementById('practice-mode-ui').classList.add('active');
+  document.getElementById('practice-mode-ui').scrollIntoView({behavior:'smooth'});
+  renderPracticeQ();
+}
+
+function stopPractice() {
+  document.getElementById('practice-mode-ui').classList.remove('active');
+}
+
+function renderPracticeQ() {
+  if (practiceQ >= mcqs.length) {
+    document.getElementById('pp-q').textContent = `🎉 Complete! You scored ${practiceScore} / ${mcqs.length}`;
+    document.getElementById('pp-opts').innerHTML = '';
+    document.getElementById('pp-next').style.display = 'none';
+    document.getElementById('pp-result').textContent = practiceScore >= 40 ? '🏆 Excellent!' : practiceScore >= 25 ? '👍 Good effort!' : '📚 Keep practicing!';
+    return;
+  }
+  const m = mcqs[practiceOrder[practiceQ]];
+  const letters = ['A','B','C','D'];
+  document.getElementById('pp-num').textContent = `Question ${practiceQ+1} of ${mcqs.length}`;
+  document.getElementById('pp-q').textContent = m.q;
+  document.getElementById('pp-result').textContent = '';
+  document.getElementById('pp-next').style.display = 'none';
+  document.getElementById('pp-fill').style.width = `${(practiceQ/mcqs.length)*100}%`;
+  document.getElementById('pp-opts').innerHTML = m.opts.map((o,j) =>
+    `<button class="practice-opt" id="po-${j}" onclick="checkPractice(${j})">${letters[j]}) ${o}</button>`
+  ).join('');
+  document.getElementById('pp-score').textContent = practiceScore;
+  document.getElementById('pp-done').textContent = practiceAnswered;
+}
+
+function checkPractice(ai) {
+  const m = mcqs[practiceOrder[practiceQ]];
+  const letters = ['A','B','C','D'];
+  for (let j = 0; j < 4; j++) {
+    const btn = document.getElementById(`po-${j}`);
+    if (btn) {
+      btn.disabled = true;
+      if (j === m.ans) btn.classList.add('correct');
+      else if (j === ai && ai !== m.ans) btn.classList.add('wrong');
+    }
+  }
+  practiceAnswered++;
+  if (ai === m.ans) {
+    practiceScore++;
+    document.getElementById('pp-result').innerHTML = `<span style="color:var(--mint)">✅ Correct!</span>`;
+  } else {
+    document.getElementById('pp-result').innerHTML = `<span style="color:var(--red)">❌ Correct answer: ${letters[m.ans]}) ${m.opts[m.ans]}</span>`;
+  }
+  document.getElementById('pp-score').textContent = practiceScore;
+  document.getElementById('pp-done').textContent = practiceAnswered;
+  document.getElementById('pp-next').style.display = 'inline-block';
+}
+
+function nextPractice() {
+  practiceQ++;
+  renderPracticeQ();
+}
+
+// ===== DARK MODE =====
+function toggleDark() {
+  document.body.classList.toggle('dark');
+  const btn = document.getElementById('dark-toggle');
+  btn.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+}
+
+// ===== COLLAPSIBLE =====
+function toggleSection(btn) {
+  btn.classList.toggle('open');
+  const content = btn.closest('.paper-section').querySelector('.collapsible-content');
+  if (btn.classList.contains('open')) {
+    content.style.maxHeight = content.scrollHeight + 'px';
+  } else {
+    content.style.maxHeight = '0';
+  }
+}
+
+// ===== SEARCH =====
+function searchNotes(query) {
+  const q = query.toLowerCase().trim();
+  // Remove old highlights
+  document.querySelectorAll('.search-highlight').forEach(el => {
+    el.outerHTML = el.innerHTML;
+  });
+  if (!q) {
+    document.querySelectorAll('.mcq-item, .note-block, .exam-card, .cheat-item, .sticky').forEach(el => {
+      el.classList.remove('search-hidden');
+    });
+    return;
+  }
+  document.querySelectorAll('.mcq-item').forEach(el => {
+    el.classList.toggle('search-hidden', !el.textContent.toLowerCase().includes(q));
+  });
+}
+
+// ===== PROGRESS BAR =====
+window.addEventListener('scroll', () => {
+  const scrolled = window.scrollY;
+  const total = document.body.scrollHeight - window.innerHeight;
+  document.getElementById('progress-bar').style.width = `${(scrolled/total)*100}%`;
+  const st = document.getElementById('scroll-top');
+  st.style.display = scrolled > 400 ? 'flex' : 'none';
+});
+
+// ===== INIT =====
+renderMCQs();
+</script>
+</body>
+</html>
