@@ -2046,7 +2046,7 @@
       container.innerHTML = '';
       mcqs.forEach(function (mcq, i) {
         var optBtns = mcq.opts.map(function (o, oi) {
-          return '<button class="mcq-opt" data-qi="' + i + '" data-oi="' + oi + '" onclick="selectOpt(' + i + ',' + oi + ')">' + String.fromCharCode(65 + oi) + ') ' + o + '</button>';
+          return '<button class="mcq-opt" data-qi="' + i + '" data-oi="' + oi + '" onclick="selectOpt(' + i + ',' + oi + ', event)">' + String.fromCharCode(65 + oi) + ') ' + o + '</button>';
         }).join('');
         var ansHidden = mode === 'practice' ? 'hidden' : '';
         var html = '<span class="mcq-q-num">Q' + (i + 1) + '/50</span>' +
@@ -2064,7 +2064,7 @@
       });
     }
 
-    function selectOpt(qi, oi) {
+    function selectOpt(qi, oi, event) {
       if (mode !== 'practice') return;
       if (answered[qi] !== undefined) return;
       answered[qi] = oi;
@@ -2074,6 +2074,7 @@
       if (oi === mcq.ans) {
         opts[oi].classList.add('correct');
         scores.correct++;
+        triggerConfetti(event);
       } else {
         opts[oi].classList.add('wrong');
         opts[mcq.ans].classList.add('correct');
@@ -2103,6 +2104,104 @@
       scores = { correct: 0, wrong: 0 };
       updateScore();
       buildMCQs();
+    }
+
+    // ── CANVAS CONFETTI EFFECT ──
+    class Confetti {
+      constructor(canvas) {
+        this.canvas = canvas;
+        this.ctx = canvas.getContext('2d');
+        this.particles = [];
+        this.animationId = null;
+        this.colors = ['#FF6B9D', '#4A90D9', '#FFD93D', '#9B72CF', '#4CAF82', '#FF8C42'];
+      }
+
+      resize() {
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
+      }
+
+      spawn(x, y, count = 80) {
+        this.resize();
+        for (let i = 0; i < count; i++) {
+          this.particles.push({
+            x: x,
+            y: y,
+            size: Math.random() * 8 + 4,
+            color: this.colors[Math.floor(Math.random() * this.colors.length)],
+            angle: Math.random() * Math.PI * 2,
+            speed: Math.random() * 8 + 5,
+            gravity: 0.25,
+            friction: 0.95,
+            rotation: Math.random() * 360,
+            rotationSpeed: Math.random() * 10 - 5,
+            opacity: 1,
+            fadeSpeed: Math.random() * 0.015 + 0.01
+          });
+        }
+        if (!this.animationId) {
+          this.animate();
+        }
+      }
+
+      animate() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        let alive = false;
+
+        this.particles.forEach((p) => {
+          if (p.opacity <= 0) return;
+          alive = true;
+
+          p.speed *= p.friction;
+          p.x += Math.cos(p.angle) * p.speed;
+          p.y += Math.sin(p.angle) * p.speed + p.gravity;
+          p.opacity -= p.fadeSpeed;
+          p.rotation += p.rotationSpeed;
+
+          this.ctx.save();
+          this.ctx.globalAlpha = p.opacity;
+          this.ctx.translate(p.x, p.y);
+          this.ctx.rotate(p.rotation * Math.PI / 180);
+          this.ctx.fillStyle = p.color;
+          this.ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+          this.ctx.restore();
+        });
+
+        if (alive) {
+          this.animationId = requestAnimationFrame(() => this.animate());
+        } else {
+          this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+          this.animationId = null;
+          this.particles = [];
+        }
+      }
+    }
+
+    let confettiManager = null;
+
+    function triggerConfetti(event) {
+      if (!confettiManager) {
+        const canvas = document.createElement('canvas');
+        canvas.id = 'confetti-canvas';
+        canvas.style.position = 'fixed';
+        canvas.style.inset = '0';
+        canvas.style.pointerEvents = 'none';
+        canvas.style.zIndex = '10000';
+        document.body.appendChild(canvas);
+        confettiManager = new Confetti(canvas);
+        window.addEventListener('resize', () => confettiManager.resize());
+      }
+
+      let spawnX = window.innerWidth / 2;
+      let spawnY = window.innerHeight / 2;
+      if (event && event.clientX) {
+        spawnX = event.clientX;
+        spawnY = event.clientY;
+      }
+      
+      confettiManager.spawn(spawnX, spawnY, 60);
+      confettiManager.spawn(50, window.innerHeight - 50, 50);
+      confettiManager.spawn(window.innerWidth - 50, window.innerHeight - 50, 50);
     }
 
     buildMCQs();
